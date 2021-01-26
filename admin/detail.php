@@ -90,7 +90,7 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                     <?php $i++ ?>
                     <?php endforeach; ?>
                     </table>
-                    <a class="btn btn-block btn-dark" href="tambah-tipe.php">
+                    <a class="btn btn-block btn-dark" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
                     <span data-feather='plus'></span>
                         Tambah Tipe Perumahan
                     </a>

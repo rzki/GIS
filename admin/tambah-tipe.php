@@ -18,6 +18,8 @@ if (isset($_SESSION['level'])) {
     }
 }
 
+$id_perum = $_GET["id_perum"];
+
 if (isset($_POST['tambah'])){
     
     if( tambahtipe ($_POST) > 0) {
@@ -25,7 +27,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Data perumahan berhasil ditambahkan!');
-            document.location.href = 'dataperum.php'
+            document.location.href = 'detail.php?id=$id_perum'
         </script>
         ";
     } else {
@@ -33,7 +35,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Data perumahan gagal ditambahkan!');
-            document.location.href = 'dataperum.php'
+            document.location.href = 'detail.php?id=$id_perum'
         </script>
         ";
     }
@@ -85,7 +87,7 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
 
-        <input type="hidden" name="id" value="<?= $perum["id_perum"];?>">
+        <input type="hidden" name="id" value="<?= $id_perum ?>">
         
         <div class="form-group row">
             <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
