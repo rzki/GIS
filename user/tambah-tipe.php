@@ -9,14 +9,16 @@ if (empty($_SESSION['login'])) {
 
 if (isset($_SESSION['level'])) {
     switch($_SESSION['level']) {
-        case 'admin': 
+        case 'user': 
             header('Location: ../admin/home.php');
         break;
-        case 'user': 
+        case 'admin': 
             $usr = $_SESSION['user'];
         break;
     }
 }
+
+$id_perum = $_GET["id_perum"];
 
 if (isset($_POST['tambah'])){
     
@@ -25,7 +27,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Data perumahan berhasil ditambahkan!');
-            document.location.href = 'home.php';
+            document.location.href = 'detail.php?id=$id_perum'
         </script>
         ";
     } else {
@@ -33,7 +35,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Data perumahan gagal ditambahkan!');
-            document.location.href = 'home.php';
+            document.location.href = 'detail.php?id=$id_perum'
         </script>
         ";
     }
@@ -50,7 +52,7 @@ if (isset($_POST['tambah'])){
 
     <!-- sidebar -->
     <?php $currentPage = 'home' ?>
-    <?php include_once('../components/sidebar-user.php') ?>
+    <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Main Content -->
     <?php $head = 'Tambah Data Perumahan' ?>
@@ -84,6 +86,8 @@ if (isset($_POST['tambah'])){
                     <input type="text" class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi">
                 </div>
         </div>
+
+        <input type="hidden" name="id" value="<?= $id_perum ?>">
         
         <div class="form-group row">
             <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>

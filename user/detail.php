@@ -9,10 +9,10 @@ if (empty($_SESSION['login'])) {
 if (isset($_SESSION['level'])) {
     switch($_SESSION['level']) {
         case 'admin': 
-            header('Location: ../admin/home.php');
+            $usr = $_SESSION['user'];
         break;
         case 'user': 
-            $usr = $_SESSION['user']; 
+            header('Location: ../user/home.php');
         break;
     }
 }
@@ -27,6 +27,7 @@ $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 $perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$idPerum'");
+$tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$idPerum'");
 
 ?>
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ $perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$
     <?php include_once('../components/header.php') ?>
 
     <!-- sidebar -->
-    <?php include_once('../components/sidebar-user.php') ?>
+    <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Main Content --> 
     <?php $head = 'Detail Perumahan' ?>
@@ -56,7 +57,6 @@ $perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <br>
@@ -72,27 +72,25 @@ $perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$
                         <th>Aksi</th>
                     </tr>
 
-                    <?php
-                    $i = 1;
-                    $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$idPerum'");
-                    while($rows = mysqli_fetch_assoc($tipe)) {
-                    ?>
-                    <tr class="show text-center" id="<?php echo $rows['id_tipe']; ?>">
-                        <td><?= $i++; ?></td>
-                        <td class="text-center" data-target="tipe_rumah"><?php echo $rows["tipe_rumah"]; ?></td>
-                        <td class="text-center" data-target="luas_bangunan" ><?php echo $rows["luas_bangunan"]; ?></td>
-                        <td class="text-center" data-target="luas_tanah"><?php echo $rows["luas_tanah"]; ?></td>
+                    <?php $i = 1; ?>
+                    <?php foreach ($tipe as $rows) : ?>
+                    <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
+                        <td><?= $i; ?></td>
+                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?></td>
+                        <td class="text-center" data-target="luas_bangunan" ><?= $rows["luas_bangunan"]; ?></td>
+                        <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
                         <td class="text-center" >
                         <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#TipeModal" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
-                        <a href="edit_tiperumah.php?id=<?php echo $rows['id_tipe'] ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
-                        <a href="delete_tiperumah.php?id=<?php echo $rows['id_tipe'] ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
+                        <a href="edit_tiperumah.php?id=<?= $rows['id_tipe'] ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
+                        <a href="delete_tiperumah.php?id=<?= $rows['id_tipe'] ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
                         </a>
-                    <?php }?>
                     </td>
                     </tr>
+                    <?php $i++ ?>
+                    <?php endforeach; ?>
                     </table>
-                    <a class="btn btn-block btn-dark" href="tambah-tipe.php?id=<?php echo $row["id_perum"]?>">
+                    <a class="btn btn-block btn-dark" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
                     <span data-feather='plus'></span>
                         Tambah Tipe Perumahan
                     </a>
@@ -149,7 +147,7 @@ $perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$
             </div>
         </div>
     </div>
-    <?php }?>
+<?php }?>
 <!-- Modal -->
 <div class="modal fade" id="TipeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -163,7 +161,7 @@ $perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$
             <div class="modal-body">
                 Tipe Rumah :
                 <br>
-                <?php echo $row["tipe_rumah"];?>
+                <?php echo $rows["tipe_rumah"];?>
                 <br>
                 <br>
                 Luas Bangunan :
