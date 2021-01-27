@@ -127,15 +127,15 @@ function ubahdataperum($data) {
                     gambar = '$gambar',
                     status = '$status'
                 WHERE id_perum = $idPerum";
-    $editPerum = mysqli_query($conn, $queryPerum);
+    mysqli_query($conn, $queryPerum);
 
-    if($editPerum == true){
-        echo '
-        <script>
-            alert ("Data perumahan berhasil di edit")
-            window.location.href="dataperum-user.php"
-        </script>';
-    }
+    // if($editPerum == true){
+    //     echo "
+    //     <script>
+    //         alert ('Data perumahan berhasil di edit!')
+    //         window.location.href='dataperum-user.php?id=$idPerum'
+    //     </script>";
+    // }
     return mysqli_affected_rows($conn);
 }
 
@@ -156,15 +156,15 @@ function ubahtiperumah($data) {
                     spesifikasi = '$spek',
                     daya_listrik = '$listrik'
                 WHERE id_tipe = $idTipe";
-    $editTipe = mysqli_query($conn, $queryTipe);
+    mysqli_query($conn, $queryTipe);
 
-    if($editTipe == true){
-        echo '
-        <script>
-            alert ("Tipe perumahan berhasil di edit")
-            window.location.href="detail.php"
-        </script>';
-    }
+    // if($editTipe == true){
+    //     echo "
+    //     <script>
+    //         alert ('Tipe perumahan berhasil di edit!')
+    //         window.location.href='detail.php?id=$'
+    //     </script>";
+    // }
     
     return mysqli_affected_rows($conn);
 }

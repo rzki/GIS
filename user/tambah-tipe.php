@@ -9,10 +9,10 @@ if (empty($_SESSION['login'])) {
 
 if (isset($_SESSION['level'])) {
     switch($_SESSION['level']) {
-        case 'user': 
+        case 'admin': 
             header('Location: ../admin/home.php');
         break;
-        case 'admin': 
+        case 'user': 
             $usr = $_SESSION['user'];
         break;
     }

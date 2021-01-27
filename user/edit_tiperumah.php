@@ -8,31 +8,34 @@ if (empty($_SESSION['login'])) {
 
 if (isset($_SESSION['level'])) {
     switch($_SESSION['level']) {
-        case 'admin': 
+        case 'user': 
             $usr = $_SESSION['user'];
         break;
-        case 'user': 
-            header('Location: ../user/home.php');
+        case 'admin': 
+            header('Location: ../admin/home.php');
         break;
     }
 }
 
 //ambil data di URL
 $idTipe = $_GET['id'];
+// mundur 2 halaman
+
 
 //query data perumahan berdasarkan id
 $perumtipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+$idperum = $perumtipe["id_perum"];
 
 if(isset($_POST["update"])){
 
     //cek apakah data berhasil diubah atau tidak
     if(ubahtiperumah($_POST) > 0) {
-        echo '
+        echo "
         <script>
-                alert("Berhasil mengubah tipe perumahan!");
-                window.location.href="detail.php"
+                alert('Berhasil mengubah tipe perumahan!');
+                document.location.href='detail.php?id=$idperum'
             </script>
-        ';
+        ";
     } 
 }
 ?>
@@ -48,7 +51,7 @@ if(isset($_POST["update"])){
 
     <!-- sidebar -->
     <?php $currentPage = 'home' ?>
-    <?php include_once('../components/sidebar-admin.php') ?>
+    <?php include_once('../components/sidebar-user.php') ?>
 
     <!-- Main Content -->
     <?php $head = 'Edit Tipe Perumahan' ?>

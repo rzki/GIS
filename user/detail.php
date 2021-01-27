@@ -9,10 +9,10 @@ if (empty($_SESSION['login'])) {
 if (isset($_SESSION['level'])) {
     switch($_SESSION['level']) {
         case 'admin': 
-            $usr = $_SESSION['user'];
+            header('Location: ../admin/home.php');
         break;
         case 'user': 
-            header('Location: ../user/home.php');
+            $usr = $_SESSION['user'];
         break;
     }
 }
@@ -26,8 +26,14 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$idPerum'");
-$tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$idPerum'");
+$perum = mysqli_query($conn, "SELECT perumahan_master.nama_perum, perumahan_master.alamat,
+                            perumahan_master.koordinat, perumahan_master.gambar,
+                            tiperumah_master.id_tipe, tiperumah_master.tipe_rumah,
+                            tiperumah_master.luas_bangunan, tiperumah_master.luas_tanah,
+                            tiperumah_master.spesifikasi, tiperumah_master.daya_listrik 
+                            FROM perumahan_master OUTER JOIN tiperumah_master 
+                            ON perumahan_master.id_perum = tiperumah_master.id_perum 
+                            WHERE tiperumah_master.id_perum = NULL");
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +46,7 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
     <?php include_once('../components/header.php') ?>
 
     <!-- sidebar -->
-    <?php include_once('../components/sidebar-admin.php') ?>
+    <?php include_once('../components/sidebar-user.php') ?>
 
     <!-- Main Content --> 
     <?php $head = 'Detail Perumahan' ?>
@@ -53,7 +59,7 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
             <div class="card w-100 border-dark">
                 <div class="card-horizontal" style="display: flex; flex:auto; width:100%;">
                     <div class="card-body">
-                        <h2 class="card-title" style="text-align: center;"><?php echo $row["nama_perum"]; ?></h2>
+                        <h2 class="card-title" style="text-align: center;"><?= $row["nama_perum"]; ?></h2>
                     </div>
                 </div>
             </div>
@@ -73,16 +79,16 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                     </tr>
 
                     <?php $i = 1; ?>
-                    <?php foreach ($tipe as $rows) : ?>
-                    <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
+                    <?php foreach ($perum as $row) : ?>
+                    <tr class="show text-center" id="<?= $row["id_tipe"]; ?>">
                         <td><?= $i; ?></td>
-                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?></td>
-                        <td class="text-center" data-target="luas_bangunan" ><?= $rows["luas_bangunan"]; ?></td>
-                        <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
+                        <td class="text-center" data-target="tipe_rumah"><?= $row["tipe_rumah"]; ?></td>
+                        <td class="text-center" data-target="luas_bangunan" ><?= $row["luas_bangunan"]; ?></td>
+                        <td class="text-center" data-target="luas_tanah"><?= $row["luas_tanah"]; ?></td>
                         <td class="text-center" >
                         <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#TipeModal" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
-                        <a href="edit_tiperumah.php?id=<?= $rows['id_tipe'] ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
-                        <a href="delete_tiperumah.php?id=<?= $rows['id_tipe'] ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
+                        <a href="edit_tiperumah.php?id=<?= $row['id_tipe'] ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
+                        <a href="delete_tiperumah.php?id=<?= $row['id_tipe'] ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -103,8 +109,8 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                 Detail Perumahan
             </h4>
                 <div class="card-body">
-                    <p class="card-title" style="word-wrap: break-word;">Alamat : <br> <?php echo $row["alamat"]?></p>
-                    <p class="card-title" style="word-wrap: break-word;">Koordinat : <br> <?php echo $row["koordinat"]?></p>
+                    <p class="card-title" style="word-wrap: break-word;">Alamat : <br> <?= $row["alamat"];?></p>
+                    <p class="card-title" style="word-wrap: break-word;">Koordinat : <br> <?= $row["koordinat"];?></p>
                 </div>
         </div>
         <div class="card">
@@ -119,21 +125,21 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="../img-perum/<?php echo $row["gambar"]; ?>" alt="First slide">
+                        <img class="d-block w-100" src="../img-perum/<?= $row["gambar"]; ?>" alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?php echo $row["tipe_rumah"]?></h5>
+                                <h5>Tipe Rumah : <?= $row["tipe_rumah"];?></h5>
                             </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="../img-perum/<?php echo $row["gambar"]; ?>" alt="Second slide">
+                        <img class="d-block w-100" src="../img-perum/<?= $row["gambar"]; ?>" alt="Second slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?php echo $row["tipe_rumah"]?></h5>
+                                <h5>Tipe Rumah : <?= $row["tipe_rumah"];?></h5>
                             </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="../img-perum/<?php echo $row["gambar"]; ?>" alt="Third slide">
+                        <img class="d-block w-100" src="../img-perum/<?= $row["gambar"]; ?>" alt="Third slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?php echo $row["tipe_rumah"]?></h5>
+                                <h5>Tipe Rumah : <?= $row["tipe_rumah"];?></h5>
                             </div>
                     </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -159,38 +165,29 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                 </button>
             </div>
             <div class="modal-body">
-                Tipe Rumah :
-                <br>
-                <?php echo $rows["tipe_rumah"];?>
+                <b>Tipe Rumah &ensp;&ensp;&ensp;&ensp;:</b> <?= $rows["tipe_rumah"];?>
                 <br>
                 <br>
-                Luas Bangunan :
-                <br>
-                <?php echo $rows["luas_bangunan"];?>
+                <b>Luas Bangunan &ensp;:</b> <?= $rows["luas_bangunan"];?>
                 <br>
                 <br>
-                Luas Tanah :
-                <br>
-                <?php echo $rows["luas_tanah"];?>
+                <b>Luas Tanah &emsp;&ensp;&ensp;&ensp;:</b> <?= $rows["luas_tanah"];?>
                 <br>
                 <br>
-                Spesifikasi :
-                <br>
-                <?php echo $rows["spesifikasi"];?>
+                <b>Spesifikasi &emsp;&emsp;&ensp;&nbsp;:</b> <?= $rows["spesifikasi"];?>
                 <br>
                 <br>
-                Daya Listrik :
-                <br>
-                <?php echo $rows["daya_listrik"];?>
+                <b>Daya Listrik &emsp;&emsp;&nbsp;:</b> <?= $rows["daya_listrik"];?>
                 <br>
                 <br>
-                Gambar :
+                <b>Gambar &emsp;&emsp;&emsp;&emsp;: </b>
                 <br>
-                <img src="../img-perum/<?php echo $rows["gambar"];?>" style="max-width:470px;">
+                <br>
+                <img src="../img-perum/<?= $rows["gambar"];?>" style="max-width:470px;">
             </div>
             
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
         </div>
     </div>

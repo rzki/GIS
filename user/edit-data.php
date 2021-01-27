@@ -21,7 +21,7 @@ if (isset($_SESSION['level'])) {
 $idPerum = $_GET['id'];
 
 //query data perumahan berdasarkan id
-$perum = query("SELECT * FROM perumahan WHERE id_perum = $idPerum")[0];
+$perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
 
 if(isset($_POST["update"])){
 
@@ -30,7 +30,7 @@ if(isset($_POST["update"])){
         echo '
         <script>
                 alert("Berhasil mengubah data perumahan!");
-                window.location.href="home.php"
+                window.location.href="dataperum.php"
             </script>
         ';
     } 
@@ -77,46 +77,6 @@ if(isset($_POST["update"])){
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" 
                     value="<?= $perum['alamat'];?>" required>
-                </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="luas_tanah" class="col-sm-2 col-form-label">Luas Tanah</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="luas_tanah" name="luas_tanah" placeholder="Luas Tanah"
-                    value="<?= $perum['luas_tanah'];?>" required>
-                </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="luas_bangunan" class="col-sm-2 col-form-label">Luas Bangunan</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="luas_bangunan" name="luas_bangunan" placeholder="Luas Bangunan" 
-                    value="<?= $perum['luas_bangunan'];?>" required>
-                </div>
-        </div>
-        
-        <div class="form-group row">
-            <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="tipe_rumah" name="tipe_rumah" placeholder="Tipe Rumah" 
-                    value="<?= $perum['tipe_rumah'];?>" required>
-                </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="spesifikasi" class="col-sm-2 col-form-label">Spesifikasi</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi" 
-                    value="<?= $perum['spesifikasi'];?>"required>
-                </div>
-        </div>
-        
-        <div class="form-group row">
-            <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="daya_listrik" name="daya_listrik" placeholder="Daya Listrik" 
-                    value="<?= $perum['daya_listrik'];?>" required>
                 </div>
         </div>
         

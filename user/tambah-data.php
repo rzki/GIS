@@ -26,7 +26,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Data perumahan berhasil ditambahkan. Silahkan menunggu persetujuan admin!');
-            document.location.href = 'home.php';
+            document.location.href = 'dataperum.php';
         </script>
         ";
     } else {
