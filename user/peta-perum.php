@@ -1,5 +1,22 @@
 <?php
-require ("../functions.php");
+session_start();
+require "../functions.php";
+
+if (empty($_SESSION['login'])) {
+    header('Location: ../auth/login.php');
+} 
+
+if (isset($_SESSION['level'])) {
+    switch($_SESSION['level']) {
+        case 'admin': 
+            header('Location: ../admin/home.php');
+        break;
+        case 'user': 
+            $usr = $_SESSION['user'];
+        break;
+    }
+}
+
 $areas = getAreaListbyID();
 
 ?>
