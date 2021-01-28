@@ -7,7 +7,7 @@
         </div>
 <script>
     function goBack() {
-        window.location = "home.php";
+        window.history.back();
     }
 </script>
 

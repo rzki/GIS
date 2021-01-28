@@ -33,6 +33,18 @@
                 Data Member
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="profile_admin.php">
+                <span class="fas fa-user"></span>
+                Pengaturan Profil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="account_admin.php">
+                <span class="fas fa-cog"></span>
+                Pengaturan akun
+                </a>
+            </li>
             </ul>
         </div>
 </nav>

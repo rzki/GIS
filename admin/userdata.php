@@ -2,7 +2,7 @@
 
 require '../functions.php';
 
-$usr = query("SELECT * FROM users");
+$usr = query("SELECT * FROM users WHERE level = 'user'");
 
 ?>
 

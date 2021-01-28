@@ -26,9 +26,6 @@
 
     <!-- Bootstrap core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -44,6 +41,12 @@
           font-size: 3.5rem;
         }
       }
+      
+    </style>
+    <style type="text/css">
+		#peta{
+			height:100vh;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="css/home.css" rel="stylesheet">

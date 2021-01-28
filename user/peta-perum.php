@@ -1,6 +1,6 @@
 <?php
 require ("../functions.php");
-$areas = getAreaList();
+$areas = getAreaListbyID();
 
 ?>
 <!DOCTYPE html>

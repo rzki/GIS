@@ -90,22 +90,13 @@ if(isset($_POST["update"])){
         </div>
 
         <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
-                <div class="col-sm-10">
-                    <img src="../img-perum/<?= $perum['gambar'];?>" width="100">
-                    <input type="file" id="gambar" name="gambar">
-                    <p>(max. size 2MB)</p>
-                </div>
-        </div>
-
-        <div class="form-group row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="status" name="status" placeholder="Daya Listrik" 
                     value="<?= $perum['status'];?>" required>
                 </div>
         </div>
-                <center><button type="submit" class="btn btn-primary btn-block" name="update">Edit Data Perumahan</button></center>
+                <button type="submit" class="btn btn-primary btn-block" name="update">Edit Data Perumahan</button>
 </form>
     <script>
             //membuat mapOptions

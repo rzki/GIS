@@ -38,6 +38,7 @@ if (isset($_POST['tambah'])){
         ";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -187,7 +188,7 @@ if (isset($_POST['tambah'])){
 
   function putDraggable() {
    /* create a draggable marker in the center of the map */
-   draggableMarker = L.marker([ map.getCenter().lat, map.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(map);
+   draggableMarker = L.marker([mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(mymap);
    
    /* collect Lat,Lng values */
    draggableMarker.on('dragend', function(e) {

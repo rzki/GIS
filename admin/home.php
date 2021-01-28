@@ -18,6 +18,8 @@ if (isset($_SESSION['level'])) {
 }
 
 $areas = getAreaList();
+$id_user = $_SESSION ["userID"];
+$namaUser = $usr["nama"];
 
 // pagination
 $jumlahDataPerHalaman = 6;
@@ -27,7 +29,7 @@ $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 $perum = query(" SELECT * FROM perumahan_master WHERE perumahan_master.status = '1' LIMIT $awalData, $jumlahDataPerHalaman ");
-
+$user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
 ?>
 
 <!doctype html>
@@ -43,9 +45,34 @@ $perum = query(" SELECT * FROM perumahan_master WHERE perumahan_master.status = 
     <?php include_once('../components/sidebar-admin.php') ?>
     
     <!-- Main Content -->
-    <?php $head = 'Daftar Perumahan' ?>
+    <?php $head = 'Selamat Datang, ' . $_SESSION['name'] . '!' ?>
     <?php include_once('../components/homepage.php') ?>
     
+<!-- Biodata -->
+<div class="container-fluid">
+    <div class="row">
+    <?php while($row = mysqli_fetch_assoc($user)) {?>
+        <div class="card w-100 border-dark">
+            <div class="card-horizontal" style="display: flex; flex:auto; width:100%;">
+                <div class="card-body">
+                    <h2 class="text-center"><b> Biodata</b></h2>
+                    <hr class="solid" style="border: solid;">
+                    <br>
+                    <h5 class="card-text"><b>Nama</b>&emsp;&emsp;: <?php echo $row["nama"];?></h5>
+                    <h5 class="card-text"><b>Alamat</b>&emsp;&nbsp;: <?php echo $row["alamat"];?></h5>
+                    <h5 class="card-text"><b>Email</b>&emsp;&emsp;: <?php echo $row["email"];?></h5>
+                    
+                </div>
+            </div>
+        </div>
+<?php } ?>
+    </div>
+</div>
+<br>
+<br>
+<!-- Daftar Perumahan yang sudah di approve -->
+<h1 class="head">Daftar Perumahan</h1>
+<hr style="margin-top: -3px;">
 
     <div class="row">
         <div class="table-responsive">
@@ -54,7 +81,6 @@ $perum = query(" SELECT * FROM perumahan_master WHERE perumahan_master.status = 
                     <th>No.</th>
                     <th>Nama Perumahan</th>
                     <th>Alamat</th>
-                    <th>Gambar</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -62,10 +88,9 @@ $perum = query(" SELECT * FROM perumahan_master WHERE perumahan_master.status = 
                 <?php $i = 1; ?>
                 <?php foreach ($perum as $row) : ?>
                 <tr class="show" id="<?= $row["id_perum"]; ?>">
-                    <td><?= $i; ?></td>
+                    <td class="text-center"><?= $i; ?></td>
                     <td class="text-center" data-target="nama_perum"><?= $row["nama_perum"]; ?></td>
                     <td class="text-center" data-target="alamat" ><?= $row["alamat"]; ?></td>
-                    <td class="text-center" data-target="gambar"><img src="../img-perum/<?= $row["gambar"]; ?>" width="300"></td>
                     <td class="text-center" data-target="status"><?php if($row["status"] == '1') {?>
                     <p>Diterima</p>
                     <?php } else {?>

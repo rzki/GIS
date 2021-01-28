@@ -58,7 +58,7 @@ if (isset($_POST['tambah'])){
     <?php $head = 'Tambah Data Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-<div id="peta" style="margin-bottom: 1%; "></div>
+<div id="peta" style="margin-bottom: 1%; width:100%";></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area">
@@ -80,41 +80,6 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
 
-        <!-- <div class="form-group row">
-            <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="tipe_rumah" name="tipe_rumah" placeholder="Tipe Rumah" required>
-                </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="luas_tanah" class="col-sm-2 col-form-label">Luas Tanah</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="luas_tanah" name="luas_tanah" placeholder="Luas Tanah" required>
-                </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="luas_bangunan" class="col-sm-2 col-form-label">Luas Bangunan</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="luas_bangunan" name="luas_bangunan" placeholder="Luas Bangunan" required>
-                </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="spesifikasi" class="col-sm-2 col-form-label">Spesifikasi</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi" required>
-                </div>
-        </div>
-        
-        <div class="form-group row">
-            <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="daya_listrik" name="daya_listrik" placeholder="Daya Listrik" required>
-                </div>
-        </div> -->
-
         <div class="form-group row">
             <label for="koordinat" class="col-sm-2 col-form-label">Koordinat</label>
                 <div class="col-sm-10">
@@ -123,13 +88,6 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
 
-        <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
-                <div class="col-sm-10">
-                    <input type="file" id="gambar" name="gambar" required>
-                    <p>(max. size 10MB)</p>
-                </div>
-        </div>
         <input type="hidden" name="id_user" value="<?= $id ?>">
         <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
 </form>

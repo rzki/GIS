@@ -26,14 +26,9 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perum = mysqli_query($conn, "SELECT perumahan_master.nama_perum, perumahan_master.alamat,
-                            perumahan_master.koordinat, perumahan_master.gambar,
-                            tiperumah_master.id_tipe, tiperumah_master.tipe_rumah,
-                            tiperumah_master.luas_bangunan, tiperumah_master.luas_tanah,
-                            tiperumah_master.spesifikasi, tiperumah_master.daya_listrik 
-                            FROM perumahan_master OUTER JOIN tiperumah_master 
-                            ON perumahan_master.id_perum = tiperumah_master.id_perum 
-                            WHERE tiperumah_master.id_perum = NULL");
+$perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
+$tipe = query("SELECT * FROM tiperumah_master WHERE id_perum = $idPerum")[0];
+$tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum");
 
 ?>
 <!DOCTYPE html>
@@ -52,19 +47,19 @@ $perum = mysqli_query($conn, "SELECT perumahan_master.nama_perum, perumahan_mast
     <?php $head = 'Detail Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-    
     <div class="container-fluid">
         <div class="row">
-        <?php while($row = mysqli_fetch_assoc($perum)) {?>
-            <div class="card w-100 border-dark">
-                <div class="card-horizontal" style="display: flex; flex:auto; width:100%;">
-                    <div class="card-body">
-                        <h2 class="card-title" style="text-align: center;"><?= $row["nama_perum"]; ?></h2>
-                    </div>
+            <div class="card" style="width:100%;">
+                    <h2 class="card-header" style="text-align: center;">
+                        <?= $perum["nama_perum"]; ?>
+                    </h2>
+                <div class="card-body">
+                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
+                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
+                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
                 </div>
             </div>
         </div>
-    </div>
     <br>
     <div class="container-fluid">
         <div class="row">
@@ -77,18 +72,17 @@ $perum = mysqli_query($conn, "SELECT perumahan_master.nama_perum, perumahan_mast
                         <th>Luas Tanah</th>
                         <th>Aksi</th>
                     </tr>
-
                     <?php $i = 1; ?>
-                    <?php foreach ($perum as $row) : ?>
-                    <tr class="show text-center" id="<?= $row["id_tipe"]; ?>">
-                        <td><?= $i; ?></td>
-                        <td class="text-center" data-target="tipe_rumah"><?= $row["tipe_rumah"]; ?></td>
-                        <td class="text-center" data-target="luas_bangunan" ><?= $row["luas_bangunan"]; ?></td>
-                        <td class="text-center" data-target="luas_tanah"><?= $row["luas_tanah"]; ?></td>
+                    <?php foreach ($tabelTipe as $rows) : ?>
+                    <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
+                        <td><?= $i++; ?></td>
+                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?></td>
+                        <td class="text-center" data-target="luas_bangunan" ><?= $rows["luas_bangunan"]; ?></td>
+                        <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
                         <td class="text-center" >
-                        <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#TipeModal" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
-                        <a href="edit_tiperumah.php?id=<?= $row['id_tipe'] ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
-                        <a href="delete_tiperumah.php?id=<?= $row['id_tipe'] ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
+                        <a href="tipe_detail.php?id=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
+                        <a href="edit_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
+                        <a href="delete_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -103,95 +97,6 @@ $perum = mysqli_query($conn, "SELECT perumahan_master.nama_perum, perumahan_mast
                     <br>
             </div>
     </div>
-    <div class="card-deck">
-        <div class="card">
-            <h4 class="card-header">
-                Detail Perumahan
-            </h4>
-                <div class="card-body">
-                    <p class="card-title" style="word-wrap: break-word;">Alamat : <br> <?= $row["alamat"];?></p>
-                    <p class="card-title" style="word-wrap: break-word;">Koordinat : <br> <?= $row["koordinat"];?></p>
-                </div>
-        </div>
-        <div class="card">
-            <h5 class="card-header">
-                Gambar Perumahan
-            </h5>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="../img-perum/<?= $row["gambar"]; ?>" alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?= $row["tipe_rumah"];?></h5>
-                            </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="../img-perum/<?= $row["gambar"]; ?>" alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?= $row["tipe_rumah"];?></h5>
-                            </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="../img-perum/<?= $row["gambar"]; ?>" alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?= $row["tipe_rumah"];?></h5>
-                            </div>
-                    </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
-<?php }?>
-<!-- Modal -->
-<div class="modal fade" id="TipeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Tipe Perumahan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <b>Tipe Rumah &ensp;&ensp;&ensp;&ensp;:</b> <?= $rows["tipe_rumah"];?>
-                <br>
-                <br>
-                <b>Luas Bangunan &ensp;:</b> <?= $rows["luas_bangunan"];?>
-                <br>
-                <br>
-                <b>Luas Tanah &emsp;&ensp;&ensp;&ensp;:</b> <?= $rows["luas_tanah"];?>
-                <br>
-                <br>
-                <b>Spesifikasi &emsp;&emsp;&ensp;&nbsp;:</b> <?= $rows["spesifikasi"];?>
-                <br>
-                <br>
-                <b>Daya Listrik &emsp;&emsp;&nbsp;:</b> <?= $rows["daya_listrik"];?>
-                <br>
-                <br>
-                <b>Gambar &emsp;&emsp;&emsp;&emsp;: </b>
-                <br>
-                <br>
-                <img src="../img-perum/<?= $rows["gambar"];?>" style="max-width:470px;">
-            </div>
-            
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                </div>
-        </div>
-    </div>
 </div>
-<div id="peta" style="margin-bottom: 1%; width:100%;"></div>
 </body>
 </html>

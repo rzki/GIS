@@ -23,11 +23,11 @@ $areas = getAreaList();
     <?php include_once('../components/main-content.php') ?>
     
 
-    <div id="peta" style="width: 1230px; height: 600px;"></div>
+    <div id="peta" style="width: 100%; height: 600px;"></div>
 
     <script>
-        //membuat mapOptions
-        var mapOptions = {
+//membuat mapOptions
+var mapOptions = {
             center: [-8.61510 , 115.17349],
             zoom: 18
         }
@@ -44,14 +44,12 @@ $areas = getAreaList();
             tileSize: 512,
             zoomOffset: -1
         }).addTo(mymap);
-
         $( document ).ready(function() {
             tambahArea();
         });
 
         function stringToGeoPoints( geo ) {
-            var linesPin = geo.split(", ");
-
+            var linesPin = geo.split(",");
             var linesLat = new Array();
             var linesLng = new Array();
 
@@ -76,11 +74,9 @@ $areas = getAreaList();
             for(var i=0; i < areas.length; i++) {
                 console.log(areas[i]['koordinat']);
                 var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areas[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areas[i]['alamat'] 
-                + "<br>" + areas[i]['gambar']);   
+                polygon.bindPopup( "<b>" + areas[i]['nama_perum']);   
             }
         }
-
         var areas = JSON.parse( '<?php echo json_encode($areas) ?>' );
     </script>
 <script src="js/home.js"></script>

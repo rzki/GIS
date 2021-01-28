@@ -59,6 +59,8 @@ if (isset($_POST['tambah'])){
     <?php include_once('../components/main-content.php') ?>
 
 <form action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="nama_perum">
+
         <div class="form-group row">
             <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
                 <div class="col-sm-10">
@@ -93,6 +95,14 @@ if (isset($_POST['tambah'])){
             <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="daya_listrik" name="daya_listrik" placeholder="Daya Listrik">
+                </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar" name="gambar" required>
+                    <p>(max. size 10MB)</p>
                 </div>
         </div>
                 <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>

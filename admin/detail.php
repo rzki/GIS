@@ -18,6 +18,7 @@ if (isset($_SESSION['level'])) {
 }
 
 $idPerum = $_GET["id"];
+$areaPerum = getAreaListbyID();
 
 // pagination
 $jumlahDataPerHalaman = 6;
@@ -26,8 +27,9 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perum = mysqli_query($conn, "SELECT * FROM perumahan_master WHERE id_perum = '$idPerum'");
-$tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$idPerum'");
+$perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
+$tipe = query("SELECT * FROM tiperumah_master WHERE id_perum = $idPerum")[0];
+$tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum");
 
 ?>
 <!DOCTYPE html>
@@ -46,19 +48,20 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
     <?php $head = 'Detail Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-    
+    <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
     <div class="container-fluid">
         <div class="row">
-        <?php while($row = mysqli_fetch_assoc($perum)) {?>
-            <div class="card w-100 border-dark">
-                <div class="card-horizontal" style="display: flex; flex:auto; width:100%;">
-                    <div class="card-body">
-                        <h2 class="card-title" style="text-align: center;"><?php echo $row["nama_perum"]; ?></h2>
-                    </div>
+            <div class="card" style="width:100%;">
+                    <h2 class="card-header" style="text-align: center;">
+                        <?= $perum["nama_perum"]; ?>
+                    </h2>
+                <div class="card-body">
+                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
+                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
+                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
                 </div>
             </div>
         </div>
-    </div>
     <br>
     <div class="container-fluid">
         <div class="row">
@@ -71,18 +74,17 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                         <th>Luas Tanah</th>
                         <th>Aksi</th>
                     </tr>
-
                     <?php $i = 1; ?>
-                    <?php foreach ($tipe as $rows) : ?>
+                    <?php foreach ($tabelTipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
-                        <td><?= $i; ?></td>
+                        <td><?= $i++; ?></td>
                         <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?></td>
                         <td class="text-center" data-target="luas_bangunan" ><?= $rows["luas_bangunan"]; ?></td>
                         <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
                         <td class="text-center" >
-                        <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#TipeModal" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
-                        <a href="edit_tiperumah.php?id=<?= $rows['id_tipe'] ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
-                        <a href="delete_tiperumah.php?id=<?= $rows['id_tipe'] ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
+                        <a href="tipe_detail.php?id=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
+                        <a href="edit_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
+                        <a href="delete_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -97,104 +99,63 @@ $tipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = '$i
                     <br>
             </div>
     </div>
-    <div class="card-deck">
-        <div class="card">
-            <h4 class="card-header">
-                Detail Perumahan
-            </h4>
-                <div class="card-body">
-                    <p class="card-title" style="word-wrap: break-word;">Alamat : <br> <?php echo $row["alamat"]?></p>
-                    <p class="card-title" style="word-wrap: break-word;">Koordinat : <br> <?php echo $row["koordinat"]?></p>
-                </div>
-        </div>
-        <div class="card">
-            <h5 class="card-header">
-                Gambar Perumahan
-            </h5>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="../img-perum/<?php echo $row["gambar"]; ?>" alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?php echo $row["tipe_rumah"]?></h5>
-                            </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="../img-perum/<?php echo $row["gambar"]; ?>" alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?php echo $row["tipe_rumah"]?></h5>
-                            </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="../img-perum/<?php echo $row["gambar"]; ?>" alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Tipe Rumah : <?php echo $row["tipe_rumah"]?></h5>
-                            </div>
-                    </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
-<?php }?>
-<!-- Modal -->
-<div class="modal fade" id="TipeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Tipe Perumahan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Tipe Rumah :
-                <br>
-                <?php echo $rows["tipe_rumah"];?>
-                <br>
-                <br>
-                Luas Bangunan :
-                <br>
-                <?php echo $rows["luas_bangunan"];?>
-                <br>
-                <br>
-                Luas Tanah :
-                <br>
-                <?php echo $rows["luas_tanah"];?>
-                <br>
-                <br>
-                Spesifikasi :
-                <br>
-                <?php echo $rows["spesifikasi"];?>
-                <br>
-                <br>
-                Daya Listrik :
-                <br>
-                <?php echo $rows["daya_listrik"];?>
-                <br>
-                <br>
-                Gambar :
-                <br>
-                <img src="../img-perum/<?php echo $rows["gambar"];?>" style="max-width:470px;">
-            </div>
-            
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-        </div>
-    </div>
 </div>
-<div id="peta" style="margin-bottom: 1%; width:100%;"></div>
+<script>
+        //membuat mapOptions
+        var mapOptions = {
+            center: [-8.61510 , 115.17349],
+            zoom: 18
+        }
+        //membuat layer map
+        var mymap = new L.map('peta', mapOptions);
+        //membuat titik awal pada peta
+        mymap.setView([-8.61499 , 115.17297], 18);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 20,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(mymap);
+
+        $( document ).ready(function() {
+            tambahArea();
+        });
+
+        function stringToGeoPoints( geo ) {
+            var linesPin = geo.split(", ");
+
+            var linesLat = new Array();
+            var linesLng = new Array();
+
+            for(i=0; i < linesPin.length; i++) {
+                if(i % 2) {
+                linesLat.push(linesPin[i]);
+                }else{
+                linesLng.push(linesPin[i]);
+                }
+            }
+
+            var latLngLine = new Array();
+
+            for(i=0; i<linesLng.length;i++) {
+                latLngLine.push( L.latLng( linesLat[i], linesLng[i]));
+            }
+            
+            return latLngLine;
+        }
+
+        function tambahArea() {
+            for(var i=0; i < areaPerum.length; i++) {
+                console.log(areaPerum[i]['koordinat']);
+                var polygon = L.polygon( stringToGeoPoints(areaPerum[i]['koordinat']), { color: 'blue'}).addTo(mymap);
+                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areaPerum[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areaPerum[i]['alamat'] 
+                + "<br>");   
+            }
+        }
+        var areaPerum = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
+    </script>
 </body>
 </html>

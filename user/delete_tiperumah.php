@@ -4,6 +4,8 @@ require '../functions.php';
 
 $id = $_GET["id"];
 
+$previous = "javascript:history.go(-1)";
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     
@@ -12,14 +14,14 @@ if (isset($_GET['id'])) {
         echo "
             <script>
                 alert('Data perumahan berhasil dihapus');
-                window.location.href='detail.php?id=$id_perum'
+                document.location.href='$previous'
             </script>
         ";
     } else {
         echo "
             <script>
                 alert('Data perumahan gagal dihapus');
-                window.location.href='$idperum'
+                window.location.href='$previous'
             </script>
         ";
     }
@@ -27,7 +29,7 @@ if (isset($_GET['id'])) {
     echo "
         <script>
             alert('Data perumahan gagal dihapus');
-            window.location.href='$id_perum'
+            window.location.href='$previous'
         </script>
         ";
 }
