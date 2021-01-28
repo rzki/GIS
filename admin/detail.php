@@ -148,14 +148,14 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         }
 
         function tambahArea() {
-            for(var i=0; i < areaPerum.length; i++) {
-                console.log(areaPerum[i]['koordinat']);
-                var polygon = L.polygon( stringToGeoPoints(areaPerum[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areaPerum[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areaPerum[i]['alamat'] 
+            for(var i=0; i < areas.length; i++) {
+                console.log(areas[i]['koordinat']);
+                var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
+                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areas[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areas[i]['alamat'] 
                 + "<br>");   
             }
         }
-        var areaPerum = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
+        var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
 </body>
 </html>

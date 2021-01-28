@@ -203,13 +203,30 @@ function getAreaList()
 	return $arr;
 }
 
-function getAreaListbyID()
+function getAreaListbyuserID()
 {
     global $conn;
 
     $idUser = $_SESSION["userID"];
     $arr = array();
     $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, id_user, status from perumahan_master where id_user = $idUser");
+    $statement->bind_result($id, $name, $alamat, $koordinat, $idUser, $status);
+	$statement->execute();
+	while ($statement->fetch()) {
+		$arr[] = [ "id_perum" => $id, "nama_perum" => $name, "alamat" => $alamat, "koordinat" => $koordinat, "id_user" => $idUser, "status" => $status];
+	}
+	$statement->close();
+	
+	return $arr;
+}
+
+function getAreaListbyID()
+{
+    global $conn;
+
+    $idPerum = $_GET["id_perum"];
+    $arr = array();
+    $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, id_user, status from perumahan_master where id_perum = $idPerum");
     $statement->bind_result($id, $name, $alamat, $koordinat, $idUser, $status);
 	$statement->execute();
 	while ($statement->fetch()) {
