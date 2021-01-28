@@ -109,7 +109,6 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         //membuat layer map
         var mymap = new L.map('peta', mapOptions);
         //membuat titik awal pada peta
-        mymap.setView([-8.61499 , 115.17297], 18);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 20,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -125,7 +124,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         });
 
         function stringToGeoPoints( geo ) {
-            var linesPin = geo.split(", ");
+            var linesPin = geo.split(",");
 
             var linesLat = new Array();
             var linesLng = new Array();
@@ -149,13 +148,14 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 
         function tambahArea() {
             for(var i=0; i < areas.length; i++) {
-                console.log(areas[i]['koordinat']);
                 var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
                 polygon.bindPopup( "<b>" + "Nama Perumahan : " + areas[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areas[i]['alamat'] 
-                + "<br>");   
+                + "<br>");
+            mymap.fitBounds(polygon.getBounds());   
             }
         }
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
+
     </script>
 </body>
 </html>

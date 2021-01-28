@@ -224,7 +224,7 @@ function getAreaListbyID()
 {
     global $conn;
 
-    $idPerum = $_GET["id_perum"];
+    $idPerum = $_GET["id"];
     $arr = array();
     $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, id_user, status from perumahan_master where id_perum = $idPerum");
     $statement->bind_result($id, $name, $alamat, $koordinat, $idUser, $status);
