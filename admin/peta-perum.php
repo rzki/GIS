@@ -103,5 +103,6 @@ var mapOptions = {
         }
         var areas = JSON.parse( '<?php echo json_encode($areas) ?>' );
     </script>
+<script src="js/home.js"></script>
 </body>
 </html>

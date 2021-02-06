@@ -18,7 +18,6 @@ if (isset($_SESSION['level'])) {
 }
 
 $idPerum = $_GET["id"];
-$areaPerum = getAreaListbyID();
 
 // pagination
 $jumlahDataPerHalaman = 6;
@@ -48,7 +47,6 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <?php $head = 'Detail Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-    <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
     <div class="container-fluid">
         <div class="row">
             <div class="card" style="width:100%;">
@@ -100,6 +98,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
             </div>
     </div>
 </div>
+<<<<<<< HEAD
 <script>
         //membuat mapOptions
         var mapOptions = {
@@ -155,5 +154,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
 
     </script>
+=======
+>>>>>>> parent of 9f473f1... update kesekian kali
 </body>
 </html>

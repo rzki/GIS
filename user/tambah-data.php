@@ -164,7 +164,7 @@ if (isset($_POST['tambah'])){
         points[i] =  draggableAreaMarkers[ i ].getLatLng().lng + "," + draggableAreaMarkers[ i ].getLatLng().lat;
         }
     }
-    $('#koordinat').val(points.join(','));
+    $('#koordinat').val(points.join(', '));
     }
     
     $( document ).ready(function() {
@@ -187,6 +187,7 @@ if (isset($_POST['tambah'])){
     $( document ).ready(function() {
     putDraggable();
     });
+
     </script>
 </body>
 </html>
