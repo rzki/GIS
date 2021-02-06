@@ -41,8 +41,8 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
     
     <div class="container-fluid">
         <div class="row">
-        <div class="card-deck mx-auto" style="width:100%">
-                <div class="card">
+        <div class="card-deck mx-auto">
+                <div class="card h-75">
                     <h2 class="card-header text-white bg-dark" style="text-align: center;">
                         <?= $tipe["tipe_rumah"]; ?>
                     </h2>
@@ -58,39 +58,11 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
                     <h2 class="card-header text-white bg-dark" style="text-align: center;">
                         Gambar Perumahan
                     </h2>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
+                    <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
-                                    </div>
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
-                                    </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
-                                    </div>
-                            </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
                 </div>
             </div>

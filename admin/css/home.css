@@ -60,7 +60,7 @@ body {
 
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
-  color: inherit;
+  color: blue;
 }
 
 .sidebar-heading {

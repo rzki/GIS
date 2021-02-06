@@ -17,7 +17,7 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaList_member();
+$areas = getAreaListbyuserID();
 $id_user = $_SESSION ["userID"];
 $namaUser = $usr["nama"];
 
@@ -35,7 +35,7 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
 <!doctype html>
 <html lang="en">
 <!-- head -->
-        <?php include_once('../components/head.php') ?>
+    <?php include_once('../components/head.php') ?>
 <body>
 <!-- header -->
     <?php include_once('../components/header.php') ?>
@@ -68,5 +68,6 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
         <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
         <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     </script>
+    <?php include_once('../components/close-main-content.php') ?>
 </body>
 </html>

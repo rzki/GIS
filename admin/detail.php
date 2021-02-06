@@ -58,7 +58,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                 <div class="card-body">
                     <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
                     <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
-                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
+                    <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
                 </div>
             </div>
         </div>
@@ -149,8 +149,6 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         function tambahArea() {
             for(var i=0; i < areas.length; i++) {
                 var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areas[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areas[i]['alamat'] 
-                + "<br>");
             mymap.fitBounds(polygon.getBounds());   
             }
         }

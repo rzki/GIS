@@ -149,8 +149,6 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         function tambahArea() {
             for(var i=0; i < areas.length; i++) {
                 var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areas[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areas[i]['alamat'] 
-                + "<br>");
             mymap.fitBounds(polygon.getBounds());   
             }
         }

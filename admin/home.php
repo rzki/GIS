@@ -17,7 +17,6 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaList();
 $id_user = $_SESSION ["userID"];
 $namaUser = $usr["nama"];
 
@@ -57,10 +56,9 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
                 <div class="card-body">
                     <h2 class="text-center"><b> Biodata</b></h2>
                     <hr class="solid" style="border: solid;">
-                    <br>
-                    <h5 class="card-text"><b>Nama</b>&emsp;&emsp;: <?php echo $row["nama"];?></h5>
-                    <h5 class="card-text"><b>Alamat</b>&emsp;&nbsp;: <?php echo $row["alamat"];?></h5>
-                    <h5 class="card-text"><b>Email</b>&emsp;&emsp;: <?php echo $row["email"];?></h5>
+                    <p class="card-text" style="font-size: large;"><b>Nama</b>&emsp;&emsp;:&nbsp; <?php echo $row["nama"];?></p>
+                    <p class="card-text" style="font-size: large;"><b>Alamat</b>&emsp;&nbsp;:&nbsp; <?php echo $row["alamat"];?></p>
+                    <p class="card-text" style="font-size: large;"><b>Email</b>&emsp;&emsp;:&nbsp; <?php echo $row["email"];?></p>
                     
                 </div>
             </div>
@@ -74,8 +72,9 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
 <h1 class="head">Daftar Perumahan</h1>
 <hr style="margin-top: -3px;">
 
+<div class="container-fluid">
     <div class="row">
-        <div class="table-responsive mx-auto d-block">
+        <div class="table-responsive">
             <table class="table table-sm table-hover table-striped table-bordered">
                 <tr class="text-center">
                     <th>No.</th>
@@ -110,9 +109,10 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
                 <a class="btn btn-block btn-primary" href="tambah-data.php">
                     <span data-feather='plus'></span>
                         Tambah Data Perumahan
-                    </a>
-                </div>
+                </a>
             </div>
+        </div>
+</div>
 
     <script>
     // mengaktifkan tooltips

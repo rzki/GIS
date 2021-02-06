@@ -17,7 +17,7 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaList_member();
+$areas = getAreaListbymemberID();
 $id_user = $_SESSION ["userID"];
 
 //pagination

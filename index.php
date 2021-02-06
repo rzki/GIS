@@ -1,101 +1,83 @@
+<?php
+require "functions.php";
+
+$areas = getAreaListbyStatus();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/scrolling-nav.css" rel="stylesheet">
-
+  <?php include_once("components/index-head.php")?>
 </head>
 
 <body id="page-top">
+  <?php include_once("components/navbar-index.php")?>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+<section id="welcomeHeader" class="welcomeImg">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">SIG Perum Kab. Badung</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Tambah Data Perumahan</a>
-          </li>
-        </ul>
-        <span class="nav-item">
-            <a class="btn btn-primary nav-link js-scroll-trigger" href ="../sig/auth/login.php" style="margin-right: 10px;">Login</a>
-          </span>
+      <div class="row">
+          <div class="col-xl-12 mx-auto">
+            <img src="assets/brand/Kabupaten_Badung.png" class="text-center" style="width: 150px; height: 150px" alt="">
+            <h1 style="color: white;">Sistem Informasi Geografis <br> Pemetaan Perumahan Kabupaten Badung</h1>
+            <p class="lead" style="color: white;">Selamat datang di Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
+          </div>
       </div>
     </div>
-  </nav>
+</section>
 
-  <header class="bg-primary text-white">
-    <div class="container text-center">
-      <h1>Welcome to Scrolling Nav</h1>
-      <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
-    </div>
-  </header>
-
-  <section id="about">
+<section id="about" class="bg-light">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <h2>About this page</h2>
-          <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
-          <ul>
-            <li>Clickable nav links that smooth scroll to page sections</li>
-            <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-            <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in the navbar</li>
-            <li>Minimal custom CSS so you are free to explore your own unique design options</li>
-          </ul>
+          <h2 style="text-align: left;">Tentang Kabupaten Badung</h2>
+          <p class="lead" style="text-align: justify;">&emsp;&emsp;&emsp;Kabupaten Badung adalah sebuah kabupaten yang terletak di provinsi Bali, Indonesia. 
+                                                                  Kabupaten Badung juga meliputi Kuta dan Nusa Dua, sebuah daerah objek wisata yang terkenal.
+          </p>
+          <p class="lead" style="text-align: justify;">&emsp;&emsp;&emsp;Kabupaten Badung terdiri dari 6 Kecamatan, yaitu Kuta Selatan, Kuta, Kuta Utara, Mengwi, Abiansemal,
+                                                                  dan Petang. Jumlah penduduk yang ada di Kabupaten Badung adalah 683,200 jiwa*.</p>
+          <p class="text-muted" style="font-size:smaller">*merujuk kepada data dari BPS Kab. Badung tahun 2020.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 style="text-align: right;">Tentang Sistem</h2>
+          <p class="lead" style="text-align: justify;">&emsp;&emsp;&emsp;Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung ini dibangun untuk memetakan perumahan yang berada di Kabupaten Badung.
+                          Untuk saat ini, ruang lingkup pemetaan perumahan dari sistem ini hanya berada di kawasan Kuta Selatan.
+          </p>
+          <p class="lead" style="text-align: justify;">&emsp;&emsp;&emsp;Nantinya sistem ini diharapkan dapat
+                          memberikan informasi yang berguna kepada masyarakat tentang perumahan dan informasi rinci tentang perumahan yang terletak di Kabupaten Badung.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="services" class="bg-light">
+  <section id="daftar-perum">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Services we offer</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
-        </div>
-      </div>
+      <h2 style="text-align:center">Daftar Perumahan</h2>
+      <br>
+        <p class="lead text-center">Daftar lengkap dari perumahan yang berada di Kabupaten Badung bisa dilihat dengan mengklik tombol dibawah</p>
+        <br>
+        <center><a href="list-perum.php" class="btn btn-lg btn-outline-dark">Klik disini</a></center>   
     </div>
   </section>
 
-  <section id="contact">
+  <section id="peta-perum" class="bg-light">
+    <h2 style="text-align:center">Peta Perumahan</h2>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Contact us</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
-        </div>
-      </div>
+      <div id="peta" style="width: 100%; height: 600px;"></div>
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Rizky Dhani 2020</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -109,7 +91,72 @@
 
   <!-- Custom JavaScript for this theme -->
   <script src="js/scrolling-nav.js"></script>
+  <script>
+//membuat mapOptions
+var mapOptions = {
+            center: [-8.61510 , 115.17349],
+            zoom: 18
+        }
+        //membuat layer map
+        var mymap = new L.map('peta', mapOptions);
+        //membuat titik awal pada peta
+        mymap.setView([-8.8081 , 115.1657], 14);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 20,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(mymap);
+        
+        $( document ).ready(function() {
+            tambahArea();
+        });
 
+        function stringToGeoPoints( geo ) {
+            var linesPin = geo.split(",");
+            var linesLat = new Array();
+            var linesLng = new Array();
+
+            for(i=0; i < linesPin.length; i++) {
+                if(i % 2) {
+                linesLat.push(linesPin[i]);
+                }else{
+                linesLng.push(linesPin[i]);
+                }
+            }
+
+            var latLngLine = new Array();
+
+            for(i=0; i<linesLng.length;i++) {
+                latLngLine.push( L.latLng( linesLat[i], linesLng[i]));
+            }
+            
+            return latLngLine;
+        }
+
+        function tambahArea() {
+            for(var i=0; i < areas.length; i++) {
+                // membuat variabel polygon dan menampilkannya di peta
+                var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
+                // membuat variabel custom style dari popup
+                var customPopUp = "<center><b style='font-size: large;'>"
+                                    + areas[i]['nama_perum'] +"</b><br>"+ areas[i]['alamat'] +
+                                    "<br><a href='perum-detail.php?id="+ areas[i]['id_perum'] +"'>Lihat detail perumahan</a></center>";
+                var customOptions = {
+                    'maxWidth': '500',
+                    'className': 'custom',
+                    closeButton: true,
+                    autoClose: false
+                };
+                // menyematkan popup beserta variabel customnya ke dalam map
+                polygon.bindPopup(customPopUp, customOptions).addTo(mymap);
+            }
+        }
+        var areas = JSON.parse( '<?php echo json_encode($areas) ?>' );
+    </script>
 </body>
 
 </html>

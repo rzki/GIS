@@ -26,7 +26,7 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perumUser = query(" SELECT * FROM perumahan_master WHERE status = '0' LIMIT $awalData, $jumlahDataPerHalaman ");
+$perumUser = query(" SELECT * FROM perumahan_master, users WHERE status = '0' LIMIT $awalData, $jumlahDataPerHalaman ");
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +53,7 @@ $perumUser = query(" SELECT * FROM perumahan_master WHERE status = '0' LIMIT $aw
                     <th>No.</th>
                     <th>Nama Perumahan</th>
                     <th>Alamat</th>
+                    <th>Nama User</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -63,6 +64,7 @@ $perumUser = query(" SELECT * FROM perumahan_master WHERE status = '0' LIMIT $aw
                     <td class="text-center"><?= $i; ?></td>
                     <td class="text-center" data-target="nama_perum"><?= $row["nama_perum"]; ?></td>
                     <td class="text-center" data-target="alamat" ><?= $row["alamat"]; ?></td>
+                    <td class="text-center" data-target="username"><?= $row["username"]; ?></td>
                     <td class="text-center" data-target="status"><?php if($row["status"] == '1') {?>
                     <p>Diterima</p>
                     <?php } else {?>

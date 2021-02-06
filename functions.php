@@ -51,6 +51,7 @@ return mysqli_affected_rows($conn);
 
 function tambahtipe($data){
     global $conn;
+    error_reporting(0);
     
     $namaPerum      = $data["nama_perum"];
     $tipeRumah      = htmlspecialchars ($data["tipe_rumah"]);
@@ -188,7 +189,7 @@ function upload() {
     return $namaFileBaru;
 }
 
-function getAreaList()
+function getAreaList() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan
 {
     global $conn;
 	$arr = array();
@@ -203,7 +204,7 @@ function getAreaList()
 	return $arr;
 }
 
-function getAreaListbyuserID()
+function getAreaListbyuserID() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan (diperuntukkan untuk member)
 {
     global $conn;
 
@@ -220,7 +221,7 @@ function getAreaListbyuserID()
 	return $arr;
 }
 
-function getAreaListbyID()
+function getAreaListbyID() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan pada halaman detail perumahan
 {
     global $conn;
 
@@ -237,11 +238,11 @@ function getAreaListbyID()
 	return $arr;
 }
     
-function getAreaList_member()
+function getAreaListbyStatus() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan pada halaman index ketika statusnya sudah diterima
 {
     global $conn;
     $arr = array();
-    $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, status from perumahan_master order by nama_perum ASC");
+    $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, status from perumahan_master where status = '1'");
     $statement->bind_result( $id, $name, $alamat, $koordinat, $status);
     $statement->execute();
     while ($statement->fetch()) {

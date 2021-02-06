@@ -83,7 +83,7 @@ if (isset($_POST['tambah'])){
         <div class="form-group row">
             <label for="spesifikasi" class="col-sm-2 col-form-label">Spesifikasi</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi">
+                    <textarea class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi"></textarea>
                 </div>
         </div>
 
@@ -93,6 +93,14 @@ if (isset($_POST['tambah'])){
             <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="daya_listrik" name="daya_listrik" placeholder="Daya Listrik">
+                </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar" name="gambar" required>
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
                 <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>

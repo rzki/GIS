@@ -17,7 +17,7 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaListbyID();
+$areas = getAreaListbyuserID();
 
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ var mapOptions = {
         //membuat layer map
         var mymap = new L.map('peta', mapOptions);
         //membuat titik awal pada peta
-        mymap.setView([-8.61499 , 115.17297], 18);
+        mymap.setView([-8.8081 , 115.1657], 14);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 20,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -89,9 +89,17 @@ var mapOptions = {
 
         function tambahArea() {
             for(var i=0; i < areas.length; i++) {
-                console.log(areas[i]['koordinat']);
                 var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-                polygon.bindPopup( "<b>" + areas[i]['nama_perum']);   
+                // membuat variabel custom style dari popup
+                var customPopUp = "<center><b style='font-size: large;'>"+ areas[i]['nama_perum'] +"</b><br>"+ areas[i]['alamat'] +"<br><a href='detail.php?id="+ areas[i]['id_perum'] +"'>Lihat detail perumahan</a></center>";
+                var customOptions = {
+                    'maxWidth': '500',
+                    'className': 'custom',
+                    closeButton: true,
+                    autoClose: false
+                };
+                // menyematkan popup beserta variabel customnya ke dalam map
+                polygon.bindPopup(customPopUp, customOptions).addTo(mymap); 
             }
         }
 

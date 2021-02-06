@@ -42,16 +42,16 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
     <div class="container-fluid">
         <div class="row">
         <div class="card-deck mx-auto" style="width:100%">
-                <div class="card">
+                <div class="card" style="height: 100%;">
                     <h2 class="card-header text-white bg-dark" style="text-align: center;">
                         <?= $tipe["tipe_rumah"]; ?>
                     </h2>
                     <div class="card-body">
-                        <p class="card-title" style="word-wrap: break-word;"><b>Tipe Rumah :</b> <br> <?= $tipe["tipe_rumah"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Bangunan :</b>  <br> <?= $tipe["luas_bangunan"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Tanah :</b>  <br> <?= $tipe["luas_tanah"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Spesifikasi :</b>  <br> <?= $tipe["spesifikasi"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Daya Listrik :</b>  <br> <?= $tipe["daya_listrik"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Tipe Rumah :</b> &nbsp; <?= $tipe["tipe_rumah"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Bangunan :</b>  &nbsp; <?= $tipe["luas_bangunan"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Tanah :</b>  &nbsp; <?= $tipe["luas_tanah"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Spesifikasi :</b>  &nbsp; <?= $tipe["spesifikasi"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Daya Listrik :</b>  &nbsp; <?= $tipe["daya_listrik"];?></p>
                     </div>
                 </div>
                 <div class="card">
@@ -66,19 +66,19 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
+                                <img class="imgPerum d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
                                     </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
+                                <img class="imgPerum d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
                                     </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
+                                <img class="imgPerum d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
                                     </div>
@@ -94,6 +94,5 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
                     </div>
                 </div>
             </div>
-    </div>
 </body>
 </html>
