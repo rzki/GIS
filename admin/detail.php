@@ -36,6 +36,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 <html lang="en">
 <head>
     <?php include_once('../components/head.php') ?>
+    <title>Detail Perum <?= $perum["nama_perum"]; ?></title>
 </head>
 <body>
     <!-- header -->
@@ -51,37 +52,52 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="card" style="width:100%;">
-                    <h2 class="card-header" style="text-align: center;">
-                        <?= $perum["nama_perum"]; ?>
-                    </h2>
-                <div class="card-body">
-                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
-                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
-                    <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
+            <div class="card-deck">
+                <div class="card">
+                        <h2 class="card-header text-white bg-dark" style="text-align: center;">
+                            <?= $perum["nama_perum"]; ?>
+                        </h2>
+                    <div class="card-body">
+                        <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b></p>
+                        <p style="font-size: medium; text-align: center;"><?= $perum["nama_perum"];?></p>
+                        <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><b>Alamat :</b></p>
+                        <p style="font-size: medium; text-align: center;"><?= $perum["alamat"];?></p>
+                        <p class="card-title text-center" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b></p>
+                        <p style="font-size: medium; text-align: center;"><?= $perum["koordinat"];?></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header text-white bg-dark" style="text-align: center;">
+                        <h2>Gambar Perumahan</h2>
+                    </div>
+                    <div class="card-body">
+                        <center><img class="d-block justify-content-center" src="../img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="100%" height="100%"></center>
+                    </div>
                 </div>
             </div>
         </div>
     <br>
+    <h1 class="text-center">Tipe Rumah</h1>
+    <hr>
     <div class="container-fluid">
         <div class="row">
             <div class="table-responsive">
                 <table class="table table-sm table-hover table-striped table-bordered">
-                    <tr class="text-center">
-                        <th>No.</th>
+                    <tr class="text-center text-white bg-dark">
+                        <th>No</th>
                         <th>Tipe Rumah</th>
-                        <th>Luas Bangunan</th>
-                        <th>Luas Tanah</th>
+                        <th>Luas Bangunan (m2)</th>
+                        <th>Luas Tanah (m2)</th>
                         <th>Aksi</th>
                     </tr>
                     <?php $i = 1; ?>
                     <?php foreach ($tabelTipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
-                        <td><?= $i++; ?></td>
-                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?></td>
-                        <td class="text-center" data-target="luas_bangunan" ><?= $rows["luas_bangunan"]; ?></td>
-                        <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
-                        <td class="text-center" >
+                        <td style="width: 75px;"><?= $i; ?></td>
+                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?> (<?= $rows["luas_bangunan"]; ?>/<?= $rows["luas_tanah"]; ?>)</td>
+                        <td class="text-center" data-target="luas_bangunan" style="width: 150px;"><?= $rows["luas_bangunan"]; ?> m2</td>
+                        <td class="text-center" data-target="luas_tanah" style="width: 125px;"><?= $rows["luas_tanah"]; ?> m2</td>
+                        <td class="text-center" style="width: 125px;">
                         <a href="tipe_detail.php?id=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
                         <a href="edit_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
                         <a href="delete_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
@@ -92,7 +108,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                     <?php $i++ ?>
                     <?php endforeach; ?>
                     </table>
-                    <a class="btn btn-block btn-dark" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
+                    <a class="btn btn-block btn-primary" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
                     <span data-feather='plus'></span>
                         Tambah Tipe Perumahan
                     </a>
@@ -104,12 +120,12 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         //membuat mapOptions
         var mapOptions = {
             center: [-8.61510 , 115.17349],
-            zoom: 18
+            zoom: 14
         }
         //membuat layer map
         var mymap = new L.map('peta', mapOptions);
         //membuat titik awal pada peta
-        mymap.setView([-8.61499 , 115.17297], 18);
+        mymap.setView([-8.61499 , 115.17297], 14);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 20,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -125,7 +141,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         });
 
         function stringToGeoPoints( geo ) {
-            var linesPin = geo.split(", ");
+            var linesPin = geo.split(",");
 
             var linesLat = new Array();
             var linesLng = new Array();
@@ -149,14 +165,8 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 
         function tambahArea() {
             for(var i=0; i < areas.length; i++) {
-                console.log(areas[i]['koordinat']);
                 var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-<<<<<<< HEAD
             mymap.fitBounds(polygon.getBounds());   
-=======
-                polygon.bindPopup( "<b>" + "Nama Perumahan : " + areas[i]['nama_perum'] + "<br>" + "<br>" + "Alamat : " + areas[i]['alamat'] 
-                + "<br>");   
->>>>>>> parent of 9f473f1... update kesekian kali
             }
         }
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );

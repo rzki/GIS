@@ -10,6 +10,7 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
 <html lang="en">
     <!-- head -->
 <?php include_once('../components/head-userdata.php') ?>
+<title>Data Member</title>
 <body>
   <!-- header -->
   <?php include_once('../components/header.php') ?>
@@ -32,6 +33,7 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
                                     <th style="text-align: center;">Alamat</th>
                                     <th style="text-align: center;">Username</th>
                                     <th style="text-align: center;">Email</th>
+                                    <th style="text-align: center;">Role</th>
                                     <th style="text-align: center;">Aksi</th>
                                 </tr>
                                 <?php $i = 1; ?>
@@ -42,6 +44,7 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
                                     <td style="text-align: center;"><?= $row["alamat"]; ?></td>
                                     <td style="text-align: center;"><?= $row["username"]; ?></td>
                                     <td style="text-align: center;"><?= $row["email"]; ?></td>
+                                    <td style="text-align: center;"><?= $row["level"]; ?></td>
                                     <td style="text-align: center;">
                                         <a href="userdata-edit.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
                                         <a href="delete.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Yakin ingin hapus data pengguna?')">

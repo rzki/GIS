@@ -1,6 +1,5 @@
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
@@ -24,9 +23,13 @@
       background-image: linear-gradient(
         rgba(0, 0, 0, 0.75),
         rgba(0, 0, 0, 0.75)
-      ), url("img-gallery/contoh-perum.jpg");
-      background-size: 100% 100%;
+      ), url("img-gallery/Perum-The Living Hill Residence-6024a02fe8682.jpg");
+      background-size: cover;
       text-align: center;
+    }
+    .carousel-item .carousel-caption{
+      background-color: black;
+      opacity: 0.75;
     }
     #peta{
 			height:100vh;

@@ -17,7 +17,7 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaListbyuserID();
+$areas = getAreaList();
 
 ?>
 <!DOCTYPE html>

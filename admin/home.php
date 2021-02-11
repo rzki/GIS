@@ -35,6 +35,7 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/head.php') ?>
+    <title>Dashboard Admin</title>
 <body>
 
     <!-- header -->
@@ -44,7 +45,7 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
     <?php include_once('../components/sidebar-admin.php') ?>
     
     <!-- Main Content -->
-    <?php $head = 'Selamat Datang, ' . $_SESSION['name'] . '!' ?>
+    <?php $head = 'Selamat Datang, ' . $_SESSION['uname'] . '!' ?>
     <?php include_once('../components/homepage.php') ?>
     
 <!-- Biodata -->
@@ -69,15 +70,15 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
 <br>
 <br>
 <!-- Daftar Perumahan yang sudah di approve -->
-<h1 class="head">Daftar Perumahan</h1>
+<h1 class="head" style="text-align: center;">Daftar Perumahan</h1>
 <hr style="margin-top: -3px;">
 
 <div class="container-fluid">
     <div class="row">
         <div class="table-responsive">
             <table class="table table-sm table-hover table-striped table-bordered">
-                <tr class="text-center">
-                    <th>No.</th>
+                <tr class="text-center text-white bg-dark">
+                    <th>No</th>
                     <th>Nama Perumahan</th>
                     <th>Alamat</th>
                     <th>Status</th>
@@ -88,7 +89,7 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
                 <?php foreach ($perum as $row) : ?>
                 <tr class="show" id="<?= $row["id_perum"]; ?>">
                     <td class="text-center"><?= $i; ?></td>
-                    <td class="text-center" data-target="nama_perum"><?= $row["nama_perum"]; ?></td>
+                    <td class="text-center" data-target="nama_perum" style="width: 300px;"><?= $row["nama_perum"]; ?></td>
                     <td class="text-center" data-target="alamat" ><?= $row["alamat"]; ?></td>
                     <td class="text-center" data-target="status"><?php if($row["status"] == '1') {?>
                     <p>Diterima</p>

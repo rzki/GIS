@@ -19,6 +19,7 @@ if (isset($_SESSION['level'])) {
 
 //ambil data di URL
 $idPerum = $_GET['id'];
+$areaPerum = getAreaListbyID();
 
 //query data perumahan berdasarkan id
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
@@ -41,6 +42,7 @@ if(isset($_POST["update"])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Edit Data Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -89,6 +91,14 @@ if(isset($_POST["update"])){
                 </div>
         </div>
 
+        <div class="form-group row" style="margin-top: 1%;">
+            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                </div>
+        </div>
+        
         <div class="form-group row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
@@ -120,6 +130,10 @@ if(isset($_POST["update"])){
                 tileSize: 512,
                 zoomOffset: -1
             }).addTo(mymap);
+
+        $( document ).ready(function() {
+            tambahArea();
+        });
 
             function resetArea() {
         if(polygon != null) {
@@ -171,7 +185,7 @@ if(isset($_POST["update"])){
         points[i] =  draggableAreaMarkers[ i ].getLatLng().lng + "," + draggableAreaMarkers[ i ].getLatLng().lat;
         }
     }
-    $('#koordinat').val(points.join(', '));
+    $('#koordinat').val(points.join(','));
     }
     
     $( document ).ready(function() {
@@ -195,6 +209,36 @@ if(isset($_POST["update"])){
     putDraggable();
     });
 
+    function stringToGeoPoints( geo ) {
+            var linesPin = geo.split(",");
+
+            var linesLat = new Array();
+            var linesLng = new Array();
+
+            for(i=0; i < linesPin.length; i++) {
+                if(i % 2) {
+                linesLat.push(linesPin[i]);
+                }else{
+                linesLng.push(linesPin[i]);
+                }
+            }
+
+            var latLngLine = new Array();
+
+            for(i=0; i<linesLng.length;i++) {
+                latLngLine.push( L.latLng( linesLat[i], linesLng[i]));
+            }
+            
+            return latLngLine;
+        }
+        
+    function tambahArea() {
+            for(var i=0; i < areas.length; i++) {
+                var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
+            mymap.fitBounds(polygon.getBounds());   
+            }
+        }
+    var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
 </body>
 </html>

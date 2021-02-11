@@ -36,6 +36,7 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
 <html lang="en">
 <!-- head -->
     <?php include_once('../components/head.php') ?>
+    <title>Dashboard Member</title>
 <body>
 <!-- header -->
     <?php include_once('../components/header.php') ?>
@@ -44,7 +45,7 @@ $user = mysqli_query($conn, " SELECT * FROM users WHERE id_user = '$id_user'");
     <?php include_once('../components/sidebar-user.php') ?>
 
     <!-- Main Content -->
-    <?php $head = 'Selamat Datang, ' . $_SESSION['name'] . '!' ?>
+    <?php $head = 'Selamat Datang, ' . $_SESSION['uname'] . '!' ?>
     <?php include_once('../components/homepage.php') ?>
 
 <!-- Biodata -->

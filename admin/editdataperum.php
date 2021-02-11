@@ -41,6 +41,7 @@ if(isset($_POST["update"])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Edit Data Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -63,7 +64,7 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perum["id_perum"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perum["gambar"]; ?>">
+    <input type="hidden" name="gambarLama" value="<?= $perum["gambar_perum"]; ?>">
         <div class="form-group row">
             <label for="nama_perum" class="col-sm-2 col-form-label">Nama Perumahan</label>
                 <div class="col-sm-10">
@@ -89,6 +90,14 @@ if(isset($_POST["update"])){
                 </div>
         </div>
 
+        <div class="form-group row" style="margin-top: 1%;">
+            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                </div>
+        </div>
+        
         <div class="form-group row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
@@ -110,7 +119,7 @@ if(isset($_POST["update"])){
             var draggableAreaMarkers = new Array();
 
             //membuat titik awal pada peta
-            mymap.setView([-8.61499 , 115.17297], 18);
+            mymap.setView([-8.8110524,115.1589606], 14);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                 maxZoom: 20,
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +

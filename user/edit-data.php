@@ -41,6 +41,7 @@ if(isset($_POST["update"])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Edit Data Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -111,7 +112,7 @@ if(isset($_POST["update"])){
             var draggableAreaMarkers = new Array();
 
             //membuat titik awal pada peta
-            mymap.setView([-8.61499 , 115.17297], 18);
+            mymap.setView([-8.8110524,115.1589606], 14);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                 maxZoom: 20,
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +

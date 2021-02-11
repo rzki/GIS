@@ -31,12 +31,12 @@ if (isset($_POST['register'])) {
     $newPassword = $_POST['password'];
     $repeatNewPassword = $_POST['password2'];
 
-    // cek password lama
-    if (!password_verify($oldPassword, $usr['password'])) {
+    // cek password lama user, apakah sama atau tidak
+    if (!password_verify($oldPassword, $user['password'])) {
         echo '
             <script>
                 alert("Password lama yang anda masukkan salah!");
-                window.location.href="account.php"
+                window.location.href="userdata.php"
             </script>
         ';
         return false;
@@ -46,7 +46,7 @@ if (isset($_POST['register'])) {
         echo '
             <script>
                 alert("Konfirmasi password tidak sesuai!");
-                window.location.href="account.php"
+                window.location.href="userdata.php"
             </script>
         ';
         return false;
@@ -71,7 +71,7 @@ if (isset($_POST['register'])) {
         echo '
             <script>
                 alert("Gagal update data!");
-                window.location.href="account.php"
+                window.location.href="userdata.php"
             </script>
         ';
     }
@@ -82,6 +82,7 @@ if (isset($_POST['register'])) {
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/head.php') ?>
+    <title>Edit Data Member</title>
 <body>
     <!-- header -->
     <?php include_once('../components/header.php') ?>
@@ -91,7 +92,7 @@ if (isset($_POST['register'])) {
 <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Begin page content -->
-    <?php $head = 'Pengaturan Akun' ?>    
+    <?php $head = 'Pengaturan Akun Member' ?>    
     <?php include_once('../components/main-content.php') ?>
 
     <form method="post" action="">
@@ -100,7 +101,7 @@ if (isset($_POST['register'])) {
     <div class="form-group row">
         <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama"
                     value="<?= $user["nama"]; ?>">
             </div>
     </div>
@@ -108,7 +109,7 @@ if (isset($_POST['register'])) {
     <div class="form-group row">
         <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" required
+                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"
                     value="<?= $user["alamat"]; ?>">
             </div>
     </div>
@@ -116,7 +117,7 @@ if (isset($_POST['register'])) {
     <div class="form-group row">
         <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username"
                     value="<?= $user["username"]; ?>">
             </div>
     </div>
@@ -130,7 +131,7 @@ if (isset($_POST['register'])) {
     </div>
 
     <div class="form-group row">
-        <label for="old_password" class="col-sm-2 col-form-label">Password Lama</label>
+        <label for="old_password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Password Lama">
             </div>

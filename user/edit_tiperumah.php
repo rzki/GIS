@@ -42,6 +42,7 @@ if(isset($_POST["update"])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Edit Tipe Rumah</title>
 </head>
 <body>
     <!-- header -->
@@ -56,6 +57,8 @@ if(isset($_POST["update"])){
     <?php include_once('../components/main-content.php') ?>
 
 <form method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?= $perumtipe["id_tipe"]; ?>">
+    <input type="hidden" name="gambarLama" value="<?= $perumtipe["gambar"]?>">
         <div class="form-group row">
             <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
                 <div class="col-sm-10">
@@ -95,7 +98,16 @@ if(isset($_POST["update"])){
                     value="<?= $perumtipe['daya_listrik'];?>" required>
                 </div>
         </div>
-                <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
+
+        <div class="form-group row">
+            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar" name="gambar" value="<?= $perumtipe['gambar'];?>">
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                </div>
+        </div>
+        
+        <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
 </form>
 </body>
 </html>

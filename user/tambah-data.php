@@ -45,6 +45,7 @@ if (isset($_POST['tambah'])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Tambah Data Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -88,6 +89,14 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
 
+        <div class="form-group row" style="margin-top: 1%;">
+            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                </div>
+        </div>
+        
         <input type="hidden" name="id_user" value="<?= $id ?>">
         <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
 </form>
@@ -103,7 +112,7 @@ if (isset($_POST['tambah'])){
         var draggableAreaMarkers = new Array();
 
         //membuat titik awal pada peta
-        mymap.setView([-8.61499 , 115.17297], 15);
+        mymap.setView([-8.8110524,115.1589606], 14);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 20,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +

@@ -34,6 +34,11 @@ function tambahdataperum($data) {
     $koordinat      = htmlspecialchars ($data["koordinat"]);
     $idUser         = $_SESSION["userID"];
     $status         = htmlspecialchars ($data["status"]);
+    // upload gambar
+    $gambarperum    = upload();
+    if(!$gambarperum){
+        return false;
+    }
 
     // ambil data perumahan
     $queryUser = "SELECT * FROM users WHERE id_user = '$idUser'";
@@ -43,7 +48,7 @@ function tambahdataperum($data) {
 
     $queryPerum         =   "   INSERT INTO perumahan_master
                                     VALUES
-                                    ('', '$namaPerum', '$alamat', '$koordinat', '$idUser', '$status')";
+                                    ('', '$namaPerum', '$alamat', '$koordinat', '$gambarperum', '$idUser', '$status')";
     mysqli_query($conn, $queryPerum);
 
 return mysqli_affected_rows($conn);
@@ -63,7 +68,7 @@ function tambahtipe($data){
     $idUser         = $_SESSION["userID"];
 
     // upload gambar
-    $gambar         = upload();
+    $gambar         = uploadtipe();
     if(!$gambar){
         return false;
     
@@ -91,11 +96,20 @@ function ubahdataperum($data) {
     $alamat         = htmlspecialchars ($data["alamat"]);
     $koordinat      = ($data["koordinat"]);
     $status         = htmlspecialchars ($data["status"]);
+    $gambarLama     = htmlspecialchars ($data["gambarLama"]);
+
+    //cek apakah user pilih gambar baru atau tidak
+    if( $_FILES['gambar_perum']['error'] == 4){
+        $gambarperum = $gambarLama;
+    } else {
+        $gambarperum = upload();
+    }
 
     $queryPerum  =   "UPDATE perumahan_master SET 
                     nama_perum = '$namaPerum',
                     alamat = '$alamat',
                     koordinat = '$koordinat',
+                    gambar_perum = '$gambarperum',
                     status = '$status'
                 WHERE id_perum = $idPerum";
     mysqli_query($conn, $queryPerum);
@@ -106,7 +120,7 @@ function ubahdataperum($data) {
 function ubahtiperumah($data) {
     global $conn;
 
-    $idTipe        = $data["id"];
+    $idTipe         = $data["id"];
     $tipeRumah      = htmlspecialchars ($data["tipe_rumah"]);
     $luasBangunan   = htmlspecialchars ($data["luas_bangunan"]);
     $luasTanah      = htmlspecialchars ($data["luas_tanah"]);
@@ -118,7 +132,7 @@ function ubahtiperumah($data) {
     if( $_FILES['gambar']['error'] == 4){
         $gambar = $gambarLama;
     } else {
-        $gambar = upload();
+        $gambar = uploadtipe();
     }
 
     $queryTipe =   "UPDATE tiperumah_master SET
@@ -135,6 +149,60 @@ function ubahtiperumah($data) {
 }
 
 function upload() {
+    global $conn;
+    
+    $namaFile = $_FILES['gambar_perum']['name'];
+    $ukuranFile = $_FILES['gambar_perum']['size'];
+    $error = $_FILES['gambar_perum']['error'];
+    $tmpName = $_FILES['gambar_perum']['tmp_name'];
+    $sizeGambar = 10 * 1024 * 1024;
+
+    // cek apakah gambar sudah di upload
+    if ($error == 4){
+        echo "
+            <script>
+                alert('Gambar belum dimasukkan!') 
+            </script>
+        ";
+    return false;
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+    if(!in_array($ekstensiGambar, $ekstensiGambarValid)){
+        echo " 
+            <script>
+                alert('Format gambar tidak didukung!')
+            </script>";
+        return false;
+    }
+
+    if($ukuranFile > $sizeGambar){
+        echo " 
+            <script>
+                alert('Ukuran gambar terlalu besar!')
+            </script>";
+        return false;
+    }   
+
+    //ambil nama perumahan untuk dimasukkan sebagai nama gambar dari table tiperumah
+    $namaPerum = $_POST["nama_perum"];
+
+    // jika lolos pengecekan, gambar siap di upload
+    // generate nama baru
+    $namaFileBaru  = 'Perum'. '-'. $namaPerum. '-' . uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName, '../img-perum/' . $namaFileBaru);
+
+    return $namaFileBaru;
+}
+
+function uploadtipe() {
     global $conn;
     
     $namaFile = $_FILES['gambar']['name'];
@@ -174,17 +242,16 @@ function upload() {
     }   
 
     //ambil nama perumahan untuk dimasukkan sebagai nama gambar dari table tiperumah
-    $idPerum = $_GET["id_perum"];
-    $namaperumtipe = query("SELECT * FROM tiperumah_master WHERE id_perum = $idPerum")[0];
-    $namaPerum = $namaperumtipe["nama_perum"];
+    $namaTipe   = $_POST["tipe_rumah"];
+    $tiperumah  = $_POST["tipe_perum"];
 
     // jika lolos pengecekan, gambar siap di upload
     // generate nama baru
-    $namaFileBaru  = $namaPerum. '-' . uniqid();
+    $namaFileBaru  = 'Tipe'. '-' . $namaTipe. '-' . $tiperumah. '-' . uniqid();
     $namaFileBaru .= '.';
     $namaFileBaru .= $ekstensiGambar;
 
-    move_uploaded_file($tmpName, '../img-perum/' . $namaFileBaru);
+    move_uploaded_file($tmpName, '../img-tiperumah/' . $namaFileBaru);
 
     return $namaFileBaru;
 }
@@ -225,7 +292,7 @@ function getAreaListbyID() //mendapatkan dan menampilkan koordinat dari seluruh 
 {
     global $conn;
 
-    $idPerum = $_GET["id_perum"];
+    $idPerum = $_GET["id"];
     $arr = array();
     $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, id_user, status from perumahan_master where id_perum = $idPerum");
     $statement->bind_result($id, $name, $alamat, $koordinat, $idUser, $status);

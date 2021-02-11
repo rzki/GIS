@@ -19,20 +19,22 @@ if (isset($_SESSION['level'])) {
 
 //ambil data di URL
 $idTipe = $_GET['id'];
+$previous = "javascript:history.go(-1)";
 
 //query data perumahan berdasarkan id
 $perumtipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+$idperum = $perumtipe["id_perum"];
 
 if(isset($_POST["update"])){
 
     //cek apakah data berhasil diubah atau tidak
     if(ubahtiperumah($_POST) > 0) {
-        echo '
+        echo "
         <script>
-                alert("Berhasil mengubah tipe perumahan!");
-                window.location.href="detail.php"
+                alert('Berhasil mengubah tipe perumahan!');
+                window.location.href = 'detail.php?id=$idperum'
             </script>
-        ';
+        ";
     } 
 }
 ?>
@@ -41,6 +43,7 @@ if(isset($_POST["update"])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Edit Tipe Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -56,6 +59,7 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perumtipe["id_tipe"]; ?>">
+    <input type="hidden" name="gambarLama" value="<?= $perumtipe["gambar"]?>">
         <div class="form-group row">
             <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
                 <div class="col-sm-10">
@@ -65,7 +69,7 @@ if(isset($_POST["update"])){
         </div>
 
         <div class="form-group row">
-            <label for="luas_bangunan" class="col-sm-2 col-form-label">Luas Bangunan</label>
+            <label for="luas_bangunan" class="col-sm-2 col-form-label">Luas Bangunan (m2)</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="luas_bangunan" name="luas_bangunan" placeholder="Luas Bangunan" 
                     value="<?= $perumtipe['luas_bangunan'];?>" required>
@@ -73,7 +77,7 @@ if(isset($_POST["update"])){
         </div>
 
         <div class="form-group row">
-            <label for="luas_tanah" class="col-sm-2 col-form-label">Luas Tanah</label>
+            <label for="luas_tanah" class="col-sm-2 col-form-label">Luas Tanah (m2)</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="luas_tanah" name="luas_tanah" placeholder="Luas Tanah"
                     value="<?= $perumtipe['luas_tanah'];?>" required>
@@ -93,6 +97,14 @@ if(isset($_POST["update"])){
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="daya_listrik" name="daya_listrik" placeholder="Daya Listrik" 
                     value="<?= $perumtipe['daya_listrik'];?>" required>
+                </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar" name="gambar" value="<?= $perumtipe['gambar'];?>">
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
 

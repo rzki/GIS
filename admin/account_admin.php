@@ -78,6 +78,7 @@ if (isset($_POST['register'])) {
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/head.php') ?>
+    <title>Pengaturan Akun Admin</title>
 <body>
     <!-- header -->
     <?php include_once('../components/header.php') ?>

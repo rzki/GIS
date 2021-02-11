@@ -54,6 +54,7 @@ if (isset($_POST['register'])) {
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/head.php') ?>
+    <title>Pengaturan Profil Member</title>
 <body>
     <!-- header -->
     <?php include_once('../components/header.php') ?>

@@ -18,6 +18,7 @@ if (isset($_SESSION['level'])) {
 }
 
 $idPerum = $_GET["id"];
+$areaPerum = getAreaListbyID();
 
 // pagination
 $jumlahDataPerHalaman = 6;
@@ -35,6 +36,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 <html lang="en">
 <head>
     <?php include_once('../components/head.php') ?>
+    <title>Detail Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -47,20 +49,35 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <?php $head = 'Detail Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
+    <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="card" style="width:100%;">
-                    <h2 class="card-header" style="text-align: center;">
-                        <?= $perum["nama_perum"]; ?>
-                    </h2>
-                <div class="card-body">
-                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
-                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
-                    <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
+            <div class="card-deck">
+                <div class="card">
+                        <h2 class="card-header text-white bg-dark" style="text-align: center;">
+                            <?= $perum["nama_perum"]; ?>
+                        </h2>
+                    <div class="card-body">
+                        <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
+                        <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
+                        <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header text-white bg-dark" style="text-align: center;">
+                        <h2>Gambar Perumahan</h2>
+                    </div>
+                    <div class="card-body">
+                        <center><img class="d-block" src="../img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="100%" height="100%"></center>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     <br>
+    <h1 class="text-center">Tipe Rumah</h1>
+    <hr>
     <div class="container-fluid">
         <div class="row">
             <div class="table-responsive">
@@ -68,8 +85,8 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                     <tr class="text-center">
                         <th>No.</th>
                         <th>Tipe Rumah</th>
-                        <th>Luas Bangunan</th>
-                        <th>Luas Tanah</th>
+                        <th>Luas Bangunan (m2)</th>
+                        <th>Luas Tanah (m2)</th>
                         <th>Aksi</th>
                     </tr>
                     <?php $i = 1; ?>
@@ -81,24 +98,33 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                         <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
                         <td class="text-center" >
                         <a href="tipe_detail.php?id=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
+                        <!-- jika data perumahan tidak diinput oleh user yang sedang login -->
+                        <!-- maka user tidak bisa memakai fungsi input/update ke dalam data tersebut -->   
+                        <?php if($perum["id_user"] != $_SESSION["userID"]) {?>
+                        <?php } else {?>
                         <a href="edit_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
                         <a href="delete_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
                         </a>
+                        <?php }?>
                     </td>
                     </tr>
                     <?php $i++ ?>
                     <?php endforeach; ?>
                     </table>
+                    <!-- jika data perumahan tidak diinput oleh user yang sedang login -->
+                    <!-- maka user tidak bisa memakai fungsi input ke dalam data tersebut -->
+                    <?php if($perum["id_user"] != $_SESSION["userID"]) {?>
+                    <?php } else {?>
                     <a class="btn btn-block btn-dark" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
                     <span data-feather='plus'></span>
                         Tambah Tipe Perumahan
-                    </a>
+                    </a>    
+                    <?php }?>    
                     <br>
             </div>
     </div>
 </div>
-<<<<<<< HEAD
 <script>
         //membuat mapOptions
         var mapOptions = {
@@ -154,7 +180,5 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
 
     </script>
-=======
->>>>>>> parent of 9f473f1... update kesekian kali
 </body>
 </html>

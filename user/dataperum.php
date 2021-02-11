@@ -17,7 +17,7 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaListbymemberID();
+$areas = getAreaListbyuserID();
 $id_user = $_SESSION ["userID"];
 
 //pagination
@@ -34,6 +34,7 @@ $perum = query(" SELECT * FROM perumahan_master WHERE id_user = '$id_user' LIMIT
 <html lang="en">
 <!-- head -->
         <?php include_once('../components/head.php') ?>
+        <title>Data Perumahan</title>
 <body>
 <!-- header -->
     <?php include_once('../components/header.php') ?>

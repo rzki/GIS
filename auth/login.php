@@ -41,7 +41,7 @@ if (isset($_SESSION['login'])) {
     // cek jika user login sebagai admin
       if(password_verify($password, $hasil['password'])){
           if($hasil['level'] == 'admin'){
-      // buat session login dan username
+      // buat session login dan username untuk admin
           $_SESSION['user'] = $hasil;
           $_SESSION['login'] = true;
           $_SESSION['level'] = 'admin';
@@ -52,6 +52,7 @@ if (isset($_SESSION['login'])) {
           $_SESSION['user'] = $hasil;
           $_SESSION['login'] = true;
           $_SESSION['level'] = 'user';
+          // alihkan ke halaman dashboard user
           header('Location: ../user/home.php');
       } 
     } else {
@@ -84,7 +85,7 @@ if (isset($_SESSION['login'])) {
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Login</title>
+    <title>Login SIG Perumahan</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
@@ -111,18 +112,20 @@ if (isset($_SESSION['login'])) {
     <link href="css/login.css" rel="stylesheet">
   </head>
   <body class="text-center">
-
+  <div class="login-form mx-auto border-dark">
     <form action="" method="post" class="form-signin">
-  <img class="mb-4" src="../assets/brand/Kabupaten_Badung.png" alt="" width="192" height="192">
-  <h1 class="h4 mb-3 font-weight-bold">SISTEM INFORMASI GEOGRAFIS <BR> PEMETAAN PERUMAHAN <BR> KABUPATEN BADUNG</h1>
-  <label for="username" class="sr-only">Username</label>
-  <input type="username" name ="username" id="username" class="form-control" placeholder="Username" required>
-  <label for="password" class="sr-only">Password</label>
-  <input type="password" name ="password" id="password" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
-  <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Log in</button>
-  <p>Belum mempunyai akun? <a href="register.php">klik disini</a></p>
-  <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+      <img class="mb-1" src="../assets/brand/Kabupaten_Badung.png" alt="" width="190" height="190">
+      <h2 class="h5 mb-3 font-weight-bold">SISTEM INFORMASI GEOGRAFIS <BR> PEMETAAN PERUMAHAN <BR> KABUPATEN BADUNG</h2>
+        <p for="username" style="margin-bottom: -1px;">Username</p>
+        <input type="username" name ="username" id="username" class="form-control text-center mt-1 mb-1" placeholder="Masukkan Username" required>
+        <p for="password" style="margin-bottom: -1px;">Password</p>
+        <input type="password" name ="password" id="password" class="form-control text-center mt-1" placeholder="Masukkan Password" required>
+      <a href="../index.php" class="btn btn-lg btn-danger" style="display:inline-block">Kembali</a>
+      <button class="btn btn-lg btn-primary" type="submit" name="login" >Log In</button>
+      <p class="mt-1">Belum mempunyai akun? <a href="register.php">klik disini</a></p>
+      <p class="text-muted">&copy; 2020</p>
+  </div>
+
 </form>
 </body>
 </html>

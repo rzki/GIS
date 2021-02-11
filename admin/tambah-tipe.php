@@ -26,7 +26,7 @@ if (isset($_POST['tambah'])){
         echo 
         "
         <script>
-            alert ('Data perumahan berhasil ditambahkan!');
+            alert ('Tipe perumahan berhasil ditambahkan!');
             document.location.href = 'detail.php?id=$id_perum'
         </script>
         ";
@@ -34,7 +34,7 @@ if (isset($_POST['tambah'])){
         echo
         "
         <script>
-            alert ('Data perumahan gagal ditambahkan!');
+            alert ('Tipe perumahan gagal ditambahkan!');
             document.location.href = 'detail.php?id=$id_perum'
         </script>
         ";
@@ -45,6 +45,7 @@ if (isset($_POST['tambah'])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Tambah Tipe Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -67,14 +68,14 @@ if (isset($_POST['tambah'])){
         </div>
 
         <div class="form-group row">
-            <label for="luas_bangunan" class="col-sm-2 col-form-label">Luas Bangunan</label>
+            <label for="luas_bangunan" class="col-sm-2 col-form-label">Luas Bangunan (m2)</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="luas_bangunan" name="luas_bangunan" placeholder="Luas Bangunan">
                 </div>
         </div>
 
         <div class="form-group row">
-            <label for="luas_tanah" class="col-sm-2 col-form-label">Luas Tanah</label>
+            <label for="luas_tanah" class="col-sm-2 col-form-label">Luas Tanah (m2)</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="luas_tanah" name="luas_tanah" placeholder="Luas Tanah">
                 </div>
@@ -103,7 +104,7 @@ if (isset($_POST['tambah'])){
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
-                <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
+                <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Tipe Perumahan</button>
     </form>
 </body>
 </html>

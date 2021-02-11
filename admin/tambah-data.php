@@ -44,6 +44,7 @@ if (isset($_POST['tambah'])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
+    <title>Tambah Data Perumahan</title>
 </head>
 <body>
     <!-- header -->
@@ -89,9 +90,10 @@ if (isset($_POST['tambah'])){
         </div>
 
         <div class="form-group row" style="margin-top: 1%;">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar" name="gambar">
+                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
         
@@ -116,7 +118,7 @@ if (isset($_POST['tambah'])){
         var draggableAreaMarkers = new Array();
 
         //membuat titik awal pada peta
-        mymap.setView([-8.61499 , 115.17297], 18);
+        mymap.setView([-8.8110524,115.1589606], 14);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 20,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -159,15 +161,14 @@ if (isset($_POST['tambah'])){
 
     for(i=0; i < draggableAreaMarkers.length; i++) {
         if(draggableAreaMarkers[ i ]!="") {
-        latLngAreas.push( L.latLng( draggableAreaMarkers[ i ].getLatLng().lat, draggableAreaMarkers[ i ].getLatLng().lng));
+            latLngAreas.push( L.latLng( draggableAreaMarkers[ i ].getLatLng().lat, draggableAreaMarkers[ i ].getLatLng().lng));
         }
     }
 
     if(latLngAreas.length > 1) {
         // create a blue polygon from an array of LatLng points
         polygon = L.polygon( latLngAreas, {color: 'blue'}).addTo(mymap);
-    }
-
+        }
     }
     
     function getGeoPoints() {
@@ -188,7 +189,7 @@ if (isset($_POST['tambah'])){
 
   function putDraggable() {
    /* create a draggable marker in the center of the map */
-   draggableMarker = L.marker([mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(mymap);
+   draggableMarker = L.marker([mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(map);
    
    /* collect Lat,Lng values */
    draggableMarker.on('dragend', function(e) {

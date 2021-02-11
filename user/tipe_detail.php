@@ -18,7 +18,6 @@ if (isset($_SESSION['level'])) {
 }
 
 $idTipe = $_GET["id"];
-
 $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
 
 ?>
@@ -26,6 +25,7 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
 <html lang="en">
 <head>
     <?php include_once('../components/head.php') ?>
+    <title>Detail <?= $tipe["tipe_rumah"]; ?></title>
 </head>
 <body>
     <!-- header -->
@@ -41,58 +41,33 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
     
     <div class="container-fluid">
         <div class="row">
-        <div class="card-deck mx-auto" style="width:100%">
+            <div class="card-deck mx-auto" style="width:100%">
                 <div class="card" style="height: 100%;">
                     <h2 class="card-header text-white bg-dark" style="text-align: center;">
                         <?= $tipe["tipe_rumah"]; ?>
                     </h2>
                     <div class="card-body">
-                        <p class="card-title" style="word-wrap: break-word;"><b>Tipe Rumah :</b> &nbsp; <?= $tipe["tipe_rumah"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Bangunan :</b>  &nbsp; <?= $tipe["luas_bangunan"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Tanah :</b>  &nbsp; <?= $tipe["luas_tanah"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Spesifikasi :</b>  &nbsp; <?= $tipe["spesifikasi"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Daya Listrik :</b>  &nbsp; <?= $tipe["daya_listrik"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Tipe Rumah :</b></p>
+                        <p><?= $tipe["tipe_rumah"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Bangunan :</b></p>
+                        <p><?= $tipe["luas_bangunan"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Tanah :</b></p>
+                        <p><?= $tipe["luas_tanah"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Spesifikasi :</b></p>
+                        <p><?= $tipe["spesifikasi"];?></p>
+                        <p class="card-title" style="word-wrap: break-word;"><b>Daya Listrik :</b></p>
+                        <p><?= $tipe["daya_listrik"];?></p>
                     </div>
                 </div>
                 <div class="card">
                     <h2 class="card-header text-white bg-dark" style="text-align: center;">
                         Gambar Perumahan
                     </h2>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="imgPerum d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
-                                    </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="imgPerum d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
-                                    </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="imgPerum d-block w-100" src="../img-perum/<?= $tipe["gambar"]; ?>" alt="">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Tipe Rumah : <?= $tipe["tipe_rumah"];?></h5>
-                                    </div>
-                            </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                    <div class="card-body">
+                        <center><img class="d-block" src="../img-tiperumah/<?= $tipe["gambar"]; ?>" alt="" width="100%" height="100%"></center>
                     </div>
                 </div>
             </div>
+        </div>
 </body>
 </html>

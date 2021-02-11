@@ -9,9 +9,6 @@
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../assets/geoman/leaflet-geoman.css" />
-    <script src="../assets/geoman/leaflet-geoman.min.js"></script>
-    <title>Peta Perumahan di Kabupaten Badung</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
     <script src="https://kit.fontawesome.com/70f3726b28.js" crossorigin="anonymous"></script>
 

@@ -81,7 +81,7 @@ if (isset($_POST['register'])) {
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Register Form</title>
+    <title>Register Member SIG Perumahan</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer/">
 

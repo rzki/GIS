@@ -9,6 +9,7 @@ $areas = getAreaListbyStatus();
 
 <head>
   <?php include_once("components/index-head.php")?>
+  <title>Sistem Informasi Geografis Pemetaan Perumahan Kab. Badung</title>
 </head>
 
 <body id="page-top">
@@ -17,7 +18,7 @@ $areas = getAreaListbyStatus();
 <section id="welcomeHeader" class="welcomeImg">
     <div class="container">
       <div class="row">
-          <div class="col-xl-12 mx-auto">
+          <div class="mx-auto">
             <img src="assets/brand/Kabupaten_Badung.png" class="text-center" style="width: 150px; height: 150px" alt="">
             <h1 style="color: white;">Sistem Informasi Geografis <br> Pemetaan Perumahan Kabupaten Badung</h1>
             <p class="lead" style="color: white;">Selamat datang di Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
@@ -26,7 +27,70 @@ $areas = getAreaListbyStatus();
     </div>
 </section>
 
-<section id="about" class="bg-light">
+  <section id="daftar-perum" class="bg-light">
+    <div class="container">
+      <h2 style="text-align:center">Daftar Perumahan</h2>
+      <br>
+        <p class="lead text-center">Daftar lengkap dari perumahan yang berada di Kabupaten Badung bisa dilihat dengan mengklik tombol dibawah</p>
+        <br>
+        <center><a href="list-perum.php" class="btn btn-lg btn-outline-dark">Klik disini</a></center>   
+    </div>
+  </section>
+
+  <section id="peta-perum">
+    <h2 style="text-align:center">Peta Perumahan</h2>
+    <div class="container">
+      <div id="peta" style="width: 100%; height: 600px;"></div>
+    </div>
+  </section>
+
+  <section id="galeri" class="bg-light">
+    <h2 style="text-align:center">Gallery Perumahan</h2>
+    <div class="container">
+      <p class="lead text-center">Berikut beberapa contoh gambar perumahan yang ada di Kuta Selatan</p>
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="col-lg-6">
+          <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselFade" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselFade" data-slide-to="1"></li>
+            <li data-target="#carouselFade" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="img-perum/Perum-The Living Hill Residence-6024a02fe8682.jpg">
+              <div class="carousel-caption">
+                <h5>The Living Hill Residence</h5>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img-perum/Perum-Damara Village-60249f95c4fcb.jpg">
+              <div class="carousel-caption">
+                <h5>Damara Village</h5>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img-perum/Perum-Mandala Griya-6024a042974db.jpg">
+              <div class="carousel-caption">
+                <h5>Mandala Griya</h5>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -55,24 +119,6 @@ $areas = getAreaListbyStatus();
       </div>
     </div>
   </section>
-
-  <section id="daftar-perum">
-    <div class="container">
-      <h2 style="text-align:center">Daftar Perumahan</h2>
-      <br>
-        <p class="lead text-center">Daftar lengkap dari perumahan yang berada di Kabupaten Badung bisa dilihat dengan mengklik tombol dibawah</p>
-        <br>
-        <center><a href="list-perum.php" class="btn btn-lg btn-outline-dark">Klik disini</a></center>   
-    </div>
-  </section>
-
-  <section id="peta-perum" class="bg-light">
-    <h2 style="text-align:center">Peta Perumahan</h2>
-    <div class="container">
-      <div id="peta" style="width: 100%; height: 600px;"></div>
-    </div>
-  </section>
-
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
@@ -144,7 +190,7 @@ var mapOptions = {
                 // membuat variabel custom style dari popup
                 var customPopUp = "<center><b style='font-size: large;'>"
                                     + areas[i]['nama_perum'] +"</b><br>"+ areas[i]['alamat'] +
-                                    "<br><a href='perum-detail.php?id="+ areas[i]['id_perum'] +"'>Lihat detail perumahan</a></center>";
+                                    "<br><a href='detail-perum.php?id="+ areas[i]['id_perum'] +"'>Lihat detail perumahan</a></center>";
                 var customOptions = {
                     'maxWidth': '500',
                     'className': 'custom',
