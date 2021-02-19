@@ -6,12 +6,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="perum-detail.php#detailPerum">Detail Perumahan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="list-perum.php#daftarPerum">Daftar Perumahan</a>

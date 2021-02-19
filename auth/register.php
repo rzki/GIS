@@ -87,16 +87,71 @@ if (isset($_POST['register'])) {
 
     <!-- Bootstrap core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
     <style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    body{
+        background-image: linear-gradient(
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.75)
+    ), url("../img-gallery/Perum-The Living Hill Residence-6024a02fe8682.jpg");
+    background-size: cover;
+    }
+
+    h1{
+        text-align: center;
+    }
+    .register{
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        background: transparent;
+        color: white;
+    }
+
+    .register input[type = "text"],.register input[type="password"]{
+        width: 100%;
+        background:none;
+        border: 3px solid white;
+        padding: 8px 8px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        color: white;
+    }
+
+    .register input[type = "text"]:focus, .register input[type="password"]:focus{
+        width: 110%;
+        background:none;
+        border: 3px solid white;
+        padding: 8px 8px;
+        box-sizing: border-box;
+        color: white;
+        outline: none;
+    }
+    
+    .register .log-in a:hover{
+        color: white;
+        background: none;
+    }
+
+    button[type="submit"]{
+        background: none;
+        border-color: white;
+        color: white;
+        border-radius: 24px;
+        width: 100%;
+    }
+
+    button[type="submit"]:hover{
+        color: white;
+        background: #0275d8;
+        border-color: #0275d8;
+        transition: 0.25s;
+    }
+
+    button[type="submit"]:active{
+        background: #0275d8;
+        border-color: #0275d8;
+        color: white;
     }
 
     @media (min-width: 768px) {
@@ -108,61 +163,37 @@ if (isset($_POST['register'])) {
     <!-- Custom styles for this template -->
     <link href="sticky-footer.css" rel="stylesheet">
 </head>
-<body class="d-flex flex-column h-100">
+<body>
     <!-- Begin page content -->
-<main role="main" class="flex-shrink-0">
-<div class="container">
-    <h1 class="mt-5 text-center" >Form Register</h1>
-    <form method="post" action="">
-
+    <form method="post" action="" class="register">
+    
+    <h1>Form Register</h1>
         <div class="form-group row">
-            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required autofocus>
-                </div>
+            <input type="text" id="nama" name="nama" placeholder="Nama" required autofocus>
         </div>
 
         <div class="form-group row">
-            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" required autofocus>
-                </div>
+            <input type="text" id="alamat" name="alamat" placeholder="Alamat" required autofocus>
         </div>
 
         <div class="form-group row">
-            <label for="username" class="col-sm-2 col-form-label">Username</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
-                </div>
+            <input type="text" id="username" name="username" placeholder="Username" required autofocus>
         </div>
 
         <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-                </div>
+            <input type="text" id="email" name="email" placeholder="Email" required>
         </div>
 
         <div class="form-group row">
-            <label for="password" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                </div>
+            <input type="password" id="password" name="password" placeholder="Password" required>
         </div>
 
         <div class="form-group row">
-            <label for="password2" class="col-sm-2 col-form-label">Konfirmasi Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Konfirmasi Password" required>
-                </div>
+            <input type="password" id="password2" name="password2" placeholder="Konfirmasi Password" required>
         </div>
 
-        <p class="text-center">Sudah mempunyai akun? <a href="login.php">klik disini</a></p>
-        <button type="submit" class="btn btn-primary form-control" name="register">Register</button>
-        </div>
-</div>
-</form>
-</div>
-</main>
+        <p class="log-in">Sudah mempunyai akun? <a href="login.php">klik disini</a></p>
+        <button type="submit" class="btn btn-lg" name="register">Register</button>
+    </form>
 </body>
 </html>

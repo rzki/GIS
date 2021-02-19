@@ -13,7 +13,6 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
 $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum");
-$bgPerum = $perum["gambar_perum"];
 ?>
 
 <!DOCTYPE html>
@@ -21,48 +20,94 @@ $bgPerum = $perum["gambar_perum"];
 <head>
     <?php include_once("components/detail-head.php")?>
     <title>Detail Perumahan</title>
+    <style>
+        .detailperum{
+            margin-top: 100px;
+            border: 2px solid black;
+            border-radius: 24px;
+            width: 50%;
+        }
+        .detailperum-box{
+            margin:auto;
+            border: 3px solid black;
+            width: 75%;
+            border-radius: 24px;
+        }
+        /* .linedetailperum{
+            border: 1px solid black;
+            background-color: black;
+        } */
+        hr{
+            border: 1px solid black;
+            background-color: black;
+        }
+        .namaperum,.alamatperum,.koordinat{
+            word-wrap: break-word;
+            font-size: large;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0 20px 0;
+        }
+        .namaperum-text,.alamatperum-text{
+            word-wrap: break-word;
+            font-size: large;
+            text-align: center;
+        }
+        .koordinat-text{
+            text-align: center;
+            margin: 0 0 20px 0;
+        }
+    </style>
 </head>
 <body>
     <?php include_once("components/navbar-detail.php")?>
 
 <!-- Header -->
-<div class="container" style=" font-size:32pt; font-weight:bold; align-content:center;">
+<div class="detailperum container">
     <center><h1>Detail Perumahan</h1></center>
 </div>
 <br>
 <br>
 
 <!-- Main Content -->
-<div class="container-fluid" >
-    <div class="row">
-        <div class="card text-center mx-auto border-dark" style="width: 80%; ">
-            <h2><?= $perum["nama_perum"]; ?></h2>
+
+<!-- Peta Area Perumahan -->
+<h1 class="text-center">Peta Area Perumahan</h1>
+<hr class="w-75">
+<div id="peta" class="mx-auto"></div>
+<br>
+
+<!-- Gambar Perumahan -->
+<h1 class="text-center">Gambar Perumahan</h1>
+<hr class="w-75">
+    <div class="container-fluid">
+        <div class="row">
+            <center><img class="d-block" src="img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="50%" height="100%"></center>
         </div>
     </div>
-</div>
 <br>
 
-<div id="peta" class="mx-auto"></div>
-
-<div class="container-fluid" style="margin-top:2%">
-    <div class="row">
-            <div class="card mx-auto" style="width: 90%;">
-                <div class="card-header text-center text-white bg-dark">
-                    <h5>Detail Perumahan <?= $perum["nama_perum"] ?></h5>
+<!-- Detail Perumahan -->
+<h1 class="text-center">Detail Perumahan</h1>
+    <div class="detailperum-box container-fluid">
+        <div class="row w-75 mx-auto">
+                <div class="col">
+                    <p class="namaperum card-title"><b>Nama Perumahan :</b></p>
+                    <p class="namaperum-text card-title"><?= $perum["nama_perum"];?></p>
+                    <p class="alamatperum card-title"><b>Alamat :</b></p>
+                    <p class="alamatperum-text card-title"><?= $perum["alamat"];?></p>
                 </div>
-                <div class="card-body">
-                    <p style="font-weight: bold; text-align:center"> Alamat :</p>
-                    <p class="text-center"><?= $perum["alamat"] ?></p>
-                    <br>
-                    <br>
-                    <p style="font-weight: bold; text-align:center"> Koordinat :</p>
-                    <p class="text-center"><?= $perum["koordinat"] ?></p>
+                <div class="col justify-content-center">
+                    <p class="koordinat card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b></p>
+                    <p class="koordinat-text card-title"><?= $perum["koordinat"];?></p>
                 </div>
             </div>
-        </div>
-</div>
+    </div>
 <br>
-<br>
+
+<!-- Tabel Tipe Rumah -->
+<h1 class="text-center">Tipe Rumah</h1>
+<hr class="w-75">
 <div class="container-fluid">
     <div class="row">
         <div class="table-responsive">
@@ -76,7 +121,6 @@ $bgPerum = $perum["gambar_perum"];
                 <th>Daya Listrik</th>
                 <th>Aksi</th>
             </tr>
-
             <?php $i = 1; ?>
             <?php foreach ($tabelTipe as $row) : ?>
             <tr class="show bg-light" id="<?= $row["id_tipe"]; ?>">
@@ -96,10 +140,12 @@ $bgPerum = $perum["gambar_perum"];
         </div>
     </div>
 </div>
+<br>
+
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Rizky Dhani 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; 2020</p>
     </div>
     <!-- /.container -->
 </footer>

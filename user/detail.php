@@ -36,7 +36,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 <html lang="en">
 <head>
     <?php include_once('../components/head.php') ?>
-    <title>Detail Perumahan</title>
+    <title>Detail Perum <?= $perum["nama_perum"]; ?></title>
 </head>
 <body>
     <!-- header -->
@@ -50,31 +50,28 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <?php include_once('../components/main-content.php') ?>
 
     <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
-
+    <h1 class="text-center">Gambar Perumahan</h1>
+    <hr>
     <div class="container-fluid">
         <div class="row">
-            <div class="card-deck">
-                <div class="card">
-                        <h2 class="card-header text-white bg-dark" style="text-align: center;">
-                            <?= $perum["nama_perum"]; ?>
-                        </h2>
-                    <div class="card-body">
-                        <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
-                        <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
-                        <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header text-white bg-dark" style="text-align: center;">
-                        <h2>Gambar Perumahan</h2>
-                    </div>
-                    <div class="card-body">
-                        <center><img class="d-block" src="../img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="100%" height="100%"></center>
-                    </div>
-                </div>
+            <center><img class="d-block" src="../img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="50%" height="100%"></center>
+        </div>
+    </div>
+    <br>
+    <h1 class="text-center">Detail Perumahan</h1>
+    <hr>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
+                <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
+            </div>
+            <div class="col">
+                <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
             </div>
         </div>
     </div>
+    <hr>
     <br>
     <h1 class="text-center">Tipe Rumah</h1>
     <hr>
@@ -82,7 +79,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         <div class="row">
             <div class="table-responsive">
                 <table class="table table-sm table-hover table-striped table-bordered">
-                    <tr class="text-center">
+                    <tr class="text-center text-white bg-dark">
                         <th>No.</th>
                         <th>Tipe Rumah</th>
                         <th>Luas Bangunan (m2)</th>
@@ -92,11 +89,11 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                     <?php $i = 1; ?>
                     <?php foreach ($tabelTipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
-                        <td><?= $i++; ?></td>
-                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?></td>
-                        <td class="text-center" data-target="luas_bangunan" ><?= $rows["luas_bangunan"]; ?></td>
-                        <td class="text-center" data-target="luas_tanah"><?= $rows["luas_tanah"]; ?></td>
-                        <td class="text-center" >
+                        <td style="width: 75px;"><?= $i++; ?></td>
+                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?> (<?= $rows["luas_bangunan"]; ?>/<?= $rows["luas_tanah"]; ?>)</td>
+                        <td class="text-center" data-target="luas_bangunan" style="width: 150px;"><?= $rows["luas_bangunan"]; ?> m2</td>
+                        <td class="text-center" data-target="luas_tanah" style="width: 125px;"><?= $rows["luas_tanah"]; ?> m2</td>
+                        <td class="text-center" style="width: 125px;">
                         <a href="tipe_detail.php?id=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
                         <!-- jika data perumahan tidak diinput oleh user yang sedang login -->
                         <!-- maka user tidak bisa memakai fungsi input/update ke dalam data tersebut -->   
@@ -112,9 +109,19 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                     <?php $i++ ?>
                     <?php endforeach; ?>
                     </table>
+                    <!-- jika data perumahan belum disetujui oleh admin -->
+                    <!-- maka user belum bisa memakai fungsi input ke dalam data tersebut -->
+                    <?php if($perum["status"] != "Diterima") {?>
+                    <?php } else {?>
+                    <a class="btn btn-block btn-dark" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
+                    <span data-feather='plus'></span>
+                        Tambah Tipe Perumahan
+                    </a>    
+                    <?php }?>    
+                    <br>
                     <!-- jika data perumahan tidak diinput oleh user yang sedang login -->
                     <!-- maka user tidak bisa memakai fungsi input ke dalam data tersebut -->
-                    <?php if($perum["id_user"] != $_SESSION["userID"]) {?>
+                    <?php if($perum["status"] != $_SESSION["userID"]) {?>
                     <?php } else {?>
                     <a class="btn btn-block btn-dark" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
                     <span data-feather='plus'></span>

@@ -21,17 +21,18 @@
                 Peta Perumahan
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="profile.php">
-                <span class="fas fa-user"></span>
-                Pengaturan Profil
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="account.php">
+            <li class="nav-item dropdown">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="fas fa-cog"></span>
-                Pengaturan akun
+                    Pengaturan Akun
+                <span class="sr-only"></span>
                 </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a class="dropdown-item" type="button" href="account.php">Biodata</a>
+                    <a class="dropdown-item" type="button" href="password.php">Password</a>
+                </div>
+                </div>
             </li>
             </ul>
         </div>

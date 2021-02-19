@@ -93,14 +93,116 @@ if (isset($_SESSION['login'])) {
 <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+    /* background */
+    body{
+      background-image: linear-gradient(
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.75)
+      ), url("../img-gallery/Perum-The Living Hill Residence-6024a02fe8682.jpg");
+      background-size: cover;
+    }
+
+    /* form login */
+    .signin{
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      background: transparent;
+      color: white;
+    }
+
+    /* header pada form login */
+    .signin h2{
+      color: white;
+      font-weight: 500;
+    }
+
+    /* input box username & pass login */
+    .signin input[type = "username"],.signin input[type = "password"]{
+      border: 0;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 3px solid white;
+      padding: 10px 10px;
+      width: 250px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+
+    /* tombol submit & tombol kembali */
+    .signin button[type = "submit"]{
+      background: none;
+      border-radius: 24px;
+      margin-top: -10%;
+      border-color: white;
+      color: white;
+    }
+
+    .signin .btn{
+      background: none;
+      border-radius: 24px;
+      margin-top: -10%;
+      border-color: white;
+      color: white;
+    }
+
+    .signin button[type = "submit"], .signin .btn{
+      display: inline-block;
+      vertical-align: middle;
+      width: 35%;
+    }
+
+    /* ketika kursor mengarah ke tombol submit dan kembali */
+    .signin button[type = "submit"]:active, .signin button[type = "submit"]:focus{
+      background: #0275d8;
+      border-color: #0275d8;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .signin button[type = "submit"]:hover{
+      background: #0275d8;
+      border-color: #0275d8;
+      transition: 0.25s;
+    }
+
+    .signin a:active, .signin a:focus{
+      background:#d9534f;
+      border-color:#d9534f;
+      outline: none;
+    }
+
+    .signin a:hover{
+      background: #d9534f;
+      border-color: #d9534f;
+      transition: 0.25s;
+    }
+    /* teks register */
+    .signin .register {
+      margin-top: 5px;
+      color: white;
+    }
+
+    /* teks register ketika di arahkan kursor */
+    .signin .register a:hover{
+      color: white;
+      background: none;
+    }
+    
+    /* teks copyright */
+    .signin .copyright{
+      color: white;
+      margin-top: 10px;
+    }
+    
+    ::placeholder{
+        color: gray;
+    }
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
@@ -112,20 +214,16 @@ if (isset($_SESSION['login'])) {
     <link href="css/login.css" rel="stylesheet">
   </head>
   <body class="text-center">
-  <div class="login-form mx-auto border-dark">
-    <form action="" method="post" class="form-signin">
-      <img class="mb-1" src="../assets/brand/Kabupaten_Badung.png" alt="" width="190" height="190">
-      <h2 class="h5 mb-3 font-weight-bold">SISTEM INFORMASI GEOGRAFIS <BR> PEMETAAN PERUMAHAN <BR> KABUPATEN BADUNG</h2>
-        <p for="username" style="margin-bottom: -1px;">Username</p>
-        <input type="username" name ="username" id="username" class="form-control text-center mt-1 mb-1" placeholder="Masukkan Username" required>
-        <p for="password" style="margin-bottom: -1px;">Password</p>
-        <input type="password" name ="password" id="password" class="form-control text-center mt-1" placeholder="Masukkan Password" required>
-      <a href="../index.php" class="btn btn-lg btn-danger" style="display:inline-block">Kembali</a>
-      <button class="btn btn-lg btn-primary" type="submit" name="login" >Log In</button>
-      <p class="mt-1">Belum mempunyai akun? <a href="register.php">klik disini</a></p>
-      <p class="text-muted">&copy; 2020</p>
-  </div>
-
-</form>
-</body>
+      <form action="" method="post" class="signin">
+        <img class="mb-1" src="../assets/brand/Kabupaten_Badung.png" alt="" width="190" height="190">
+        <h4 class="mb-4">SISTEM INFORMASI GEOGRAFIS <BR> PEMETAAN PERUMAHAN <BR> KABUPATEN BADUNG</h4>
+          <input type="username" name ="username" id="username" placeholder="Username" required>
+          <input type="password" name ="password" id="password" placeholder="Password" required>
+          <br>
+        <a href="../index.php" class="btn btn-lg">Back</a>
+        <button class="btn btn-lg" type="submit" name="login" >Log In</button>
+        <p class="register">Belum mempunyai akun? <a href="register.php">klik disini</a></p>
+        <p class="copyright">&copy; 2020</p>
+      </form>
+  </body>
 </html>

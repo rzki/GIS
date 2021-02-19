@@ -27,20 +27,7 @@ if (isset($_POST['register'])) {
     $alamat      = $_POST['alamat'];
     $username    = $_POST['username'];
     $email       = $_POST['email'];
-    $oldPassword = $_POST['old_password'];
-    $newPassword = $_POST['password'];
-    $repeatNewPassword = $_POST['password2'];
 
-    // cek password lama user, apakah sama atau tidak
-    if (!password_verify($oldPassword, $user['password'])) {
-        echo '
-            <script>
-                alert("Password lama yang anda masukkan salah!");
-                window.location.href="userdata.php"
-            </script>
-        ';
-        return false;
-    } 
     // cek konfirmasi password
     if ($newPassword != $repeatNewPassword) {
         echo '
@@ -57,8 +44,8 @@ if (isset($_POST['register'])) {
                 nama = '$nama',
                 alamat = '$alamat',
                 username = '$username',
-                email = '$email',
-                password = '$passwordUpdate' WHERE id_user = $idUser");
+                email = '$email'
+                WHERE id_user = $idUser");
 
     if ($result > 0) {
         echo '
@@ -83,6 +70,16 @@ if (isset($_POST['register'])) {
     <!-- head -->
     <?php include_once('../components/head.php') ?>
     <title>Edit Data Member</title>
+    <style>
+    .pwd2{
+        margin-top: -20px;
+    }
+    .min{
+        margin-top: 2px;
+        margin-left: px;
+    }
+
+    </style>
 <body>
     <!-- header -->
     <?php include_once('../components/header.php') ?>
@@ -127,27 +124,6 @@ if (isset($_POST['register'])) {
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"
                     value="<?= $user["email"]; ?>">
-            </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="old_password" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Password Lama">
-            </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">Password Baru</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password Baru"">
-            </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="password2" class="col-sm-2 col-form-label">Konfirmasi Password Baru</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="password2" name="password2" placeholder="Konfirmasi Password Baru"">
             </div>
     </div>
 

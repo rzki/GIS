@@ -45,7 +45,7 @@ if (isset($_POST['tambah'])){
 <html lang="en">
     <!-- head -->
     <?php include_once('../components/perum-tambah.php') ?>
-    <title>Tambah Tipe Perumahan</title>
+    <title>Tambah Tipe Rumah</title>
 </head>
 <body>
     <!-- header -->

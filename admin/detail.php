@@ -28,6 +28,7 @@ $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
+$gambarperum = query("SELECT * FROM perum_gambar WHERE id_perum = $idPerum")[0];
 $tipe = query("SELECT * FROM tiperumah_master WHERE id_perum = $idPerum")[0];
 $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum");
 
@@ -37,6 +38,23 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 <head>
     <?php include_once('../components/head.php') ?>
     <title>Detail Perum <?= $perum["nama_perum"]; ?></title>
+    <style>
+    .gambar-perum{
+        text-align: center;
+        margin-left: 175px;
+    }
+    .btnGambar{
+        margin-top: 10px;
+        float: right;
+    }
+    hr{
+        border: 1px solid gray;
+        background-color: gray;
+    }
+    #btnGambar{
+        margin: auto;
+    }
+    </style>
 </head>
 <body>
     <!-- header -->
@@ -49,34 +67,40 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <?php $head = 'Detail Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-    <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
+    <div id="peta" style="margin-bottom: 1%; width:100%; height:35%"></div>
+    <div class="container">
+    <a class="btnGambar btn btn-primary" href="tambah-gambarperum.php?id_perum=<?= $idPerum ?>">
+        Tambah Gambar
+    </a>
+    </div>
+    <h1 class="gambar-perum">Gambar Perumahan</h1>
+    <hr>
+    <div class="container-fluid mx-auto">
+        <div class="row">
+            <center><img class="d-block" src="../img-perum/<?= $gambarperum["gambar_perum"]; ?>" alt="" width="50%" height="100%"></center>
+        </div>
+    </div>
+    <br>
+    <h1 class="text-center">Detail Perumahan</h1>
+    <hr>
     <div class="container-fluid">
         <div class="row">
-            <div class="card-deck">
-                <div class="card">
-                        <h2 class="card-header text-white bg-dark" style="text-align: center;">
-                            <?= $perum["nama_perum"]; ?>
-                        </h2>
-                    <div class="card-body">
-                        <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b></p>
-                        <p style="font-size: medium; text-align: center;"><?= $perum["nama_perum"];?></p>
-                        <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><b>Alamat :</b></p>
-                        <p style="font-size: medium; text-align: center;"><?= $perum["alamat"];?></p>
-                        <p class="card-title text-center" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b></p>
-                        <p style="font-size: medium; text-align: center;"><?= $perum["koordinat"];?></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header text-white bg-dark" style="text-align: center;">
-                        <h2>Gambar Perumahan</h2>
-                    </div>
-                    <div class="card-body">
-                        <center><img class="d-block justify-content-center" src="../img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="100%" height="100%"></center>
-                    </div>
-                </div>
+            <div class="col">
+                <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
+                <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
+            </div>
+            <div class="col">
+                <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
             </div>
         </div>
+    </div>
+    <hr>
     <br>
+    <div class="container">
+        <a class="btn btn-primary" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
+            Tambah Tipe
+        </a>
+    </div>
     <h1 class="text-center">Tipe Rumah</h1>
     <hr>
     <div class="container-fluid">
@@ -108,10 +132,6 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                     <?php $i++ ?>
                     <?php endforeach; ?>
                     </table>
-                    <a class="btn btn-block btn-primary" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
-                    <span data-feather='plus'></span>
-                        Tambah Tipe Perumahan
-                    </a>
                     <br>
             </div>
     </div>
@@ -171,5 +191,8 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         }
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

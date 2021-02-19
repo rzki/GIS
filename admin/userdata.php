@@ -24,7 +24,6 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
 
         <div class="container" id="container">
             <div class="row">
-                <div class="col-lg-12">
                     <div class="table-responsive">
                         <table class="table table-sm table-hover table-striped table-bordered">
                                 <tr>
@@ -46,8 +45,9 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
                                     <td style="text-align: center;"><?= $row["email"]; ?></td>
                                     <td style="text-align: center;"><?= $row["level"]; ?></td>
                                     <td style="text-align: center;">
-                                        <a href="userdata-edit.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                        <a href="delete.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Yakin ingin hapus data pengguna?')">
+                                        <a href="userdata-edit.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit" title="Edit Biodata Member"></i></a>
+                                        <a href="password_user.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-dark btn-sm" title="Ubah Password Member"><i class="fas fa-cog"></i></a>
+                                        <a href="delete.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-danger btn-sm" title="Hapus Member" onclick="return confirm('Yakin ingin hapus data pengguna?')">
                                         <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
@@ -57,15 +57,13 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
                             </thead>
                         </table>
                     </div>
-                </div>
             </div>
         </div>
 
     <!-- close main content-->
     <?php include_once('../components/close-main-content.php') ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-        <script src="js/userdata.js"></script></body>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/userdata.js"></script>
 </html>

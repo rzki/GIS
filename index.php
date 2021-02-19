@@ -10,11 +10,26 @@ $areas = getAreaListbyStatus();
 <head>
   <?php include_once("components/index-head.php")?>
   <title>Sistem Informasi Geografis Pemetaan Perumahan Kab. Badung</title>
+  <style>
+    .register-text{
+      font-style: italic;
+      color: white;
+    }
+    .register-link{
+      font-style: normal;
+    }
+    .register-link:hover,.register-link:active{
+      font-style: normal;
+      color: white;
+      background: none;
+      transition: 0.25s;
+    }
+  </style>
 </head>
-
 <body id="page-top">
   <?php include_once("components/navbar-index.php")?>
 
+  <!-- Welcome Section -->
 <section id="welcomeHeader" class="welcomeImg">
     <div class="container">
       <div class="row">
@@ -22,11 +37,13 @@ $areas = getAreaListbyStatus();
             <img src="assets/brand/Kabupaten_Badung.png" class="text-center" style="width: 150px; height: 150px" alt="">
             <h1 style="color: white;">Sistem Informasi Geografis <br> Pemetaan Perumahan Kabupaten Badung</h1>
             <p class="lead" style="color: white;">Selamat datang di Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
+            <p class="register-text">Untuk memulai menambahkan data perumahan, <a class="register-link" href="auth/login.php">klik disini</a></p>
           </div>
       </div>
     </div>
 </section>
 
+<!-- Daftar Perumahan Section -->
   <section id="daftar-perum" class="bg-light">
     <div class="container">
       <h2 style="text-align:center">Daftar Perumahan</h2>
@@ -37,6 +54,7 @@ $areas = getAreaListbyStatus();
     </div>
   </section>
 
+  <!-- Peta Perumahan Section -->
   <section id="peta-perum">
     <h2 style="text-align:center">Peta Perumahan</h2>
     <div class="container">
@@ -44,6 +62,7 @@ $areas = getAreaListbyStatus();
     </div>
   </section>
 
+  <!-- Gallery Section -->
   <section id="galeri" class="bg-light">
     <h2 style="text-align:center">Gallery Perumahan</h2>
     <div class="container">
@@ -90,6 +109,7 @@ $areas = getAreaListbyStatus();
     </div>
   </section>
 
+  <!-- About Section -->
   <section id="about">
     <div class="container">
       <div class="row">
@@ -123,7 +143,7 @@ $areas = getAreaListbyStatus();
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Rizky Dhani 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; 2020</p>
     </div>
     <!-- /.container -->
   </footer>

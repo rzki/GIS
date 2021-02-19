@@ -12,14 +12,14 @@ if (isset($_GET['id'])) {
         echo '
             <script>
                 alert("Data perumahan berhasil dihapus");
-                window.location.href="home.php"
+                window.location.href="dataperum-all.php"
             </script>
         ';
     } else {
         echo '
             <script>
                 alert("Data perumahan berhasil dihapus");
-                window.location.href="home.php"
+                window.location.href="dataperum-all.php"
             </script>
         ';
     }
@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
     echo '
         <script>
             alert("Data perumahan gagal dihapus");
-            window.location.href="home.php"
+            window.location.href="dataperum-all.php"
         </script>
     ';
 }

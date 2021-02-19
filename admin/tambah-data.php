@@ -20,12 +20,12 @@ if (isset($_SESSION['level'])) {
 
 if (isset($_POST['tambah'])){
     
-    if( tambahdataperum ($_POST) > 0) {
+    if( tambahdataperum  ($_POST) > 0) {
         echo 
         "
         <script>
             alert ('Data perumahan berhasil ditambahkan!');
-            document.location.href = 'home.php';
+            document.location.href = 'dataperum-all.php';
         </script>
         ";
     } else {
@@ -59,7 +59,7 @@ if (isset($_POST['tambah'])){
     <?php include_once('../components/main-content.php') ?>
 
 
-<div id="peta" style="margin-bottom: 1%; width:100%;"></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area">
@@ -89,21 +89,32 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
 
-        <div class="form-group row" style="margin-top: 1%;">
-            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+        <div class="form-group row">
+            <label for="no_telp" class="col-sm-2 col-form-label">Nomor Telepon</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <input type="text" class="form-control" id="no_telp" name="no_telp" placeholder="Nomor Telepon">
+                </div>
+        </div>
+
+        <div class="form-group row" style="margin-top: 1%;">
+            <label for="gambar_perum[]" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar_perum[]" name="gambar_perum[]" multiple>
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
-        
+
         <div class="form-group row" style="margin-top: 1%;">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="status" name="status">
+                <select name="status" class="form-control">
+                    <option value="Pending">Pending</option>
+                    <option value="Diterima">Diterima</option>
+                </select>
                 </div>
         </div>
                 <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
+                <br>
     </form>
 
     <script>
@@ -187,21 +198,24 @@ if (isset($_POST['tambah'])){
    });
   });
 
-  function putDraggable() {
-   /* create a draggable marker in the center of the map */
-   draggableMarker = L.marker([mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(map);
+//   function putDraggable() {
+//    /* create a draggable marker in the center of the map */
+// //    draggableMarker = L.marker([mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(map);
    
-   /* collect Lat,Lng values */
-   draggableMarker.on('dragend', function(e) {
-    $("#lat").val(this.getLatLng().lat);
-    $("#lng").val(this.getLatLng().lng);
-   });
-  }
+//    /* collect Lat,Lng values */
+//    draggableMarker.on('dragend', function(e) {
+//     $("#lat").val(this.getLatLng().lat);
+//     $("#lng").val(this.getLatLng().lng);
+//    });
+//   }
    
-  $( document ).ready(function() {
-   putDraggable();
-  });
+//   $( document ).ready(function() {
+//    putDraggable();
+//   });
 
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -59,7 +59,7 @@ if (isset($_POST['tambah'])){
     <?php $head = 'Tambah Data Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-<div id="peta" style="margin-bottom: 1%; width:100%";></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area">
@@ -97,6 +97,7 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
         
+        <input type="hidden" name="status" value="Pending">
         <input type="hidden" name="id_user" value="<?= $id ?>">
         <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
 </form>

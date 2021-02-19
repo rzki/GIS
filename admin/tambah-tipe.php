@@ -104,6 +104,13 @@ if (isset($_POST['tambah'])){
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
+
+        <div class="form-group row">
+            <label for="harga" class="col-sm-2 col-form-label">Harga</label>
+                <div class="col-sm-10">
+                    <input type="text" id="harga" name="harga" required>
+                </div>
+        </div>
                 <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Tipe Perumahan</button>
     </form>
 </body>

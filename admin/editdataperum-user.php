@@ -31,7 +31,7 @@ if(isset($_POST["update"])){
         echo '
         <script>
                 alert("Berhasil mengubah data perumahan!");
-                window.location.href="home.php"
+                window.location.href="dataperum-user.php"
             </script>
         ';
     } 
@@ -56,7 +56,7 @@ if(isset($_POST["update"])){
     <?php $head = 'Edit Data Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-<div id="peta" style="margin-bottom: 1%; width:100%;"></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area Perumahan">
@@ -65,7 +65,7 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perum["id_perum"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perum["gambar"]; ?>">
+    <input type="hidden" name="gambarLama" value="<?= $perum["gambar_perum"]; ?>">
         <div class="form-group row">
             <label for="nama_perum" class="col-sm-2 col-form-label">Nama Perumahan</label>
                 <div class="col-sm-10">
@@ -91,10 +91,17 @@ if(isset($_POST["update"])){
                 </div>
         </div>
 
+        <div class="form-group row">
+            <label for="no_telp" class="col-sm-2 col-form-label">Nomor Telepon</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="no_telp" name="no_telp" placeholder="Nomor Telepon">
+                </div>
+        </div>
+
         <div class="form-group row" style="margin-top: 1%;">
             <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <input type="file" id="gambar_perum" name="gambar_perum" value="<?= $perum['gambar_perum'];?>">
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
@@ -102,8 +109,11 @@ if(isset($_POST["update"])){
         <div class="form-group row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="status" name="status" placeholder="Daya Listrik" 
-                    value="<?= $perum['status'];?>" required>
+                    <select name="status" class="form-control">
+                    <?php $status = $perum['status']?>
+                    <option <?=($status == "Pending")?'selected="selected"':''?>>Pending</option>
+                    <option <?=($status == "Diterima")?'selected="selected"':''?>>Diterima</option>
+                    </select>
                 </div>
         </div>
                 <center><button type="submit" class="btn btn-primary btn-block" name="update">Edit Data Perumahan</button></center>

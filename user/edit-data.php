@@ -26,7 +26,7 @@ $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
 if(isset($_POST["update"])){
 
     //cek apakah data berhasil diubah atau tidak
-    if(ubahdataperum($_POST) > 0) {
+    if(ubahdataperum_member($_POST) > 0) {
         echo '
         <script>
                 alert("Berhasil mengubah data perumahan!");
@@ -55,7 +55,7 @@ if(isset($_POST["update"])){
     <?php $head = 'Edit Data Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-<div id="peta" style="margin-bottom: 1%; "></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area Perumahan">
@@ -64,7 +64,7 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perum["id_perum"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perum["gambar"]; ?>">
+    <input type="hidden" name="gambarLama" value="<?= $perum["gambar_perum"]; ?>">
         <div class="form-group row">
             <label for="nama_perum" class="col-sm-2 col-form-label">Nama Perumahan</label>
                 <div class="col-sm-10">
@@ -91,10 +91,9 @@ if(isset($_POST["update"])){
         </div>
         
         <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar</label>
                 <div class="col-sm-10">
-                    <img src="../img-perum/<?= $perum['gambar'];?>" width="100">
-                    <input type="file" id="gambar" name="gambar">
+                    <input type="file" id="gambar_perum" name="gambar_perum" value="<?= $perum['gambar_perum'];?>">
                     <p>(max. size 2MB)</p>
                 </div>
         </div>

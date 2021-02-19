@@ -27,6 +27,14 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
 <head>
     <?php include_once('../components/head.php') ?>
     <title>Detail Tipe <?= $tipe["tipe_rumah"]; ?></title>
+    <style>
+    h1{
+        text-align: center;
+    }
+    img{
+        justify-content: center;
+    }
+    </style>
 </head>
 <body>
     <!-- header -->
@@ -36,39 +44,38 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
     <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Main Content --> 
-    <?php $head = 'Detail Tipe Perumahan' ?>
+    <?php $head = 'Detail Tipe ' . $tipe["tipe_rumah"] ?>
     <?php include_once('../components/main-content.php') ?>
 
-    
+    <h1>Detail Tipe Rumah</h1>
+    <hr>
     <div class="container-fluid">
         <div class="row">
-        <div class="card-deck mx-auto">
-                <div class="card h-100">
-                    <h2 class="card-header text-white bg-dark" style="text-align: center;">
-                        Tipe <?= $tipe["tipe_rumah"]; ?>
-                    </h2>
-                    <div class="card-body">
-                        <p class="card-title" style="word-wrap: break-word;"><b>Tipe Rumah :</b></p>
-                        <p><?= $tipe["tipe_rumah"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Bangunan (m2):</b></p>
-                        <p><?= $tipe["luas_bangunan"];?> m2</p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Luas Tanah (m2): </b></p>
-                        <p><?= $tipe["luas_tanah"];?>  m2</p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Spesifikasi :</b></p>
-                        <p><?= $tipe["spesifikasi"];?></p>
-                        <p class="card-title" style="word-wrap: break-word;"><b>Daya Listrik :</b></p>
-                        <p><?= $tipe["daya_listrik"];?></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header text-white bg-dark" style="text-align: center;">
-                        <h2>Gambar Perumahan</h2>
-                    </div>
-                    <div class="card-body">
-                        <center><img class="d-block" src="../img-tiperumah/<?= $tipe["gambar"]; ?>" alt="" width="100%" height="100%"></center>
-                    </div>
-                </div>
+            <div class="col">
+            <p class="card-title" style="word-wrap: break-word;"><b>Tipe Rumah :</b></p>
+            <p><?= $tipe["tipe_rumah"];?></p>
+            <p class="card-title" style="word-wrap: break-word;"><b>Luas Bangunan (m2):</b></p>
+            <p><?= $tipe["luas_bangunan"];?> m2</p>
+            <p class="card-title" style="word-wrap: break-word;"><b>Luas Tanah (m2): </b></p>
+            <p><?= $tipe["luas_tanah"];?>  m2</p>
+            </div>
+            <div class="col">
+            <p class="card-title" style="word-wrap: break-word;"><b>Spesifikasi :</b></p>
+            <p><?= $tipe["spesifikasi"];?></p>
+            <p class="card-title" style="word-wrap: break-word;"><b>Daya Listrik :</b></p>
+            <p><?= $tipe["daya_listrik"];?></p>
             </div>
         </div>
+    </div>
+    <hr>
+    <br>
+    <h1>Gambar Tipe Rumah</h1>
+    <hr>
+    <div class="container-fluid">
+        <div class="row">
+            <center><img class="d-block" src="../img-tiperumah/<?= $tipe["gambar"]; ?>" alt="" width="75%" height="100%"></center>
+        </div>
+    </div>
+    <br>
 </body>
 </html>
