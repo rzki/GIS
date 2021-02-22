@@ -28,14 +28,12 @@ $gambarperum = query("SELECT * FROM perum_gambar WHERE id_perum = $idPerum")[0];
 if(isset($_POST["update"])){
     //cek apakah data berhasil diubah atau tidak
     if(ubahdataperum($_POST) > 0) {
-        if(upload_perum($_POST) > 0) {
             echo "
             <script>
                     alert('Berhasil mengubah data dan gambar perumahan!');
                     window.location.href='dataperum-all.php'
                 </script>
             ";
-        }
     }
 }
 ?>
@@ -98,14 +96,6 @@ if(isset($_POST["update"])){
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="no_telp" name="no_telp"
                     value="<?= $perum['no_telp'];?>" placeholder="Nomor Telepon">
-                </div>
-        </div>
-
-        <div class="form-group row" style="margin-top: 1%;">
-            <label for="gambar_perum[]" class="col-sm-2 col-form-label">Gambar Perumahan</label>
-                <div class="col-sm-10">
-                    <input type="file" id="gambar_perum[]" name="gambar_perum[]" multiple>
-                    <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
         

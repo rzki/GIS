@@ -21,7 +21,7 @@ $idPerum = $_GET["id"];
 $areaPerum = getAreaListbyID();
 
 // pagination
-$jumlahDataPerHalaman = 6;
+$jumlahDataPerHalaman = 5;
 $jumlahData = count(query("SELECT * FROM tiperumah_master"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
@@ -30,7 +30,7 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
 $gambarperum = query("SELECT * FROM perum_gambar WHERE id_perum = $idPerum")[0];
 $tipe = query("SELECT * FROM tiperumah_master WHERE id_perum = $idPerum")[0];
-$tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum");
+$tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum LIMIT $awalData, $jumlahDataPerHalaman");
 
 ?>
 <!DOCTYPE html>
@@ -71,8 +71,8 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 
     <div id="peta" style="margin-bottom: 1%; width:100%; height:35%"></div>
     <div class="container">
-    <a class="btnGambar btn btn-primary" href="tambah-gambarperum.php?id_perum=<?= $idPerum ?>">
-        Tambah Gambar
+    <a class="btnGambar btn btn-primary" href="kelola-gambar.php?id_perum=<?= $idPerum ?>">
+        Kelola Gambar Perum
     </a>
     </div>
     <h1 class="gambar-perum">Gambar Perumahan</h1>

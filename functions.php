@@ -203,6 +203,73 @@ function ubahgambarperum($data){
     return mysqli_affected_rows($conn);
 }
 
+function ubahGambar($data, $gambar) {
+
+    global $conn; // koneksi db
+
+    $id_perum = $data["id_perum"]; // id perum
+
+    $id_gambar = $data["id_gambar"]; // id gambar
+    $sizeGambar = 10 * 1024 * 1024;
+    // data gambar
+    $namaFile = $gambar['name'];
+    $ukuranFile = $gambar['size'];
+    $tmpName = $gambar['tmp_name'];
+
+    $tipe_file = pathinfo($namaFile, PATHINFO_EXTENSION);
+    $error = $gambar['error'];
+
+    // cek apakah gambar sudah di upload
+    if ($error == 4) {
+        echo "
+            <script>
+                alert('Gambar belum dimasukkan!') 
+            </script>
+        ";
+        return false;
+    }
+
+    $ekstensiGambarValid = array('jpg', 'jpeg', 'png');
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+        echo " 
+            <script>
+                alert('Format gambar tidak didukung!')
+            </script>";
+        return false;
+    }
+
+    if ($ukuranFile > $sizeGambar) {
+        echo " 
+            <script>
+                alert('Ukuran gambar terlalu besar!')
+            </script>";
+        return false;
+    }   
+
+    //ambil nama perumahan untuk dimasukkan sebagai nama gambar dari table tiperumah
+    $getPerum    = query("SELECT * FROM perumahan_master WHERE id_perum = $id_perum")[0];
+    $namaPerum   = $getPerum["nama_perum"];
+
+    // jika lolos pengecekan, gambar siap di upload
+    // generate nama baru
+    $namaFileBaru  = 'Perum'.'-'. $namaPerum . '-'. uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $tipe_file;
+
+    move_uploaded_file($tmpName, '../img-perum/' . $namaFileBaru); // memindahkan file
+
+    // query ke db
+    $queryGambar = "UPDATE perum_gambar
+                    SET gambar_perum = '$namaFileBaru'
+                    WHERE id_gambar = '$id_gambar'
+                    ";
+
+    mysqli_query($conn, $queryGambar); // kirim ke tabel
+
+}
 function ubahgambartipe($data) {
     global $conn;
 
@@ -323,7 +390,7 @@ function tambahgambar_perum() {
 
     // jika lolos pengecekan, gambar siap di upload
     // generate nama baru
-    $namaFileBaru  = 'Perum'.'-'. $namaPerum . '-'. $x;
+    $namaFileBaru  = 'Perum'.'-'. $namaPerum . '-'. uniqid();
     $namaFileBaru .= '.';
     $namaFileBaru .= $tipe_file;
 

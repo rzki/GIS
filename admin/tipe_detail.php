@@ -19,7 +19,7 @@ if (isset($_SESSION['level'])) {
 
 $idTipe = $_GET["id"];
 
-$tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];;
+$tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
 
 ?>
 <!DOCTYPE html>

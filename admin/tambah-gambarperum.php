@@ -27,7 +27,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Gambar perumahan berhasil ditambahkan!');
-            document.location.href = 'detail.php?id=$id_Perum'
+            document.location.href = 'kelola-gambar.php?id_perum=$id_Perum'
         </script>
         ";
     } else {
@@ -35,7 +35,7 @@ if (isset($_POST['tambah'])){
         "
         <script>
             alert ('Gambar perumahan gagal ditambahkan!');
-            document.location.href = 'detail.php?id=$id_Perum'
+            document.location.href = 'kelola-gambar.php?id_perum=$id_Perum'
         </script>
         ";
     }
