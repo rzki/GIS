@@ -98,14 +98,6 @@ if(isset($_POST["update"])){
                 </div>
         </div>
 
-        <div class="form-group row" style="margin-top: 1%;">
-            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
-                <div class="col-sm-10">
-                    <input type="file" id="gambar_perum" name="gambar_perum" value="<?= $perum['gambar_perum'];?>">
-                    <p class="text-muted">(ukuran maks. 10MB)</p>
-                </div>
-        </div>
-        
         <div class="form-group row">
             <label for="status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">

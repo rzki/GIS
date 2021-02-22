@@ -3,7 +3,7 @@ session_start();
 require "../functions.php";
 
 if (empty($_SESSION['login'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ../../auth/login.php');
 } 
 
 if (isset($_SESSION['level'])) {
@@ -30,14 +30,12 @@ if(isset($_POST["update"])){
 
     //cek apakah data berhasil diubah atau tidak
     if(ubahtiperumah($_POST) > 0) {
-        if(ubahgambartipe($_POST) > 0){
             echo "
             <script>
                     alert('Berhasil mengubah tipe perumahan!');
                     window.location.href = 'detail.php?id=$idperum'
                 </script>
             ";
-        }
     } 
 }
 ?>
@@ -110,15 +108,7 @@ if(isset($_POST["update"])){
                     value="<?= $perumtipe['harga'];?>" required>
                 </div>
         </div>
-
-        <div class="form-group row">
-            <label for="gambar_tipe[]" class="col-sm-2 col-form-label">Gambar</label>
-                <div class="col-sm-10">
-                    <input type="file" id="gambar_tipe[]" name="gambar_tipe[]" value="<?= $gambartipe['gambar_tipe'];?>">
-                    <p class="text-muted">(ukuran maks. 10MB)</p>
-                </div>
-        </div>
-
+        
         <input type="hidden" name="id_perum" id="id_perum" value="<?= $idperum ?>">
                 <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
 </form>

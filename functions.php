@@ -73,7 +73,7 @@ function tambahdataperum_member($data) {
                                     ('', '$namaPerum', '$alamat', '$koordinat', '$noTelp', '$idUser', '$status')";
     mysqli_query($conn, $queryPerum);
 
-return mysqli_affected_rows($conn);
+    return mysqli_affected_rows($conn);
 }
 
 function tambahtipe($data){
@@ -189,99 +189,6 @@ function ubahtiperumah($data) {
     return mysqli_affected_rows($conn);
 }
 
-function ubahgambarperum($data){
-    global $conn;
-
-    $gambarLama     = htmlspecialchars ($data["gambarLama"]);
-    $gambar         = tambahgambar_perum();
-    //cek apakah user pilih gambar baru atau tidak
-    if( $_FILES['gambar']['error'] == 4){
-        $gambar = $gambarLama;
-    } else {
-        $gambar;
-    }
-    return mysqli_affected_rows($conn);
-}
-
-function ubahGambar($data, $gambar) {
-
-    global $conn; // koneksi db
-
-    $id_perum = $data["id_perum"]; // id perum
-
-    $id_gambar = $data["id_gambar"]; // id gambar
-    $sizeGambar = 10 * 1024 * 1024;
-    // data gambar
-    $namaFile = $gambar['name'];
-    $ukuranFile = $gambar['size'];
-    $tmpName = $gambar['tmp_name'];
-
-    $tipe_file = pathinfo($namaFile, PATHINFO_EXTENSION);
-    $error = $gambar['error'];
-
-    // cek apakah gambar sudah di upload
-    if ($error == 4) {
-        echo "
-            <script>
-                alert('Gambar belum dimasukkan!') 
-            </script>
-        ";
-        return false;
-    }
-
-    $ekstensiGambarValid = array('jpg', 'jpeg', 'png');
-    $ekstensiGambar = explode('.', $namaFile);
-    $ekstensiGambar = strtolower(end($ekstensiGambar));
-
-    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
-        echo " 
-            <script>
-                alert('Format gambar tidak didukung!')
-            </script>";
-        return false;
-    }
-
-    if ($ukuranFile > $sizeGambar) {
-        echo " 
-            <script>
-                alert('Ukuran gambar terlalu besar!')
-            </script>";
-        return false;
-    }   
-
-    //ambil nama perumahan untuk dimasukkan sebagai nama gambar dari table tiperumah
-    $getPerum    = query("SELECT * FROM perumahan_master WHERE id_perum = $id_perum")[0];
-    $namaPerum   = $getPerum["nama_perum"];
-
-    // jika lolos pengecekan, gambar siap di upload
-    // generate nama baru
-    $namaFileBaru  = 'Perum'.'-'. $namaPerum . '-'. uniqid();
-    $namaFileBaru .= '.';
-    $namaFileBaru .= $tipe_file;
-
-    move_uploaded_file($tmpName, '../img-perum/' . $namaFileBaru); // memindahkan file
-
-    // query ke db
-    $queryGambar = "UPDATE perum_gambar
-                    SET gambar_perum = '$namaFileBaru'
-                    WHERE id_gambar = '$id_gambar'
-                    ";
-
-    mysqli_query($conn, $queryGambar); // kirim ke tabel
-
-}
-function ubahgambartipe($data) {
-    global $conn;
-
-    $gambarLama     = htmlspecialchars ($data["gambarLama"]);
-    //cek apakah user pilih gambar baru atau tidak
-    if( $_FILES['gambar']['error'] == 4){
-        $gambar = $gambarLama;
-    } else {
-        $gambar = uploadtipe();
-    }
-}
-
 function uploadperum() {
     global $conn;
 
@@ -329,7 +236,7 @@ function uploadperum() {
 
     // jika lolos pengecekan, gambar siap di upload
     // generate nama baru
-    $namaFileBaru  = 'Perum'.'-'. $namaPerum . '-'. $x;
+    $namaFileBaru  = 'Perum'.'-'. $namaPerum . '-'. uniqid();
     $namaFileBaru .= '.';
     $namaFileBaru .= $tipe_file;
 
@@ -403,6 +310,72 @@ function tambahgambar_perum() {
     return $namaFileBaru;
 }
 
+function tambahgambar_tipe() {
+    global $conn;
+
+    $sizeGambar = 10 * 1024 * 1024;
+    $idPerum = $_POST["id_perum"];
+    $idTipe =  $_POST["id_tipe"];
+    foreach($_FILES["gambar_tipe"]["tmp_name"] as $y=>$tmp_name){
+    $namaFile = $_FILES['gambar_tipe']['name'][$y];
+    $ukuranFile = $_FILES['gambar_tipe']['size'][$y];
+    $tmpName = $_FILES['gambar_tipe']['tmp_name'][$y];
+    $tipe_file = pathinfo($namaFile, PATHINFO_EXTENSION);
+    $error = $_FILES['gambar_tipe']['error'];
+
+    // cek apakah gambar sudah di upload
+    if ($error == 4){
+        echo "
+            <script>
+                alert('Gambar belum dimasukkan!') 
+            </script>
+        ";
+    return false;
+    }
+
+    $ekstensiGambarValid = array('jpg', 'jpeg', 'png');
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+    if(!in_array($ekstensiGambar, $ekstensiGambarValid)){
+        echo " 
+            <script>
+                alert('Format gambar tidak didukung!')
+            </script>";
+        return false;
+    }
+
+    if($ukuranFile > $sizeGambar){
+        echo " 
+            <script>
+                alert('Ukuran gambar terlalu besar!')
+            </script>";
+        return false;
+    }   
+
+    //ambil nama perumahan untuk dimasukkan sebagai nama gambar dari table tiperumah
+    $perumQuery  = query("SELECT * FROM perumahan_master WHERE id_perum = '$idPerum'")[0];
+    $idPerum    = $perumQuery["id_perum"];
+    $namaPerum  = $perumQuery["nama_perum"];
+    $tipeQuery = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+    $idTipe     = $tipeQuery["id_tipe"];
+    $namaTipe   = $tipeQuery["tipe_rumah"];
+
+    // jika lolos pengecekan, gambar siap di upload
+    // generate nama baru
+    $namaFileBaru  = 'Perum' . '-' . $namaPerum . '_' . 'Tipe'. '-' . $namaTipe. '-' . uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $tipe_file;
+
+    move_uploaded_file($tmpName, '../img-tiperumah/' . $namaFileBaru);
+    $queryTipe      = "INSERT INTO tipe_gambar
+                            VALUES 
+                            ('', '$namaFileBaru', '$idTipe')";
+    mysqli_query($conn, $queryTipe);
+    }
+    return $namaFileBaru;
+}
+
 function uploadtipe() {
     global $conn;
 
@@ -454,7 +427,7 @@ function uploadtipe() {
 
     // jika lolos pengecekan, gambar siap di upload
     // generate nama baru
-    $namaFileBaru  = 'Perum' . $namaPerum . '-' . 'Tipe'. '-' . $namaTipe. '-' . $y;
+    $namaFileBaru  = 'Perum' . '-' . $namaPerum . '-' . 'Tipe'. '-' . $namaTipe. '-' . uniqid();
     $namaFileBaru .= '.';
     $namaFileBaru .= $tipe_file;
 
@@ -467,72 +440,7 @@ function uploadtipe() {
     return $namaFileBaru;
 }
 
-function upload_tipe() {
-    global $conn;
-
-    $sizeGambar = 10 * 1024 * 1024;
-    $idPerum = $_POST["id"];
-    $idTipe =  mysqli_insert_id($conn);
-    foreach($_FILES["gambar_tipe"]["tmp_name"] as $y=>$tmp_name){
-    $namaFile = $_FILES['gambar_tipe']['name'][$y];
-    $ukuranFile = $_FILES['gambar_tipe']['size'][$y];
-    $tmpName = $_FILES['gambar_tipe']['tmp_name'][$y];
-    $tipe_file = pathinfo($namaFile, PATHINFO_EXTENSION);
-    $error = $_FILES['gambar_tipe']['error'];
-
-    // cek apakah gambar sudah di upload
-    if ($error == 4){
-        echo "
-            <script>
-                alert('Gambar belum dimasukkan!') 
-            </script>
-        ";
-    return false;
-    }
-
-    $ekstensiGambarValid = array('jpg', 'jpeg', 'png');
-    $ekstensiGambar = explode('.', $namaFile);
-    $ekstensiGambar = strtolower(end($ekstensiGambar));
-
-    if(!in_array($ekstensiGambar, $ekstensiGambarValid)){
-        echo " 
-            <script>
-                alert('Format gambar tidak didukung!')
-            </script>";
-        return false;
-    }
-
-    if($ukuranFile > $sizeGambar){
-        echo " 
-            <script>
-                alert('Ukuran gambar terlalu besar!')
-            </script>";
-        return false;
-    }   
-
-    //ambil nama perumahan untuk dimasukkan sebagai nama gambar dari table tiperumah
-    $namaTipe   = $_POST["tipe_rumah"];
-    $tipeQuery  = query("SELECT * FROM perumahan_master WHERE id_perum = '$idPerum'")[0];
-    $idPerum    = $tipeQuery["id_perum"];
-    $namaPerum  = $tipeQuery["nama_perum"];
-
-    // jika lolos pengecekan, gambar siap di upload
-    // generate nama baru
-    $namaFileBaru  = 'Perum' . $namaPerum . '-' . 'Tipe'. '-' . $namaTipe. '-' . $y;
-    $namaFileBaru .= '.';
-    $namaFileBaru .= $tipe_file;
-
-    move_uploaded_file($tmpName, '../img-tiperumah/' . $namaFileBaru);
-    $queryTipe      = "INSERT INTO tipe_gambar
-                            VALUES 
-                            ('', '$namaFileBaru', '$idPerum', '$idTipe')";
-    mysqli_query($conn, $queryTipe);
-    }
-    return $namaFileBaru;
-}
-
-function getAreaList() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan
-{
+function getAreaList() {//mendapatkan dan menampilkan koordinat dari seluruh area perumahan
     global $conn;
 	$arr = array();
     $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, status from perumahan_master order by nama_perum ASC");
@@ -546,8 +454,8 @@ function getAreaList() //mendapatkan dan menampilkan koordinat dari seluruh area
 	return $arr;
 }
 
-function getAreaListbyuserID() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan (diperuntukkan untuk member)
-{
+function getAreaListbyuserID() {//mendapatkan dan menampilkan koordinat dari seluruh area perumahan (diperuntukkan untuk member)
+
     global $conn;
 
     $idUser = $_SESSION["userID"];
@@ -563,8 +471,8 @@ function getAreaListbyuserID() //mendapatkan dan menampilkan koordinat dari selu
 	return $arr;
 }
 
-function getAreaListbyID() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan pada halaman detail perumahan
-{
+function getAreaListbyID() {//mendapatkan dan menampilkan koordinat dari seluruh area perumahan pada halaman detail perumahan
+
     global $conn;
 
     $idPerum = $_GET["id"];
@@ -580,8 +488,8 @@ function getAreaListbyID() //mendapatkan dan menampilkan koordinat dari seluruh 
 	return $arr;
 }
     
-function getAreaListbyStatus() //mendapatkan dan menampilkan koordinat dari seluruh area perumahan pada halaman index ketika statusnya sudah diterima
-{
+function getAreaListbyStatus() {//mendapatkan dan menampilkan koordinat dari seluruh area perumahan pada halaman index ketika statusnya sudah diterima
+
     global $conn;
     $arr = array();
     $statement = $conn->prepare( "SELECT id_perum, nama_perum, alamat, koordinat, status from perumahan_master where status = 'Diterima'");

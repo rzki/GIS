@@ -17,24 +17,24 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$idPerum = $_GET["id_perum"];
+$idTipe = $_GET["id_tipe"];
 
 // pagination
-$jumlahDataPerHalaman =  10;
-$jumlahData = count(query("SELECT * FROM perum_gambar"));
+$jumlahDataPerHalaman =  11;
+$jumlahData = count(query("SELECT * FROM tipe_gambar"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
-$gambarperum = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum LIMIT $awalData, $jumlahDataPerHalaman");
+$tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+$gambartipe = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTipe LIMIT $awalData, $jumlahDataPerHalaman");
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include_once('../components/head.php') ?>
-    <title>Detail Perum <?= $perum["nama_perum"]; ?></title>
+    <title>Detail Tipe Rumah <?= $tipe["tipe_perum"]; ?></title>
     <!-- <style>
     .gambar-perum{
         text-align: center;
@@ -76,14 +76,14 @@ $gambarperum = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = 
                         <th>Aksi</th>
                     </tr>
                     <?php $i = 1; ?>
-                    <?php foreach ($gambarperum as $rows) : ?>
+                    <?php foreach ($gambartipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_gambar"]; ?>">
                         <td style="width: 75px;"><?= $i; ?></td>
-                        <td data-target="gambar_perum"><img src="../img-perum/<?= $rows["gambar_perum"];?>" alt="" width="400" height="300"></td>
+                        <td data-target="gambar_tipe"><img src="../img-tiperumah/<?= $rows["gambar_tipe"];?>" alt="" width="400" height="300"></td>
                         <td>
-                        <a href="delete_gambarperum.php?id=<?= $rows['id_gambar']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
+                        <a href="delete_gambartipe.php?id=<?= $rows['id_gambar']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
                             <i class="fas fa-trash"></i>
-                            Hapus Gambar Perumahan
+                            Hapus Gambar Tipe Rumah
                         </a>
                         </td>
                     </td>
@@ -93,8 +93,8 @@ $gambarperum = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = 
                     </table>
                     <br>
             </div>
-        <a class="btnTambah btn btn-primary btn-block" href="tambah-gambarperum.php?id_perum=<?= $idPerum ?>">
-            Tambah Gambar
+        <a class="btnTambah btn btn-primary btn-block" href="tambah-gambartipe.php?id_tipe=<?= $idTipe ?>">
+            Tambah Gambar Tipe Rumah
         </a>
     </div>
 </div>

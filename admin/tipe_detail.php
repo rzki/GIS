@@ -20,6 +20,7 @@ if (isset($_SESSION['level'])) {
 $idTipe = $_GET["id"];
 
 $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+$gambartipe = query("SELECT * FROM tipe_gambar WHERE id_tipe = $idTipe")[0];
 
 ?>
 <!DOCTYPE html>
@@ -33,6 +34,11 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
     }
     img{
         justify-content: center;
+    }
+    .btnGambar{
+        margin-top: 10px;
+        float: right;
+        margin-right: -50px;
     }
     </style>
 </head>
@@ -69,11 +75,16 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
     </div>
     <hr>
     <br>
+    <div class="container">
+    <a class="btnGambar btn btn-primary" href="kelola-gambartipe.php?id_tipe=<?= $idTipe ?>">
+        Kelola Gambar
+    </a>
+    </div>
     <h1>Gambar Tipe Rumah</h1>
     <hr>
     <div class="container-fluid">
         <div class="row">
-            <center><img class="d-block" src="../img-tiperumah/<?= $tipe["gambar"]; ?>" alt="" width="75%" height="100%"></center>
+            <center><img class="d-block" src="../img-tiperumah/<?= $gambartipe["gambar_tipe"]; ?>" alt="" width="75%" height="100%"></center>
         </div>
     </div>
     <br>

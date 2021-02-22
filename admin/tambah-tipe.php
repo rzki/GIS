@@ -111,7 +111,7 @@ if (isset($_POST['tambah'])){
             <label for="gambar_tipe[]" class="col-sm-2 col-form-label">Gambar Tipe Rumah</label>
                 <div class="col-sm-10">
                     <input type="file" id="gambar_tipe[]" name="gambar_tipe[]" multiple>
-                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                    <p class="text-muted">(maks. 10 gambar)</p>
                 </div>
         </div>
 
