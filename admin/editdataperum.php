@@ -19,21 +19,24 @@ if (isset($_SESSION['level'])) {
 
 //ambil data di URL
 $idPerum = $_GET['id'];
+$areaPerum = getAreaListbyID();
 
 //query data perumahan berdasarkan id
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
+$gambarperum = query("SELECT * FROM perum_gambar WHERE id_perum = $idPerum")[0];
 
 if(isset($_POST["update"])){
-
     //cek apakah data berhasil diubah atau tidak
     if(ubahdataperum($_POST) > 0) {
-        echo '
-        <script>
-                alert("Berhasil mengubah data perumahan!");
-                window.location.href="dataperum-all.php"
-            </script>
-        ';
-    } 
+        if(upload_perum($_POST) > 0) {
+            echo "
+            <script>
+                    alert('Berhasil mengubah data dan gambar perumahan!');
+                    window.location.href='dataperum-all.php'
+                </script>
+            ";
+        }
+    }
 }
 ?>
 
@@ -64,7 +67,7 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perum["id_perum"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perum["gambar_perum"]; ?>">
+    <input type="hidden" name="gambarLama" value="<?= $gambarperum ["gambar_perum"];?>">
         <div class="form-group row">
             <label for="nama_perum" class="col-sm-2 col-form-label">Nama Perumahan</label>
                 <div class="col-sm-10">
@@ -93,14 +96,15 @@ if(isset($_POST["update"])){
         <div class="form-group row">
             <label for="no_telp" class="col-sm-2 col-form-label">Nomor Telepon</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="no_telp" name="no_telp" placeholder="Nomor Telepon">
+                    <input type="text" class="form-control" id="no_telp" name="no_telp"
+                    value="<?= $perum['no_telp'];?>" placeholder="Nomor Telepon">
                 </div>
         </div>
 
         <div class="form-group row" style="margin-top: 1%;">
-            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+            <label for="gambar_perum[]" class="col-sm-2 col-form-label">Gambar Perumahan</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar_perum" name="gambar_perum" value="<?= $perum['gambar_perum'];?>">
+                    <input type="file" id="gambar_perum[]" name="gambar_perum[]" multiple>
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
@@ -140,7 +144,7 @@ if(isset($_POST["update"])){
                 zoomOffset: -1
             }).addTo(mymap);
 
-            function resetArea() {
+        function resetArea() {
         if(polygon != null) {
             mymap.removeLayer( polygon );
         }
@@ -184,36 +188,68 @@ if(isset($_POST["update"])){
         }
         
         function getGeoPoints() {
-    var points = new Array();
-    for(var i=0; i < draggableAreaMarkers.length; i++) {
-        if(draggableAreaMarkers[i] != "") {
-        points[i] =  draggableAreaMarkers[ i ].getLatLng().lng + "," + draggableAreaMarkers[ i ].getLatLng().lat;
+            var points = new Array();
+            for(var i=0; i < draggableAreaMarkers.length; i++) {
+                if(draggableAreaMarkers[i] != "") {
+                points[i] =  draggableAreaMarkers[ i ].getLatLng().lng + "," + draggableAreaMarkers[ i ].getLatLng().lat;
+                }
+            }
+            $('#koordinat').val(points.join(','));
         }
-    }
-    $('#koordinat').val(points.join(', '));
-    }
-    
-    $( document ).ready(function() {
-    mymap.on('click', function(e) {
-        addMarkerAreaPoint( e.latlng);
-    });
-    });
+            
+        $( document ).ready(function() {
+            mymap.on('click', function(e) {
+                addMarkerAreaPoint( e.latlng);
+            });
+        });
 
-    function putDraggable() {
-    /* create a draggable marker in the center of the map */
-    draggableMarker = L.marker([ map.getCenter().lat, map.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(map);
-    
-    /* collect Lat,Lng values */
-    draggableMarker.on('dragend', function(e) {
-        $("#lat").val(this.getLatLng().lat);
-        $("#lng").val(this.getLatLng().lng);
-    });
-    }
-    
-    $( document ).ready(function() {
-    putDraggable();
-    });
+        function putDraggable() {
+        /* create a draggable marker in the center of the map */
+        draggableMarker = L.marker([ mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(mymap);
+        
+        /* collect Lat,Lng values */
+        draggableMarker.on('dragend', function(e) {
+            $("#lat").val(this.getLatLng().lat);
+            $("#lng").val(this.getLatLng().lng);
+        });
+        }
+        
+        $( document ).ready(function() {
+        putDraggable();
+        });
 
+        // function stringToGeoPoints( geo ) {
+        //         var linesPin = geo.split(",");
+
+        //         var linesLat = new Array();
+        //         var linesLng = new Array();
+
+        //         for(i=0; i < linesPin.length; i++) {
+        //             if(i % 2) {
+        //             linesLat.push(linesPin[i]);
+        //             }else{
+        //             linesLng.push(linesPin[i]);
+        //             }
+        //         }
+
+        //         var latLngLine = new Array();
+
+        //         for(i=0; i<linesLng.length;i++) {
+        //             latLngLine.push( L.latLng( linesLat[i], linesLng[i]));
+        //         }
+                
+        //         return latLngLine;
+        //     }
+
+        // function tambahArea() {
+        //     for(var i=0; i < areas.length; i++) {
+        //         var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
+        //     mymap.fitBounds(polygon.getBounds());   
+        //     }
+        // }
+        // $( document ).ready(function() {
+        //     tambahArea();
+        // });
     </script>
 </body>
 </html>

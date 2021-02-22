@@ -9,13 +9,16 @@
         <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#daftar-perum">Daftar Perumahan</a>
-          </li>
+        </li>
         <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#peta-perum">Peta Perumahan</a>
           </li>
-          <li class="nav-item">
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#simulasi-kredit">Kalkulator KPR</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#galeri">Gallery</a>
-          </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#about">Tentang</a>
           </li>

@@ -23,18 +23,21 @@ $previous = "javascript:history.go(-1)";
 
 //query data perumahan berdasarkan id
 $perumtipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+$gambartipe = query("SELECT * FROM tipe_gambar WHERE id_tipe = $idTipe")[0];
 $idperum = $perumtipe["id_perum"];
 
 if(isset($_POST["update"])){
 
     //cek apakah data berhasil diubah atau tidak
     if(ubahtiperumah($_POST) > 0) {
-        echo "
-        <script>
-                alert('Berhasil mengubah tipe perumahan!');
-                window.location.href = 'detail.php?id=$idperum'
-            </script>
-        ";
+        if(ubahgambartipe($_POST) > 0){
+            echo "
+            <script>
+                    alert('Berhasil mengubah tipe perumahan!');
+                    window.location.href = 'detail.php?id=$idperum'
+                </script>
+            ";
+        }
     } 
 }
 ?>
@@ -59,7 +62,7 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perumtipe["id_tipe"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perumtipe["gambar"]?>">
+    <input type="hidden" name="gambarLama[]" value="<?= $gambartipe["gambar_tipe"]?>">
         <div class="form-group row">
             <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
                 <div class="col-sm-10">
@@ -99,16 +102,24 @@ if(isset($_POST["update"])){
                     value="<?= $perumtipe['daya_listrik'];?>" required>
                 </div>
         </div>
+                
+        <div class="form-group row">
+            <label for="harga" class="col-sm-2 col-form-label">Harga</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="harga" name="harga" placeholder="Daya Listrik" 
+                    value="<?= $perumtipe['harga'];?>" required>
+                </div>
+        </div>
 
         <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+            <label for="gambar_tipe[]" class="col-sm-2 col-form-label">Gambar</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar" name="gambar" value="<?= $perumtipe['gambar'];?>">
+                    <input type="file" id="gambar_tipe[]" name="gambar_tipe[]" value="<?= $gambartipe['gambar_tipe'];?>">
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
 
-        <input type="hidden" name="id_perum" id="id_perum">
+        <input type="hidden" name="id_perum" id="id_perum" value="<?= $idperum ?>">
                 <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
 </form>
 </body>

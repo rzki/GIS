@@ -19,10 +19,13 @@ if (isset($_SESSION['level'])) {
 }
 
 $id_perum = $_GET["id_perum"];
+$tipe = query("SELECT * FROM perumahan_master WHERE id_perum = $id_perum")[0];
+$namaPerum = $tipe["nama_perum"];
 
 if (isset($_POST['tambah'])){
     
     if( tambahtipe ($_POST) > 0) {
+        if( tambahgambartipe ($_POST) > 0){
         echo 
         "
         <script>
@@ -39,6 +42,7 @@ if (isset($_POST['tambah'])){
         </script>
         ";
     }
+}      
 }
 ?>
 <!DOCTYPE html>
@@ -60,6 +64,7 @@ if (isset($_POST['tambah'])){
     <?php include_once('../components/main-content.php') ?>
 
 <form action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="nama_perum" value="<?= $namaPerum?>">
         <div class="form-group row">
             <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
                 <div class="col-sm-10">
@@ -87,8 +92,6 @@ if (isset($_POST['tambah'])){
                     <textarea class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi"></textarea>
                 </div>
         </div>
-
-        <input type="hidden" name="id" value="<?= $id_perum ?>">
         
         <div class="form-group row">
             <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
@@ -98,20 +101,22 @@ if (isset($_POST['tambah'])){
         </div>
 
         <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+            <label for="harga" class="col-sm-2 col-form-label">Harga</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar" name="gambar" required>
-                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                    <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga" required>
                 </div>
         </div>
 
         <div class="form-group row">
-            <label for="harga" class="col-sm-2 col-form-label">Harga</label>
+            <label for="gambar_tipe[]" class="col-sm-2 col-form-label">Gambar Tipe Rumah</label>
                 <div class="col-sm-10">
-                    <input type="text" id="harga" name="harga" required>
+                    <input type="file" id="gambar_tipe[]" name="gambar_tipe[]" multiple>
+                    <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>
-                <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Tipe Perumahan</button>
+
+        <input type="hidden" name="id" value="<?= $id_perum ?>">
+        <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Tipe Perumahan</button>
     </form>
 </body>
 </html>

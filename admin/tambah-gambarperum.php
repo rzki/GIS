@@ -22,7 +22,7 @@ $id_Perum = $_GET["id_perum"];
 
 if (isset($_POST['tambah'])){
     
-    if( uploadperum ($_POST) > 0) {
+    if( tambahgambar_perum ($_POST) > 0) {
         echo 
         "
         <script>

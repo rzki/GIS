@@ -41,11 +41,13 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <style>
     .gambar-perum{
         text-align: center;
-        margin-left: 175px;
+        margin-left: 100px;
+        margin-right: 50px;
     }
-    .btnGambar{
+    .btnGambar,.btnTipe{
         margin-top: 10px;
         float: right;
+        margin-right: -30px;
     }
     hr{
         border: 1px solid gray;
@@ -97,7 +99,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <hr>
     <br>
     <div class="container">
-        <a class="btn btn-primary" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
+        <a class="btnTipe btn btn-primary" href="tambah-tipe.php?id_perum=<?= $idPerum ?>">
             Tambah Tipe
         </a>
     </div>

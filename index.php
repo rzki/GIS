@@ -62,8 +62,19 @@ $areas = getAreaListbyStatus();
     </div>
   </section>
 
+<!-- Simulasi KPR Section -->
+<section id="simulasi-kredit" class="bg-light">
+    <div class="container">
+      <h2 style="text-align:center">Kalkulator KPR</h2>
+      <br>
+        <p class="lead text-center">Ingin mengetahui angsuran dan detail pembayaran lainnya mengenai rumah yang diminati? <br> Silahkan gunakan kalkulator KPR dengan klik tombol dibawah</p>
+        <br>
+        <center><a href="simulasi_kredit.php" class="btn btn-lg btn-outline-dark">Klik disini</a></center>   
+    </div>
+  </section>
+
   <!-- Gallery Section -->
-  <section id="galeri" class="bg-light">
+  <section id="galeri" class="">
     <h2 style="text-align:center">Gallery Perumahan</h2>
     <div class="container">
       <p class="lead text-center">Berikut beberapa contoh gambar perumahan yang ada di Kuta Selatan</p>
@@ -110,7 +121,7 @@ $areas = getAreaListbyStatus();
   </section>
 
   <!-- About Section -->
-  <section id="about">
+  <section id="about" class="bg-light">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
