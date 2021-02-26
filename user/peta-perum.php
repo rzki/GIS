@@ -105,6 +105,11 @@ var mapOptions = {
 
         var areas = JSON.parse( '<?php echo json_encode($areas) ?>' );
     </script>
-<script src="js/home.js"></script></body>
+        <script>
+        function goBack() {
+            window.location.href="home.php";
+        }
+    </script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

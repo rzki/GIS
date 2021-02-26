@@ -13,6 +13,7 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
 $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum");
+$carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum");
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,10 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <title>Detail Perumahan</title>
     <style>
         .detailperum{
-            margin-top: 100px;
+            font-size: 32pt;
+            font-weight: bold;
+            align-content: center;
+            vertical-align: middle;
             border: 2px solid black;
             border-radius: 24px;
             width: 50%;
@@ -33,15 +37,15 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
             width: 75%;
             border-radius: 24px;
         }
-        /* .linedetailperum{
-            border: 1px solid black;
-            background-color: black;
-        } */
+        .btn-back{
+        margin-top: 8%;
+        margin-left: 10%;
+        }
         hr{
             border: 1px solid black;
             background-color: black;
         }
-        .namaperum,.alamatperum,.koordinat{
+        .namaperum,.alamatperum,.notelp{
             word-wrap: break-word;
             font-size: large;
             font-weight: bold;
@@ -53,9 +57,19 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
             font-size: large;
             text-align: center;
         }
-        .koordinat-text{
+        .wa-div{
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin: 0 0 20px 0;
+        }
+        .wa-link{
+            color: black;
+        }
+        .wa-link a:hover a:focus{
+            color: blue;
+        }
+        .wa-text{
+            display: inline-block;
         }
     </style>
 </head>
@@ -63,6 +77,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <?php include_once("components/navbar-detail.php")?>
 
 <!-- Header -->
+<button class="btn-back btn btn-lg border-dark" onclick="goBack()"><i class="fas fa-angle-left"></i>Kembali</button>
 <div class="detailperum container">
     <center><h1>Detail Perumahan</h1></center>
 </div>
@@ -80,9 +95,51 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
 <!-- Gambar Perumahan -->
 <h1 class="text-center">Gambar Perumahan</h1>
 <hr class="w-75">
-    <div class="container-fluid">
-        <div class="row">
-            <center><img class="d-block" src="img-perum/<?= $perum["gambar_perum"]; ?>" alt="" width="50%" height="100%"></center>
+<div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <!— Banner SlideShow nya —>
+                <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <ol class="carousel-indicators">
+                            <?php
+
+                            $count = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum");
+                            $res = mysqli_num_rows($count);
+                            for($i=0; $i<$res;$i++){
+                                echo '<li data-target="#dmbannerhead" data-slide-to="'.$i.'"'; if($i==0){ echo 'class="active"'; } echo '></li>';
+                            }
+                            ?>
+                        </ol>
+                <?php
+                    if($res = $carousel) {
+                    $x = 0;
+                    while ($row = mysqli_fetch_assoc($res)) {
+                    if($x==0) $aktif = "active";
+                        else $aktif = '';
+                        ?>
+                        <div class="carousel-item <?php echo $aktif ?>  text-center">
+                        <a href="img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
+                        <img src="img-perum/<?php echo $row['gambar_perum'] ?>" alt="" title="<?php echo $row['gambar_perum'] ?>" width="600" height="400">
+                        <a href="img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
+                    </div>
+                <?php 
+                    $x++;
+                    } // tutup while
+                }	// tutup if
+                ?>
+                </div>
+                <a class="carousel-control-prev" href="#dmbannerhead" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#dmbannerhead" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+            <!— /Banner Slideshow nya —>
+            </div>
         </div>
     </div>
 <br>
@@ -92,14 +149,16 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <div class="detailperum-box container-fluid">
         <div class="row w-75 mx-auto">
                 <div class="col">
-                    <p class="namaperum card-title"><b>Nama Perumahan :</b></p>
+                    <p class="namaperum card-title"><b>Nama Perumahan</b></p>
                     <p class="namaperum-text card-title"><?= $perum["nama_perum"];?></p>
-                    <p class="alamatperum card-title"><b>Alamat :</b></p>
+                    <p class="alamatperum card-title"><b>Alamat</b></p>
                     <p class="alamatperum-text card-title"><?= $perum["alamat"];?></p>
+                    <p class="notelp card-title"><b>Nomor Telepon</b></p>
+                    <div class="wa-div">
+                        <p class="wa-text card-title text-center" style="word-wrap: break-word; font-size:large;">
+                        <?= $perum["no_telp"];?> (<a href="tel:<?= $perum["no_telp"];?>">call</a>)
+                        </p>
                 </div>
-                <div class="col justify-content-center">
-                    <p class="koordinat card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b></p>
-                    <p class="koordinat-text card-title"><?= $perum["koordinat"];?></p>
                 </div>
             </div>
     </div>
@@ -119,6 +178,7 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                 <th>Luas Tanah (m2)</th>
                 <th>Spesifikasi</th>
                 <th>Daya Listrik</th>
+                <th>Harga Rumah</th>
                 <th>Aksi</th>
             </tr>
             <?php $i = 1; ?>
@@ -126,11 +186,12 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
             <tr class="show bg-light" id="<?= $row["id_tipe"]; ?>">
                 <td class="text-center" style="width: 75px;"><?= $i; ?></td>
                 <td class="text-center" data-target="tipe_rumah" style="width: 150px;"><?= $row["tipe_rumah"]; ?></td>
-                <td class="text-center" data-target="luas_bangunan" style="width: 200px;"><?= $row["luas_bangunan"]; ?> m2</td>
+                <td class="text-center" data-target="luas_bangunan" style="width: 150px;"><?= $row["luas_bangunan"]; ?> m2</td>
                 <td class="text-center" data-target="luas_tanah" style="width: 150px;"><?= $row["luas_tanah"]; ?> m2</td>
                 <td class="text-center" data-target="spesifikasi" style="width: 500px;"><?= $row["spesifikasi"]?></td>
-                <td class="text-center" data-target="daya_listrik" style="width: 150px;"><?= $row["daya_listrik"]?></td>
-                <td class="text-center" style="text-align: center;">
+                <td class="text-center" data-target="daya_listrik" style="width: 100px;"><?= $row["daya_listrik"]?></td>
+                <td class="text-center" data-target="harga" style="width: 200px;"><?= rupiah($row["harga"])?></td>
+                <td class="text-center" style="text-align: center;width: 150px;">
                     <a href="detail-tipe.php?id=<?= $row['id_tipe']?>" class="btn btn-outline-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Detail Tipe Perumahan"><i class="fas fa-info"></i> Lihat Detail</a>
                 </td>
             </tr>
@@ -213,5 +274,10 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
         }
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
+    <script>
+    function goBack() {
+        window.location.href="list-perum.php";
+    }
+</script>
 </body>
 </html>

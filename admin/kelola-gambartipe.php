@@ -20,8 +20,8 @@ if (isset($_SESSION['level'])) {
 $idTipe = $_GET["id_tipe"];
 
 // pagination
-$jumlahDataPerHalaman =  11;
-$jumlahData = count(query("SELECT * FROM tipe_gambar"));
+$jumlahDataPerHalaman =  5;
+$jumlahData = count(query("SELECT * FROM tipe_gambar WHERE id_tipe = $idTipe"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
@@ -93,10 +93,57 @@ $gambartipe = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $id
                     </table>
                     <br>
             </div>
+            
+            <div class="panel-footer mx-auto">
+            <nav class="page">
+                <ul class="pagination">
+                    <?php if ($halamanAktif > 1) : ?>
+                    <li class="page-item">
+                        <a href="?id_tipe=<?= $tipe["id_tipe"];?>&halaman=<?= $halamanAktif - 1 ?>" class="page-link">Previous</a>
+                    </li>
+                    <?php else : ?>
+                    <li class="page-item disabled">
+                        <div class="page-link text-dark">Previous</div>
+                    </li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                        <?php if ($i == $halamanAktif) : ?>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?id_tipe=<?= $tipe["id_tipe"];?>&halaman=<?= $i; ?>"><?= $i; ?></a>
+                        </li>
+                        <?php else : ?>
+                        <li class="page-item" aria-current="page">
+                            <a class="page-link  text-dark" href="?id_tipe=<?= $tipe["id_tipe"];?>&halaman=<?= $i; ?>""><?= $i; ?></a>
+                        </li>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+
+                    <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                    <li>
+                        <a href="?id_tipe=<?= $tipe["id_tipe"];?>&halaman=<?= $halamanAktif + 1 ?>" class="page-link" href="#">Next</a>
+                    </li>
+                    <?php else : ?>
+                    <li class="page-item disabled">
+                        <div class="page-link text-dark">Next</div>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+            </div>
         <a class="btnTambah btn btn-primary btn-block" href="tambah-gambartipe.php?id_tipe=<?= $idTipe ?>">
             Tambah Gambar Tipe Rumah
         </a>
     </div>
+    <br>
 </div>
+<script>
+    function goBack() {
+        window.location.href="tipe_detail.php?id_tipe=<?= $idTipe?>";
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

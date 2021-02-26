@@ -23,6 +23,7 @@ $id_perum = $_GET["id_perum"];
 if (isset($_POST['tambah'])){
     
     if( tambahtipe ($_POST) > 0) {
+        if( tambahgambartipe ($_POST) > 0){
         echo 
         "
         <script>
@@ -39,6 +40,7 @@ if (isset($_POST['tambah'])){
         </script>
         ";
     }
+}
 }
 ?>
 <!DOCTYPE html>
@@ -86,11 +88,9 @@ if (isset($_POST['tambah'])){
         <div class="form-group row">
             <label for="spesifikasi" class="col-sm-2 col-form-label">Spesifikasi</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi">
+                    <textarea class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi">
                 </div>
         </div>
-
-        <input type="hidden" name="id" value="<?= $id_perum ?>">
         
         <div class="form-group row">
             <label for="daya_listrik" class="col-sm-2 col-form-label">Daya Listrik</label>
@@ -98,15 +98,29 @@ if (isset($_POST['tambah'])){
                     <input type="text" class="form-control" id="daya_listrik" name="daya_listrik" placeholder="Daya Listrik">
                 </div>
         </div>
+
+        <div class="form-group row">
+            <label for="harga" class="col-sm-2 col-form-label">Harga</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga">
+                </div>
+        </div>
         
         <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+            <label for="gambar_tipe[]" class="col-sm-2 col-form-label">Gambar Tipe</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar" name="gambar" required>
+                    <input type="file" id="gambar_tipe[]" name="gambar_tipe[]" multiple required>
                     <p>(max. size 10MB)</p>
                 </div>
         </div>
+
+        <input type="hidden" name="id" value="<?= $id_perum ?>">
                 <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
     </form>
+    <script>
+        function goBack() {
+            window.location.href="detail.php?id=<?= $id_perum?>";
+        }
+    </script>  
 </body>
 </html>

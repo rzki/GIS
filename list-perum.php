@@ -22,6 +22,12 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
         width: 250px;
         text-align: center;
     }
+    .daftarPerumHeader{
+        margin-top:-75px;
+    }
+    #daftarPerum{
+        margin-bottom: -50px;
+    }
     </style>
 </head>
 <body>
@@ -34,7 +40,7 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
             <div class="col mx-auto">
                 <img src="assets/brand/Kabupaten_Badung.png" class="text-center" style="width: 150px; height: 150px" alt="">
                 <h1 style="color: white;">Sistem Informasi Geografis <br> Pemetaan Perumahan Kabupaten Badung</h1>
-                <p class="lead" style="color: white;">Selamat datang di Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
+                <p class="lead" style="color: white;">Berikut merupakan daftar perumahan yang ada di <br> Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
             </div>
         </div>
     </div>
@@ -42,12 +48,14 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
 
 <!-- List Perumahan Section -->
 <section id="daftarPerum">
+    <div class="daftarPerumHeader container">
         <center><h1>Daftar Perumahan</h1></center>
         <hr class=" w-75 mx-auto">
+    </div>
     <div class="container">
         <div class="row">
         <form action="" method="post" class="search-form ml-auto">
-            <input type="text" name="keyword" class="box-cari" placeholder="Masukkan keyword pencarian" id="keyword" autofocus>
+            <input type="text" name="keyword" class="box-cari" placeholder="Masukkan keyword pencarian" id="keyword">
         </form>
             <div class="table-responsive mx-auto" style="width: 100%;" id="tabel">
                 <table class="table table-lg table-hover table-striped table-bordered">
@@ -78,7 +86,7 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
         <ul class="pagination justify-content-center">
             <?php if ($halamanAktif > 1) : ?>
             <li class="page-item">
-                <a href="?halaman=<?= $halamanAktif - 1 ?>" class="page-link">Previous</a>
+                <a href="?halaman=<?= $halamanAktif - 1 ?>#daftarPerum" class="page-link">Previous</a>
             </li>
             <?php else : ?>
             <li class="page-item">
@@ -89,11 +97,11 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
             <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
                 <?php if ($i == $halamanAktif) : ?>
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                    <a class="page-link" href="?halaman=<?= $i; ?>#daftarPerum"><?= $i; ?></a>
                 </li>
                 <?php else : ?>
                 <li class="page-item" aria-current="page">
-                    <a class="page-link  text-dark" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                    <a class="page-link  text-dark" href="?halaman=<?= $i; ?>#daftarPerum"><?= $i; ?></a>
                 </li>
                 <?php endif; ?>
             <?php endfor; ?>

@@ -65,9 +65,9 @@ $areas = getAreaListbyStatus();
 <!-- Simulasi KPR Section -->
 <section id="simulasi-kredit" class="bg-light">
     <div class="container">
-      <h2 style="text-align:center">Kalkulator KPR</h2>
+      <h2 style="text-align:center">Simulasi KPR</h2>
       <br>
-        <p class="lead text-center">Ingin mengetahui angsuran dan detail pembayaran lainnya mengenai rumah yang diminati? <br> Silahkan gunakan kalkulator KPR dengan klik tombol dibawah</p>
+        <p class="lead text-center">Ingin mengetahui angsuran dan detail pembayaran lainnya mengenai rumah yang diminati? <br> Silahkan simulasikan KPR yang diinginkan menggunakan kalkulator KPR dengan klik tombol dibawah</p>
         <br>
         <center><a href="simulasi_kredit.php" class="btn btn-lg btn-outline-dark">Klik disini</a></center>   
     </div>
@@ -89,19 +89,25 @@ $areas = getAreaListbyStatus();
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
+            <a href="img-perum/Perum-The Living Hill Residence-6024a02fe8682.jpg" target="_blank">
               <img class="d-block w-100" src="img-perum/Perum-The Living Hill Residence-6024a02fe8682.jpg">
+              </a>
               <div class="carousel-caption">
                 <h5>The Living Hill Residence</h5>
               </div>
             </div>
             <div class="carousel-item">
+            <a href="img-perum/Perum-Damara Village-60249f95c4fcb.jpg" target="_blank">
               <img class="d-block w-100" src="img-perum/Perum-Damara Village-60249f95c4fcb.jpg">
+              </a>
               <div class="carousel-caption">
                 <h5>Damara Village</h5>
               </div>
             </div>
             <div class="carousel-item">
+            <a href="img-perum/Perum-Mandala Griya-6024a042974db.jpg" target="_blank">
               <img class="d-block w-100" src="img-perum/Perum-Mandala Griya-6024a042974db.jpg">
+              </a>
               <div class="carousel-caption">
                 <h5>Mandala Griya</h5>
               </div>

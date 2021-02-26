@@ -4,9 +4,4 @@
             <h1 class="head"><?= $head ?></h1>
             <hr class="headline">
         </div>
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
 

@@ -73,6 +73,11 @@ if (isset($_POST['tambah'])){
         <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Gambar Perumahan</button>
         <br>
     </form>
+    <script>
+        function goBack() {
+            window.location.href="kelola-gambar.php?id=<?=$id_Perum?>";
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

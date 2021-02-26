@@ -14,7 +14,7 @@
             <a class="nav-link js-scroll-trigger" href="#peta-perum">Peta Perumahan</a>
           </li>
         <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#simulasi-kredit">Kalkulator KPR</a>
+            <a class="nav-link js-scroll-trigger" href="#simulasi-kredit">Simulasi KPR</a>
         </li>
         <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#galeri">Gallery</a>

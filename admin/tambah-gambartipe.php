@@ -59,7 +59,7 @@ if (isset($_POST['tambah'])){
     <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Main Content -->
-    <?php $head = 'Tambah Data Perumahan' ?>
+    <?php $head = 'Tambah Gambar Tipe Rumah' ?>
     <?php include_once('../components/main-content.php') ?>
 
 

@@ -89,10 +89,17 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
 
-        <div class="form-group row" style="margin-top: 1%;">
-            <label for="gambar_perum" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+        <div class="form-group row">
+            <label for="no_telp" class="col-sm-2 col-form-label">Nomor Telepon</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar_perum" name="gambar_perum">
+                    <input type="text" class="form-control" id="no_telp" name="no_telp" placeholder="Nomor Telepon">
+                </div>
+        </div>
+
+        <div class="form-group row" style="margin-top: 1%;">
+            <label for="gambar_perum[]" class="col-sm-2 col-form-label">Gambar Perumahan</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gambar_perum[]" name="gambar_perum[]" multiple required>
                     <p class="text-muted">(ukuran maks. 10MB)</p>
                 </div>
         </div>

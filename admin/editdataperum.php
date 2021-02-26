@@ -30,7 +30,7 @@ if(isset($_POST["update"])){
     if(ubahdataperum($_POST) > 0) {
             echo "
             <script>
-                    alert('Berhasil mengubah data dan gambar perumahan!');
+                    alert('Berhasil mengubah data perumahan!');
                     window.location.href='dataperum-all.php'
                 </script>
             ";
@@ -184,7 +184,7 @@ if(isset($_POST["update"])){
                 points[i] =  draggableAreaMarkers[ i ].getLatLng().lng + "," + draggableAreaMarkers[ i ].getLatLng().lat;
                 }
             }
-            $('#koordinat').val(points.join(','));
+            $('#koordinat').val(points.join(', '));
         }
             
         $( document ).ready(function() {
@@ -195,7 +195,7 @@ if(isset($_POST["update"])){
 
         function putDraggable() {
         /* create a draggable marker in the center of the map */
-        draggableMarker = L.marker([ mymap.getCenter().lat, mymap.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(mymap);
+        draggableMarker = L.marker([ map.getCenter().lat, map.getCenter().lng], {draggable:true, zIndexOffset:900}).addTo(map);
         
         /* collect Lat,Lng values */
         draggableMarker.on('dragend', function(e) {
@@ -208,38 +208,48 @@ if(isset($_POST["update"])){
         putDraggable();
         });
 
-        // function stringToGeoPoints( geo ) {
-        //         var linesPin = geo.split(",");
+        $( document ).ready(function() {
+            tambahArea();
+        });
 
-        //         var linesLat = new Array();
-        //         var linesLng = new Array();
+        function stringToGeoPoints( geo ) {
+            var linesPin = geo.split(",");
 
-        //         for(i=0; i < linesPin.length; i++) {
-        //             if(i % 2) {
-        //             linesLat.push(linesPin[i]);
-        //             }else{
-        //             linesLng.push(linesPin[i]);
-        //             }
-        //         }
+            var linesLat = new Array();
+            var linesLng = new Array();
 
-        //         var latLngLine = new Array();
+            for(i=0; i < linesPin.length; i++) {
+                if(i % 2) {
+                linesLat.push(linesPin[i]);
+                }else{
+                linesLng.push(linesPin[i]);
+                }
+            }
 
-        //         for(i=0; i<linesLng.length;i++) {
-        //             latLngLine.push( L.latLng( linesLat[i], linesLng[i]));
-        //         }
-                
-        //         return latLngLine;
-        //     }
+            var latLngLine = new Array();
 
-        // function tambahArea() {
-        //     for(var i=0; i < areas.length; i++) {
-        //         var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
-        //     mymap.fitBounds(polygon.getBounds());   
-        //     }
-        // }
-        // $( document ).ready(function() {
-        //     tambahArea();
-        // });
+            for(i=0; i<linesLng.length;i++) {
+                latLngLine.push( L.latLng( linesLat[i], linesLng[i]));
+            }
+            
+            return latLngLine;
+        }
+
+        function tambahArea() {
+            for(var i=0; i < areas.length; i++) {
+                var polygon = L.polygon( stringToGeoPoints(areas[i]['koordinat']), { color: 'blue'}).addTo(mymap);
+            mymap.fitBounds(polygon.getBounds());   
+            }
+        }
+        var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
+    <script>
+        function goBack() {
+            window.location.href="dataperum-all.php";
+        }
+    </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -129,6 +129,12 @@ $perumUser = query(" SELECT * FROM perumahan_master WHERE status = 'Pending' LIM
 </div>
 <!-- fungsi pencarian menggunakan ajax -->
 <script src="js/search-user.js"></script>
+<!--  -->
+<script>
+        function goBack() {
+            window.location.href="home.php";
+        }
+    </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

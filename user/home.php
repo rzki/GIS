@@ -72,5 +72,6 @@ $user = query("SELECT * FROM users WHERE id_user = '$id_user'")[0];
         <script src="js/home.js">
     </script>
     <?php include_once('../components/close-main-content.php') ?>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

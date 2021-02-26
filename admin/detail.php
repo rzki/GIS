@@ -28,9 +28,9 @@ $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 $perum = query("SELECT * FROM perumahan_master WHERE id_perum = $idPerum")[0];
-$gambarperum = query("SELECT * FROM perum_gambar WHERE id_perum = $idPerum")[0];
 $tipe = query("SELECT * FROM tiperumah_master WHERE id_perum = $idPerum")[0];
 $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum = $idPerum LIMIT $awalData, $jumlahDataPerHalaman");
+$carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum");
 
 ?>
 <!DOCTYPE html>
@@ -56,6 +56,20 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     #btnGambar{
         margin: auto;
     }
+        .wa-div{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .wa-link{
+        color: black;
+    }
+    .wa-link a:hover a:focus{
+        color: blue;
+    }
+    .wa-text{
+        display: inline-block;
+    }
     </style>
 </head>
 <body>
@@ -72,14 +86,56 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <div id="peta" style="margin-bottom: 1%; width:100%; height:35%"></div>
     <div class="container">
     <a class="btnGambar btn btn-primary" href="kelola-gambar.php?id_perum=<?= $idPerum ?>">
-        Kelola Gambar Perum
+        Kelola Gambar
     </a>
     </div>
     <h1 class="gambar-perum">Gambar Perumahan</h1>
     <hr>
-    <div class="container-fluid mx-auto">
-        <div class="row">
-            <center><img class="d-block" src="../img-perum/<?= $gambarperum["gambar_perum"]; ?>" alt="" width="50%" height="100%"></center>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-8">
+                <!— Banner SlideShow nya —>
+                <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <ol class="carousel-indicators">
+                        <?php
+
+                        $count = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum");
+                        $res = mysqli_num_rows($count);
+                        for($i=0; $i<$res;$i++){
+                            echo '<li data-target="#dmbannerhead" data-slide-to="'.$i.'"'; if($i==0){ echo 'class="active"'; } echo '></li>';
+                        }
+                        ?>
+                    </ol>
+                <?php
+                    if($res = $carousel) {
+                    $x = 0;
+                    while ($row = mysqli_fetch_assoc($res)) {
+                    if($x==0) $aktif = "active";
+                        else $aktif = '';
+                        ?>
+                        <div class="carousel-item <?php echo $aktif ?>  text-center">
+                        <a href="../img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
+                        <img src="../img-perum/<?php echo $row['gambar_perum'] ?>" alt="" title="<?php echo $row['gambar_perum'] ?>" width="700" height="400">
+                        </a>
+                    </div>
+                <?php 
+                    $x++;
+                    } // tutup while
+                }	// tutup if
+                ?>
+                </div>
+                <a class="carousel-control-prev" href="#dmbannerhead" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#dmbannerhead" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+            <!— /Banner Slideshow nya —>
+            </div>
         </div>
     </div>
     <br>
@@ -88,11 +144,13 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Nama Perumahan :</b> <br> <?= $perum["nama_perum"];?></p>
-                <p class="card-title" style="word-wrap: break-word; font-size:large"><b>Alamat :</b> <br> <?= $perum["alamat"];?></p>
-            </div>
-            <div class="col">
-                <p class="card-title" style="word-wrap: break-word; font-size:large;"><b>Koordinat :</b>  <br> <?= $perum["koordinat"];?></p>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:x-large"><b>Nama Perumahan</b></p>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><?= $perum["nama_perum"];?></p>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:x-large"><b>Alamat</b></p>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><?= $perum["alamat"];?></p>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:x-large"><b>Nomor Telepon</b></p>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:large;"><?= $perum["no_telp"];?>
+                (<a href="tel:<?= $perum["no_telp"];?>">call</a>)</p>
             </div>
         </div>
     </div>
@@ -114,19 +172,21 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
                         <th>Tipe Rumah</th>
                         <th>Luas Bangunan (m2)</th>
                         <th>Luas Tanah (m2)</th>
+                        <th>Harga Rumah</th>
                         <th>Aksi</th>
                     </tr>
                     <?php $i = 1; ?>
                     <?php foreach ($tabelTipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
                         <td style="width: 75px;"><?= $i; ?></td>
-                        <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?> (<?= $rows["luas_bangunan"]; ?>/<?= $rows["luas_tanah"]; ?>)</td>
+                        <td class="text-center" data-target="tipe_rumah" style="width: 300px;"><?= $rows["tipe_rumah"]; ?></td>
                         <td class="text-center" data-target="luas_bangunan" style="width: 150px;"><?= $rows["luas_bangunan"]; ?> m2</td>
                         <td class="text-center" data-target="luas_tanah" style="width: 125px;"><?= $rows["luas_tanah"]; ?> m2</td>
+                        <td class="text-center" data-target="harga" style="width:125px"><?= rupiah($rows["harga"]);?></td>
                         <td class="text-center" style="width: 125px;">
-                        <a href="tipe_detail.php?id=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
-                        <a href="edit_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
-                        <a href="delete_tiperumah.php?id=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
+                        <a href="tipe_detail.php?id_tipe=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
+                        <a href="edit_tiperumah.php?id_tipe=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
+                        <a href="delete_tiperumah.php?id_tipe=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -192,6 +252,11 @@ $tabelTipe = mysqli_query($conn, "SELECT * FROM tiperumah_master WHERE id_perum 
             }
         }
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
+    </script>
+    <script>
+        function goBack() {
+            window.location.href="dataperum-all.php";
+        }
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>

@@ -154,11 +154,13 @@ function ubahdataperum_member($data) {
     $namaPerum      = htmlspecialchars ($data["nama_perum"]);
     $alamat         = htmlspecialchars ($data["alamat"]);
     $koordinat      = ($data["koordinat"]);
+    $noTelp         = htmlspecialchars ($data["no_telp"]);
 
     $queryPerum  =   "UPDATE perumahan_master SET 
                     nama_perum = '$namaPerum',
                     alamat = '$alamat',
-                    koordinat = '$koordinat'
+                    koordinat = '$koordinat',
+                    no_telp = '$noTelp'
                 WHERE id_perum = $idPerum";
     mysqli_query($conn, $queryPerum);
 
@@ -194,6 +196,7 @@ function uploadperum() {
 
     $sizeGambar = 10 * 1024 * 1024;
     $idPerum =  mysqli_insert_id($conn);
+    $uploaded = date("Y-m-d H:i:s");
     foreach($_FILES["gambar_perum"]["tmp_name"] as $x=>$tmp_name){
     $namaFile = $_FILES['gambar_perum']['name'][$x];
     $ukuranFile = $_FILES['gambar_perum']['size'][$x];
@@ -243,7 +246,7 @@ function uploadperum() {
     move_uploaded_file($tmpName, '../img-perum/' . $namaFileBaru);
     $queryGambar      =   "   INSERT INTO perum_gambar
                                 VALUES
-                                ('', '$namaFileBaru', '$idPerum')";
+                                ('', '$namaFileBaru', '$idPerum', '$uploaded')";
     mysqli_query($conn, $queryGambar);
     }
     return $namaFileBaru;
@@ -254,6 +257,7 @@ function tambahgambar_perum() {
 
     $sizeGambar = 10 * 1024 * 1024;
     $idperum     = $_POST["id"];
+    $uploaded = date("Y-m-d H:i:s");
     foreach($_FILES["gambar_perum"]["tmp_name"] as $x=>$tmp_name){
     $namaFile = $_FILES['gambar_perum']['name'][$x];
     $ukuranFile = $_FILES['gambar_perum']['size'][$x];
@@ -304,7 +308,7 @@ function tambahgambar_perum() {
     move_uploaded_file($tmpName, '../img-perum/' . $namaFileBaru);
     $queryGambar      =   "   INSERT INTO perum_gambar
                                 VALUES
-                                ('', '$namaFileBaru', '$idperum')";
+                                ('', '$namaFileBaru', '$idperum', '$uploaded')";
     mysqli_query($conn, $queryGambar);
     }
     return $namaFileBaru;
@@ -316,6 +320,7 @@ function tambahgambar_tipe() {
     $sizeGambar = 10 * 1024 * 1024;
     $idPerum = $_POST["id_perum"];
     $idTipe =  $_POST["id_tipe"];
+    $uploaded = date("Y-m-d H:i:s");
     foreach($_FILES["gambar_tipe"]["tmp_name"] as $y=>$tmp_name){
     $namaFile = $_FILES['gambar_tipe']['name'][$y];
     $ukuranFile = $_FILES['gambar_tipe']['size'][$y];
@@ -370,7 +375,7 @@ function tambahgambar_tipe() {
     move_uploaded_file($tmpName, '../img-tiperumah/' . $namaFileBaru);
     $queryTipe      = "INSERT INTO tipe_gambar
                             VALUES 
-                            ('', '$namaFileBaru', '$idTipe')";
+                            ('', '$namaFileBaru', '$idTipe', '$uploaded')";
     mysqli_query($conn, $queryTipe);
     }
     return $namaFileBaru;
@@ -382,6 +387,7 @@ function uploadtipe() {
     $sizeGambar = 10 * 1024 * 1024;
     $idPerum = $_POST["id"];
     $idTipe =  mysqli_insert_id($conn);
+    $uploaded = date("Y-m-d H:i:s");
     foreach($_FILES["gambar_tipe"]["tmp_name"] as $y=>$tmp_name){
     $namaFile = $_FILES['gambar_tipe']['name'][$y];
     $ukuranFile = $_FILES['gambar_tipe']['size'][$y];
@@ -434,7 +440,7 @@ function uploadtipe() {
     move_uploaded_file($tmpName, '../img-tiperumah/' . $namaFileBaru);
     $queryTipe      = "INSERT INTO tipe_gambar
                             VALUES 
-                            ('', '$namaFileBaru', '$idPerum', '$idTipe')";
+                            ('', '$namaFileBaru', '$idTipe', '$uploaded')";
     mysqli_query($conn, $queryTipe);
     }
     return $namaFileBaru;
@@ -501,5 +507,11 @@ function getAreaListbyStatus() {//mendapatkan dan menampilkan koordinat dari sel
     $statement->close();
     
     return $arr;
+}
+function rupiah($angka){
+	
+	$hasil_rupiah = "Rp. " . number_format($angka,0,',','.');
+	return $hasil_rupiah;
+
 }
 ?>

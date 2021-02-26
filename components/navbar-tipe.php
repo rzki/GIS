@@ -11,7 +11,19 @@
             <a class="nav-link js-scroll-trigger" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="list-perum.php">Daftar Perumahan</a>
+            <a class="nav-link js-scroll-trigger" href="list-perum.php#daftarPerum">Daftar Perumahan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.php#peta-perum">Peta Perumahan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="simulasi_kredit.php">Kalkulator KPR</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.php#gallery">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.php#about">Tentang</a>
           </li>
         </ul>
         <span class="nav-item">

@@ -18,29 +18,18 @@ if (isset($_SESSION['level'])) {
 }
 
 //ambil data di URL
-$idUser = $_SESSION['userID'];
+$idUser = $_GET["id"];
 $user = query("SELECT * FROM users WHERE id_user = '$idUser'")[0];
 
 if(isset($_POST['register'])){
-    $oldPassword = $_POST['old_password'];
     $newPassword = $_POST['password'];
     $repeatNewPassword = $_POST['password2'];
-    // cek password lama
-    if (!password_verify($oldPassword, $user["password"])) {
-        echo '
-            <script>
-                alert("Password lama yang anda masukkan salah!");
-                window.location.href="account.php"
-            </script>
-        ';
-        return false;
-    } 
     // cek konfirmasi password
     if ($newPassword != $repeatNewPassword) {
         echo '
             <script>
                 alert("Konfirmasi password tidak sesuai!");
-                window.location.href="account.php"
+                window.location.href="userdata.php"
             </script>
         ';
         return false;
@@ -116,12 +105,16 @@ if(isset($_POST['register'])){
     <div class="form-group row text-center">
         <div class="col-sm-10">
             <a class="btn btn-danger" href="home.php">Back</a>
-            <button type="submit" class="btn btn-primary" name="register" onclick="return confirm('Yakin ingin update password anda?')">Update Password</button>
+            <button type="submit" class="btn btn-primary" name="register" onclick="return confirm('Yakin ingin update password member?')">Update Password</button>
         </div>
     </div>
 </form>
 </main>
-
+<script>
+        function goBack() {
+            window.location.href="userdata.php";
+        }
+    </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>

@@ -22,7 +22,7 @@ $id_user = $_SESSION ["userID"];
 
 //pagination
 $jumlahDataPerHalaman = 5;
-$jumlahData = count(query("SELECT * FROM perumahan_master"));
+$jumlahData = count(query("SELECT * FROM perumahan_master WHERE id_user = $id_user"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
@@ -75,7 +75,7 @@ $perum = query(" SELECT * FROM perumahan_master WHERE id_user = '$id_user' LIMIT
                         <?php foreach ($perum as $row) : ?>
                         <tr class="show text-center" id="<?= $row["id_perum"]; ?>">
                             <td data-target="id_perum" style="width: 50px;"><?= $i; ?></td>
-                            <td data-target="nama_perum" style="width: 200px;"><?= $row["nama_perum"]; ?></td>
+                            <td data-target="nama_perum" style="width: 300px;"><?= $row["nama_perum"]; ?></td>
                             <td data-target="alamat"><?= $row["alamat"]; ?></td>
                             <td data-target="status" style="width: 100px"><?= $row["status"]; ?></td>
                             <td style="width:150px">
@@ -136,6 +136,12 @@ $perum = query(" SELECT * FROM perumahan_master WHERE id_user = '$id_user' LIMIT
 </div>
 <!-- fungsi search menggunakan ajax -->
 <script src="js/search-user.js"></script>
+<!--  -->
+<script>
+        function goBack() {
+            window.location.href="home.php";
+        }
+    </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

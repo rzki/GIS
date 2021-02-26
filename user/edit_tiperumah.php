@@ -100,14 +100,20 @@ if(isset($_POST["update"])){
         </div>
 
         <div class="form-group row">
-            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+            <label for="harga" class="col-sm-2 col-form-label">Harga</label>
                 <div class="col-sm-10">
-                    <input type="file" id="gambar" name="gambar" value="<?= $perumtipe['gambar'];?>">
-                    <p class="text-muted">(ukuran maks. 10MB)</p>
+                    <input type="text" class="form-control" id="harga" name="harga" placeholder="Hrga" 
+                    value="<?= $perumtipe['harga'];?>" required>
                 </div>
         </div>
-        
+
         <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
 </form>
+<script>
+    function goBack() {
+        window.location.href="detail.php?id=<?=$idperum?>";
+    }
+</script>
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

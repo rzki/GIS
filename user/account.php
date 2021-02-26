@@ -109,14 +109,18 @@ if (isset($_POST['register'])) {
     <div class="form-group row text-center mx-auto">
         <div class="col-sm-10">
             <a class="btn btn-danger" href="home.php">Back</a>
-            <button type="submit" class="btn btn-primary" name="register">Update Data</button>
+            <button type="submit" class="btn btn-primary" name="register" onclick="return confirm('Yakin ingin update biodata anda?')">Update Biodata</button>
         </div>
     </div>
 </form>
 </main>
+<script>
+        function goBack() {
+            window.location.href="home.php";
+        }
+    </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="js/home.js"></script></body>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

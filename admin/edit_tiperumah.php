@@ -43,7 +43,7 @@ if(isset($_POST["update"])){
 <!DOCTYPE html>
 <html lang="en">
     <!-- head -->
-    <?php include_once('../components/perum-tambah.php') ?>
+    <?php include_once('../components/head.php') ?>
     <title>Edit Tipe Perumahan</title>
 </head>
 <body>
@@ -112,5 +112,13 @@ if(isset($_POST["update"])){
         <input type="hidden" name="id_perum" id="id_perum" value="<?= $idperum ?>">
                 <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
 </form>
+<script>
+        function goBack() {
+            window.location.href="detail.php?id=<?= $idperum?>";
+        }
+    </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

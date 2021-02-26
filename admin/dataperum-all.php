@@ -56,7 +56,7 @@ $perum = query(" SELECT * FROM perumahan_master LIMIT $awalData, $jumlahDataPerH
     <div class="container-fluid">
         <div class="row">
             <form action="" method="post" class="search-form ml-auto">
-            <input type="text" name="keyword" class="box-cari" placeholder="Masukkan keyword pencarian" id="keyword" autofocus>
+            <input type="text" name="keyword" class="box-cari" placeholder="Masukkan keyword pencarian" id="keyword">
             </form>
             <div class="table-responsive" id="tabel">
                 <table class="table table-sm table-hover table-striped table-bordered">
@@ -130,6 +130,12 @@ $perum = query(" SELECT * FROM perumahan_master LIMIT $awalData, $jumlahDataPerH
     
 <!-- fungsi pencarian menggunakan ajax -->
 <script src="js/search.js"></script>
+<!--  -->
+<script>
+        function goBack() {
+            window.location.href="home.php";
+        }
+    </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

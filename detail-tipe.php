@@ -3,6 +3,7 @@ require "functions.php";
 
 $idTipe = $_GET["id"];
 $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
+$carousel = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTipe");
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +17,13 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
         font-weight: bold;
         align-content: center;
         vertical-align: middle;
+        border: 2px solid black;
+        border-radius: 24px;
+        width: 50%;
     }
     .btn-back{
-        margin-top: 10%;
+        margin-top: 8%;
+        margin-left: 10%;
     }
     .detailtipe-box{
         margin: auto;
@@ -27,12 +32,19 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
         width: 75%;
         border-radius: 24px;
     }
-    .lbangunan,.ltanah,.spesifikasi,.listrik{
+    hr{
+        border: 1px solid black;
+        background-color: black;
+    }
+    .lbangunan,.ltanah,.spesifikasi,.listrik,.harga{
         font-weight: bold;
         text-align: center;
     }
     .lbangunan,.spesifikasi{
         margin: 20px 0 0 0;
+    }
+    .listrik{
+        margin: 60px 0 0 0 ;
     }
     .lbangunan-text,.spesifikasi-text{
         margin: 0 0 20px 0;
@@ -43,7 +55,7 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
     .ltanah-text,.listrik-text{
         margin: 0 0 20px 0;
     }
-    .lbangunan-text,.ltanah-text,.spesifikasi-text,.listrik-text{
+    .lbangunan-text,.ltanah-text,.spesifikasi-text,.listrik-text,.harga-text{
         text-align: center;
     }
     .luas{
@@ -72,12 +84,69 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
     <?php include_once("components/navbar-tipe.php")?>
 
     <!-- Detail Tipe Rumah Header -->
-<div class="detailtipe container">
     <button class="btn-back btn btn-lg border-dark" onclick="goBack()"><i class="fas fa-angle-left"></i>Kembali</button>
+<div class="detailtipe container">
+    <center><h1>Detail Tipe <?= $tipe["tipe_rumah"];?></h1></center>
+</div>
+<br>
+<br>
+<!-- Main Content -->
+<!-- Gambar Tipe Rumah -->
+<div class="gbr-text container-fluid">
+    <center><h1>Gambar Tipe Rumah</h1></center>
+</div>
+<hr class="w-75">
+<div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-7">
+                <!— Banner SlideShow nya —>
+                <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <ol class="carousel-indicators">
+                        <?php
+
+                        $count = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTipe");
+                        $res = mysqli_num_rows($count);
+                        for($i=0; $i<$res;$i++){
+                            echo '<li data-target="#dmbannerhead" data-slide-to="'.$i.'"'; if($i==0){ echo 'class="active"'; } echo '></li>';
+                        }
+                        ?>
+                    </ol>
+                <?php
+                    if($result = $carousel) {
+                    $y = 0;
+                    while ($rows = mysqli_fetch_assoc($result)) {
+                if($y==0) $aktif = "active";
+                    else $aktif = '';
+                    ?>
+                    <div class="carousel-item <?php echo $aktif ?>  text-center">
+                    <img src="img-tiperumah/<?php echo $rows['gambar_tipe'] ?>" alt="" title="<?php echo $rows['gambar_tipe'] ?>" width="600" height="400">
+                </div>
+            <?php 
+                $y++;
+                } // tutup while
+            }	// tutup if
+            ?>
+                </div>
+                    <a class="carousel-control-prev" href="#dmbannerhead" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#dmbannerhead" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            <!— /Banner Slideshow nya —>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+<!-- Detail Tipe -->
+<div class="detail container">
     <center><h1>Detail Tipe Rumah</h1></center>
 </div>
-
-<!-- Main Content -->
 <div class="detailtipe-box container-fluid">
         <div class="row w-75 mx-auto">
             <div class="luas col">
@@ -85,29 +154,19 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
                 <p class="lbangunan-text card-title"><?= $tipe["luas_bangunan"] ?> m2</p>
                 <p class="ltanah card-title">Luas Tanah (m2)</p>
                 <p class="ltanah-text card-title"><?= $tipe["luas_tanah"] ?> m2</p>
-            </div>
-            <div class="speklistrik col">
                 <p class="spesifikasi card-title">Spesifikasi</p>
                 <p class="spesifikasi-text card-title"><?= $tipe["spesifikasi"] ?></p>
+            </div>
+            <div class="speklistrik col">
                 <p class="listrik card-title">Daya Listrik</p> 
                 <p class="listrik-text card-title"><?= $tipe["daya_listrik"] ?></p>
+                <p class="harga card-title">Harga</p>
+                <p class="harga-text card-title"><?= rupiah($tipe["harga"])?></p>
             </div>
-        </div>
-</div>
-<br>
-<br>
 
-<!-- Gambar Tipe Rumah -->
-<div class="gbr-text container-fluid">
-    <center><h1>Gambar Tipe Rumah</h1></center>
-</div>
-<div class="Tipe-box container-fluid">
-    <div class="row w-75 mx-auto">
-        <div class="gbr-box">
-            <img class="gbrtipe" src="img-tiperumah/<?= $tipe["gambar"];?>" alt="" width="50%" height="100%">
         </div>
-    </div>
 </div>
+<br>
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
@@ -128,7 +187,7 @@ $tipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
 <script src="js/scrolling-nav.js"></script>
 <script>
     function goBack() {
-        window.history.back();
+        window.location.href="detail-perum.php?id=<?= $tipe["id_perum"]; ?>";
     }
 </script>
 </body>

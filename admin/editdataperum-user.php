@@ -242,5 +242,10 @@ if(isset($_POST["update"])){
         }
     var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
+    <script>
+        function goBack() {
+            window.location.href="dataperum-user.php";
+        }
+    </script>
 </body>
 </html>
