@@ -53,8 +53,7 @@ $usr = query("SELECT * FROM users WHERE level = 'user'");
                                     <td style="text-align: center;"><?= $row["username"]; ?></td>
                                     <td style="text-align: center;"><?= $row["email"]; ?></td>
                                     <td style="text-align: center;">
-                                        <a href="userdata-edit.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit" title="Edit Biodata Member"></i></a>
-                                        <a href="password_user.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-dark btn-sm" title="Ubah Password Member"><i class="fas fa-key"></i></a>
+                                        <a href="password_user.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-dark btn-sm" title="Reset Password Member"><i class="fas fa-key"></i></a>
                                         <a href="delete.php?id=<?= $row['id_user'] ?>" class="btn btn-outline-danger btn-sm" title="Hapus Member" onclick="return confirm('Yakin ingin hapus data pengguna?')">
                                         <i class="fas fa-trash"></i>
                                         </a>

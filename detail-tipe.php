@@ -44,7 +44,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTi
         margin: 20px 0 0 0;
     }
     .listrik{
-        margin: 60px 0 0 0 ;
+        margin: 40px 0 0 0 ;
     }
     .lbangunan-text,.spesifikasi-text{
         margin: 0 0 20px 0;
@@ -77,6 +77,9 @@ $carousel = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTi
     }
     .Tipe-box{
         margin: 0 0 50px 0;
+    }
+    .harga-text{
+        margin: 0 0 20px 0;
     }
     </style>
 </head>
@@ -162,6 +165,9 @@ $carousel = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTi
                 <p class="listrik-text card-title"><?= $tipe["daya_listrik"] ?></p>
                 <p class="harga card-title">Harga</p>
                 <p class="harga-text card-title"><?= rupiah($tipe["harga"])?></p>
+                <div class="simulasi-box text-center">
+                    <a class="btn btn-sm btn-dark simulasikan-text card-title mx-auto" href="simulasi_kredit.php" target="_blank">Simulasi Cicilan</a>
+                </div>
             </div>
 
         </div>

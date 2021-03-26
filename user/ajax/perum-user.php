@@ -36,7 +36,7 @@ $perum = query("SELECT * FROM perumahan_master
                             <td data-target="alamat"><?= $row["alamat"]; ?></td>
                             <td data-target="status"><?= $row["status"]; ?></td>
                             <td>
-                                <a href="detail.php?id=<?= $row['id_perum']?>" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Detail Perumahan"><i class="fas fa-info"></i></a>
+                                <a href="detail.php?id=<?= $row['id_perum']?>" class="btn btn-outline-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Detail Perumahan"><i class="fas fa-info"></i></a>
                                 <a href="edit-data.php?id=<?= $row["id_perum"]; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Perumahan"><i class="fas fa-edit"></i></a>
                                 <a href="delete_perum.php?id=<?= $row["id_perum"]; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Perumahan" onclick="return confirm('Yakin ingin hapus data perumahan?')">
                                     <i class="fas fa-trash"></i>

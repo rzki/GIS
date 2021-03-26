@@ -70,7 +70,7 @@ if (isset($_POST['register'])) {
 <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Begin page content -->
-    <?php $head = 'Pengaturan Akun' ?>    
+    <?php $head = 'Pengaturan Akun Admin' ?>    
     <?php include_once('../components/main-content.php') ?>
 
     <form method="post" action="">

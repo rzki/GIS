@@ -79,9 +79,9 @@ $gambarperum = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = 
                     <?php foreach ($gambarperum as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_gambar"]; ?>">
                         <td style="width: 75px;"><?= $i; ?></td>
-                        <td data-target="gambar_perum"><img src="../img-perum/<?= $rows["gambar_perum"];?>" alt="" width="400" height="300"></td>
+                        <td data-target="gambar_perum"><img src="../img-perum/<?= $rows["gambar_perum"];?>" alt="" width="200" height="150"></td>
                         <td style="width:230px;">
-                        <a href="delete_gambarperum.php?id=<?= $rows['id_gambar']; ?>" style=" margin-top:120px" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
+                        <a href="delete_gambarperum.php?id=<?= $rows['id_gambar']; ?>" style="justify-content:center" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
                             <i class="fas fa-trash"></i>
                             Hapus Gambar Perumahan
                         </a>

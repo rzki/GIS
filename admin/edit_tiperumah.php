@@ -18,7 +18,7 @@ if (isset($_SESSION['level'])) {
 }
 
 //ambil data di URL
-$idTipe = $_GET['id'];
+$idTipe = $_GET['id_tipe'];
 $previous = "javascript:history.go(-1)";
 
 //query data perumahan berdasarkan id
@@ -32,7 +32,7 @@ if(isset($_POST["update"])){
     if(ubahtiperumah($_POST) > 0) {
             echo "
             <script>
-                    alert('Berhasil mengubah tipe perumahan!');
+                    alert('Berhasil mengubah tipe rumah!');
                     window.location.href = 'detail.php?id=$idperum'
                 </script>
             ";
@@ -110,7 +110,7 @@ if(isset($_POST["update"])){
         </div>
         
         <input type="hidden" name="id_perum" id="id_perum" value="<?= $idperum ?>">
-                <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Tipe Perumahan</button></center>
+                <center><button type="submit" class="btn btn-primary btn-block" name="update" onclick="return confirm('Apakah data tiperumah yang ingin diubah sudah benar?')">Update Tipe Rumah</button></center>
 </form>
 <script>
         function goBack() {

@@ -75,7 +75,6 @@ $user = query("SELECT * FROM users WHERE id_user = '$id_user'")[0];
                     <p class="card-text" style="font-size: large;"><b>Nama</b>&emsp;&emsp;:&nbsp; <?php echo $row["nama"];?></p>
                     <p class="card-text" style="font-size: large;"><b>Alamat</b>&emsp;&nbsp;:&nbsp; <?php echo $row["alamat"];?></p>
                     <p class="card-text" style="font-size: large;"><b>Email</b>&emsp;&emsp;:&nbsp; <?php echo $row["email"];?></p>
-                    
                 </div>
             </div>
         </div>

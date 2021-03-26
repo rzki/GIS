@@ -30,7 +30,7 @@ if(isset($_POST["update"])){
     if(ubahdataperum($_POST) > 0) {
         echo '
         <script>
-                alert("Berhasil mengubah data perumahan!");
+                alert("Data perumahan berhasil disetujui!");
                 window.location.href="dataperum-user.php"
             </script>
         ';
@@ -108,7 +108,7 @@ if(isset($_POST["update"])){
                     </select>
                 </div>
         </div>
-                <center><button type="submit" class="btn btn-primary btn-block" name="update">Edit Data Perumahan</button></center>
+                <center><button type="submit" class="btn btn-primary btn-block" name="update" onclick="return confirm('Apakah data perumahan yang ingin diubah sudah benar?')">Edit Data Perumahan</button></center>
 </form>
     <script>
             //membuat mapOptions

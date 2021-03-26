@@ -56,7 +56,7 @@ if (isset($_POST['tambah'])){
 
     <!-- sidebar -->
     <?php $currentPage = 'home' ?>
-    <?php include_once('../components/sidebar-admin.php') ?>
+    <?php include_once('../components/sidebar-user.php') ?>
 
     <!-- Main Content -->
     <?php $head = 'Tambah Gambar Tipe Rumah' ?>
@@ -78,7 +78,7 @@ if (isset($_POST['tambah'])){
     </form>
     <script>
         function goBack() {
-            window.location.href="kelola-gambartipe.php?id=<?=$idTipe?>";
+            window.location.href="kelola-gambartipe.php?id_tipe=<?=$idTipe?>";
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

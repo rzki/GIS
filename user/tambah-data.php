@@ -22,6 +22,7 @@ $id = $_SESSION["userID"];
 if (isset($_POST['tambah'])){
     
     if( tambahdataperum ($_POST) > 0) {
+        if(tambahgambarperum ($_POST) > 0) {
         echo 
         "
         <script>
@@ -29,7 +30,7 @@ if (isset($_POST['tambah'])){
             document.location.href = 'dataperum.php';
         </script>
         ";
-    } else {
+        } else {
         echo
         "
         <script>
@@ -37,6 +38,7 @@ if (isset($_POST['tambah'])){
             document.location.href = 'home.php';
         </script>
         ";
+        }
     }
 }
 ?>
@@ -59,11 +61,11 @@ if (isset($_POST['tambah'])){
     <?php $head = 'Tambah Data Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 500px;"></div>
 
 <div class="row justify-content-center">
-    <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area">
-    <input type="button" onclick="resetArea();" class="btn btn-danger" style="margin-bottom: 1%; margin-right: 1%;" value="Hapus Area">
+    <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area Perumahan">
+    <input type="button" onclick="resetArea();" class="btn btn-danger" style="margin-bottom: 1%; margin-right: 1%;" value="Hapus Area Perumahan">
 </div>
 
 <form method="post" action="" enctype="multipart/form-data">
@@ -108,6 +110,7 @@ if (isset($_POST['tambah'])){
         <input type="hidden" name="id_user" value="<?= $id ?>">
         <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
 </form>
+<br>
 <script>
         //membuat mapOptions
         var mapOptions = {
@@ -204,7 +207,11 @@ if (isset($_POST['tambah'])){
     $( document ).ready(function() {
     putDraggable();
     });
-
     </script>
+<script>
+    function goBack() {
+        window.location.href="home.php";
+    }
+</script>
 </body>
 </html>

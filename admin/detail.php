@@ -114,9 +114,9 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
                     if($x==0) $aktif = "active";
                         else $aktif = '';
                         ?>
-                        <div class="carousel-item <?php echo $aktif ?>  text-center">
+                        <div class="carousel-item <?php echo $aktif ?>  text-center img-fluid">
                         <a href="../img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
-                        <img src="../img-perum/<?php echo $row['gambar_perum'] ?>" alt="" title="<?php echo $row['gambar_perum'] ?>" width="700" height="400">
+                        <img src="../img-perum/<?php echo $row['gambar_perum'] ?>" alt="" title="<?php echo $row['gambar_perum'] ?>" width="700" height="500">
                         </a>
                     </div>
                 <?php 

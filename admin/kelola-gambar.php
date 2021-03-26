@@ -81,11 +81,11 @@ $gambarperum = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = 
                         <td style="width: 75px;"><?= $i; ?></td>
                         <td data-target="gambar_perum">
                             <a href="../img-perum/<?= $rows["gambar_perum"];?>">
-                                <img src="../img-perum/<?= $rows["gambar_perum"];?>" alt="" width="400" height="300">
+                                <img src="../img-perum/<?= $rows["gambar_perum"];?>" alt="" width="200" height="150">
                             </a>
                         </td>
                         <td style="width:230px;">
-                        <a href="delete_gambarperum.php?id=<?= $rows['id_gambar']; ?>" style=" margin-top:120px" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
+                        <a href="delete_gambarperum.php?id=<?= $rows['id_gambar']; ?>" style="justify-content:center; vertical-align:middle" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
                             <i class="fas fa-trash"></i>
                             Hapus Gambar Perumahan
                         </a>

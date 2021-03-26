@@ -55,13 +55,12 @@ $user = query("SELECT * FROM users WHERE id_user = '$id_user'")[0];
         <div class="card w-100 border-dark">
             <div class="card-horizontal" style="display: flex; flex:auto; width:100%;">
                 <div class="card-body">
-                    <h2 class="text-center"><b> Biodata</b></h2>
+                    <h2 class="text-center"><b>Biodata</b></h2>
                     <hr class="solid" style="border: solid;">
                     <br>
                     <h5 class="card-text"><b>Nama</b>&emsp;&emsp;: <?php echo $row["nama"];?></h5>
                     <h5 class="card-text"><b>Alamat</b>&emsp;&nbsp;: <?php echo $row["alamat"];?></h5>
                     <h5 class="card-text"><b>Email</b>&emsp;&emsp;: <?php echo $row["email"];?></h5>
-                    
             </div>
         </div>
     </div>

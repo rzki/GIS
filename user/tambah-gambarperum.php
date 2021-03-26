@@ -53,7 +53,7 @@ if (isset($_POST['tambah'])){
 
     <!-- sidebar -->
     <?php $currentPage = 'home' ?>
-    <?php include_once('../components/sidebar-admin.php') ?>
+    <?php include_once('../components/sidebar-user.php') ?>
 
     <!-- Main Content -->
     <?php $head = 'Tambah Data Perumahan' ?>

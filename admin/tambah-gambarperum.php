@@ -70,12 +70,12 @@ if (isset($_POST['tambah'])){
                 </div>
         </div>
         <input type="hidden" name="id" value="<?= $id_Perum ?>">
-        <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Gambar Perumahan</button>
+        <button type="submit" class="btn btn-primary btn-block" name="tambah" onclick="return confirm('Yakin ingin tambah gambar perumahan?')">Tambah Gambar Perumahan</button>
         <br>
     </form>
     <script>
         function goBack() {
-            window.location.href="kelola-gambar.php?id=<?=$id_Perum?>";
+            window.location.href="kelola-gambar.php?id_perum=<?=$id_Perum?>";
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

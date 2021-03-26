@@ -116,7 +116,7 @@ if (isset($_POST['tambah'])){
         </div>
 
         <input type="hidden" name="id" value="<?= $id_perum ?>">
-        <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Tipe Perumahan</button>
+        <button type="submit" class="btn btn-primary btn-block" name="tambah" onclick="return confirm('Apakah data tipe rumah yang ingin ditambahkan sudah benar?')">Tambah Tipe Perumahan</button>
     </form>
     <script>
         function goBack() {

@@ -58,7 +58,7 @@ if (isset($_POST['tambah'])){
     <?php include_once('../components/sidebar-user.php') ?>
 
     <!-- Main Content -->
-    <?php $head = 'Tambah Data Perumahan' ?>
+    <?php $head = 'Tambah Tipe Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -88,7 +88,7 @@ if (isset($_POST['tambah'])){
         <div class="form-group row">
             <label for="spesifikasi" class="col-sm-2 col-form-label">Spesifikasi</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi">
+                    <textarea class="form-control" id="spesifikasi" name="spesifikasi" placeholder="Spesifikasi"></textarea>
                 </div>
         </div>
         

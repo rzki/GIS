@@ -18,7 +18,7 @@ if (isset($_SESSION['level'])) {
 }
 
 //ambil data di URL
-$idTipe = $_GET['id'];
+$idTipe = $_GET['id_tipe'];
 
 //query data perumahan berdasarkan id
 $perumtipe = query("SELECT * FROM tiperumah_master WHERE id_tipe = $idTipe")[0];
@@ -58,7 +58,6 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perumtipe["id_tipe"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perumtipe["gambar"]?>">
         <div class="form-group row">
             <label for="tipe_rumah" class="col-sm-2 col-form-label">Tipe Rumah</label>
                 <div class="col-sm-10">

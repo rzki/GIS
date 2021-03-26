@@ -35,7 +35,7 @@ $areas = getAreaList();
     <?php include_once('../components/main-content.php') ?>
     
 
-    <div id="peta" style="width:100%; height: 600px;"></div>
+    <div id="peta" style="width:100%; height: 550px;"></div>
 
     <script>
 //membuat mapOptions

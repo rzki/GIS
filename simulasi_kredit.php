@@ -1,13 +1,13 @@
-<?php
-require "functions.php";
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include_once("components/index-list.php")?>
     <title>Simulasi KPR</title>
 	<style>
+	#simulasiKPR{
+		margin: -50px 0 -50px 0;
+	}
 	.btnSubmit{
 		margin: 20px 200px 0 0;
 	}
@@ -28,7 +28,7 @@ require "functions.php";
 <h1 class="text-bold text-center">Simulasi KPR</h1>
 <div class="container-fluid">
 	<div class="row">
-	<form action="hasil_simulasikpr.php" method="post" class="form-simulasi">
+	<form action="hasil_simulasi.php" method="post" class="form-simulasi">
 		<div class="form-group-row">
 			<div class="besarpinjaman col-sm-10">
 				<label class="col-form-label">Harga Rumah</label>
@@ -50,10 +50,12 @@ require "functions.php";
 		</div>
 		<div class="form-group-row">
 			<div class="lamapinjaman col-sm-10">
-				<label class="col-form-label">Uang Muka (% dari harga rumah)</label>
+				<label class="col-form-label">Uang Muka (%)</label>
 				<input type="text" class="uang_muka form-control" name="uang_muka" placeholder="Masukkan uang muka dalam persen">
 			</div>
 		</div>
+		<br>
+		<p class="text-muted">* Perhitungan simulasi diatas menggunakan rumus perhitungan bunga anuitas</p>
 			<center><button class="btnSubmit btn btn-lg btn-primary " type="submit">Simulasikan</button></center>
 	</form>
 	</div>
@@ -66,9 +68,6 @@ require "functions.php";
     </div>
     <!-- /.container -->
 </footer>
-<script>
-
-</script>
 <script src="js/search.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>

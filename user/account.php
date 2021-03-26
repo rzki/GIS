@@ -108,7 +108,7 @@ if (isset($_POST['register'])) {
 
     <div class="form-group row text-center mx-auto">
         <div class="col-sm-10">
-            <a class="btn btn-danger" href="home.php">Back</a>
+            <a class="btn btn-dark" href="home.php">Back</a>
             <button type="submit" class="btn btn-primary" name="register" onclick="return confirm('Yakin ingin update biodata anda?')">Update Biodata</button>
         </div>
     </div>

@@ -38,6 +38,7 @@ if (isset($_SESSION['login'])) {
       $_SESSION ["userID"] = $hasil["id_user"];
       $_SESSION ["uname"] = $hasil ["username"];
       $_SESSION ["name"] = $hasil ["nama"];
+      $_SESSION ["role"] = $hasil ["level"];
     // cek jika user login sebagai admin
       if(password_verify($password, $hasil['password'])){
           if($hasil['level'] == 'admin'){

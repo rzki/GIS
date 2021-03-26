@@ -65,7 +65,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $idTi
     <hr>
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <!— Banner SlideShow nya —>
                 <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">

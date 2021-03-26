@@ -26,7 +26,7 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perumUser = query(" SELECT * FROM perumahan_master WHERE status = 'Pending' LIMIT $awalData, $jumlahDataPerHalaman ");
+$perumUser = query("SELECT * FROM perumahan_master WHERE status = 'Pending' LIMIT $awalData, $jumlahDataPerHalaman");
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ $perumUser = query(" SELECT * FROM perumahan_master WHERE status = 'Pending' LIM
     <?php include_once('../components/sidebar-admin.php') ?>
 
     <!-- Main Content -->
-    <?php $head = 'Data Perumahan (User)' ?>
+    <?php $head = 'Data Perumahan (Member)' ?>
     <?php include_once('../components/main-content.php') ?>
     
 <div class="container-fluid">

@@ -129,10 +129,6 @@ $perum = query(" SELECT * FROM perumahan_master WHERE id_user = '$id_user' LIMIT
         </ul>
     </nav>
 </div>
-    <a class="btn btn-block btn-primary" href="tambah-data.php">
-    <span data-feather='plus'></span>
-        Tambah Data Perumahan
-    </a>
 </div>
 <!-- fungsi search menggunakan ajax -->
 <script src="js/search-user.js"></script>

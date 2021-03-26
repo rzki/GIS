@@ -79,7 +79,7 @@ $gambartipe = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $id
                     <?php foreach ($gambartipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_gambar"]; ?>">
                         <td style="width: 75px;"><?= $i; ?></td>
-                        <td data-target="gambar_tipe"><img src="../img-tiperumah/<?= $rows["gambar_tipe"];?>" alt="" width="400" height="300"></td>
+                        <td data-target="gambar_tipe"><img src="../img-tiperumah/<?= $rows["gambar_tipe"];?>" alt="" width="200" height="100"></td>
                         <td>
                         <a href="delete_gambartipe.php?id=<?= $rows['id_gambar']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Gambar Rumah" onclick="return confirm('Yakin ingin hapus gambar ini?')">
                             <i class="fas fa-trash"></i>
@@ -100,7 +100,7 @@ $gambartipe = mysqli_query($conn, "SELECT * FROM tipe_gambar WHERE id_tipe = $id
 </div>
 <script>
     function goBack() {
-        window.location.href="tipe_detail.php?id=<?= $idTipe?>";
+        window.location.href="tipe_detail.php?id_tipe=<?= $idTipe?>";
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

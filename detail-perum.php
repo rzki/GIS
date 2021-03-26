@@ -22,7 +22,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
     <?php include_once("components/detail-head.php")?>
     <title>Detail Perumahan</title>
     <style>
-        .detailperum{
+        .detailperum-container{
             font-size: 32pt;
             font-weight: bold;
             align-content: center;
@@ -35,7 +35,14 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
             margin:auto;
             border: 3px solid black;
             width: 75%;
+            height:75%;
             border-radius: 24px;
+        }
+        .perumdetail{
+            margin: 0 0 0 -100px;
+        }
+        .gambarperum{
+            margin: 0 -100px 0 0;
         }
         .btn-back{
         margin-top: 8%;
@@ -78,7 +85,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
 
 <!-- Header -->
 <button class="btn-back btn btn-lg border-dark" onclick="goBack()"><i class="fas fa-angle-left"></i>Kembali</button>
-<div class="detailperum container">
+<div class="detailperum-container container">
     <center><h1>Detail Perumahan</h1></center>
 </div>
 <br>
@@ -91,78 +98,85 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
 <hr class="w-75">
 <div id="peta" class="mx-auto"></div>
 <br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="gambarperum col">
+            <!-- Gambar Perumahan -->
+            <h1 class="text-center">Gambar Perumahan</h1>
+            <hr class="w-75">
+            <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-sm-8">
+                            <!— Banner SlideShow nya —>
+                            <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <ol class="carousel-indicators">
+                                        <?php
 
-<!-- Gambar Perumahan -->
-<h1 class="text-center">Gambar Perumahan</h1>
-<hr class="w-75">
-<div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-sm-6">
-                <!— Banner SlideShow nya —>
-                <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <ol class="carousel-indicators">
+                                        $count = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum");
+                                        $res = mysqli_num_rows($count);
+                                        for($i=0; $i<$res;$i++){
+                                            echo '<li data-target="#dmbannerhead" data-slide-to="'.$i.'"'; if($i==0){ echo 'class="active"'; } echo '></li>';
+                                        }
+                                        ?>
+                                    </ol>
                             <?php
-
-                            $count = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $idPerum");
-                            $res = mysqli_num_rows($count);
-                            for($i=0; $i<$res;$i++){
-                                echo '<li data-target="#dmbannerhead" data-slide-to="'.$i.'"'; if($i==0){ echo 'class="active"'; } echo '></li>';
-                            }
+                                if($res = $carousel) {
+                                $x = 0;
+                                while ($row = mysqli_fetch_assoc($res)) {
+                                if($x==0) $aktif = "active";
+                                    else $aktif = '';
+                                    ?>
+                                    <div class="carousel-item <?php echo $aktif ?>  text-center">
+                                    <a href="img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
+                                    <img src="img-perum/<?php echo $row['gambar_perum'] ?>" alt="" title="<?php echo $row['gambar_perum'] ?>" width="600" height="400">
+                                    <a href="img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
+                                </div>
+                            <?php 
+                                $x++;
+                                } // tutup while
+                            }	// tutup if
                             ?>
-                        </ol>
-                <?php
-                    if($res = $carousel) {
-                    $x = 0;
-                    while ($row = mysqli_fetch_assoc($res)) {
-                    if($x==0) $aktif = "active";
-                        else $aktif = '';
-                        ?>
-                        <div class="carousel-item <?php echo $aktif ?>  text-center">
-                        <a href="img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
-                        <img src="img-perum/<?php echo $row['gambar_perum'] ?>" alt="" title="<?php echo $row['gambar_perum'] ?>" width="600" height="400">
-                        <a href="img-perum/<?php echo $row['gambar_perum'] ?>" target="_blank">
+                            </div>
+                            <a class="carousel-control-prev" href="#dmbannerhead" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#dmbannerhead" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            </div>
+                        <!— /Banner Slideshow nya —>
+                        </div>
                     </div>
-                <?php 
-                    $x++;
-                    } // tutup while
-                }	// tutup if
-                ?>
                 </div>
-                <a class="carousel-control-prev" href="#dmbannerhead" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#dmbannerhead" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            <br>
+        </div>
+        <div class="perumdetail col">
+            <!-- Detail Perumahan -->
+            <h1 class="text-center">Detail Perumahan</h1>
+            <hr class="w-75">
+                <div class="detailperum-box container-fluid">
+                    <div class="row w-100 mx-auto">
+                            <div class="col">
+                                <p class="namaperum card-title"><b>Nama Perumahan</b></p>
+                                <p class="namaperum-text card-title"><?= $perum["nama_perum"];?></p>
+                                <p class="alamatperum card-title"><b>Alamat</b></p>
+                                <p class="alamatperum-text card-title"><?= $perum["alamat"];?></p>
+                                <p class="notelp card-title"><b>Nomor Telepon</b></p>
+                                <div class="wa-div">
+                                    <p class="wa-text card-title text-center" style="word-wrap: break-word; font-size:large;">
+                                    <?= $perum["no_telp"];?> (<a href="tel:<?= $perum["no_telp"];?>">call</a>)
+                                    </p>
+                            </div>
+                            </div>
+                        </div>
                 </div>
-            <!— /Banner Slideshow nya —>
-            </div>
+            <br>
         </div>
     </div>
-<br>
-
-<!-- Detail Perumahan -->
-<h1 class="text-center">Detail Perumahan</h1>
-    <div class="detailperum-box container-fluid">
-        <div class="row w-75 mx-auto">
-                <div class="col">
-                    <p class="namaperum card-title"><b>Nama Perumahan</b></p>
-                    <p class="namaperum-text card-title"><?= $perum["nama_perum"];?></p>
-                    <p class="alamatperum card-title"><b>Alamat</b></p>
-                    <p class="alamatperum-text card-title"><?= $perum["alamat"];?></p>
-                    <p class="notelp card-title"><b>Nomor Telepon</b></p>
-                    <div class="wa-div">
-                        <p class="wa-text card-title text-center" style="word-wrap: break-word; font-size:large;">
-                        <?= $perum["no_telp"];?> (<a href="tel:<?= $perum["no_telp"];?>">call</a>)
-                        </p>
-                </div>
-                </div>
-            </div>
-    </div>
-<br>
+</div>
 
 <!-- Tabel Tipe Rumah -->
 <h1 class="text-center">Tipe Rumah</h1>
@@ -206,7 +220,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; <?php echo date('Y'); ?></p>
     </div>
     <!-- /.container -->
 </footer>
@@ -274,7 +288,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
         }
         var areas = JSON.parse( '<?php echo json_encode($areaPerum) ?>' );
     </script>
-    <script>
+<script>
     function goBack() {
         window.location.href="list-perum.php";
     }

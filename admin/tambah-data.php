@@ -62,7 +62,7 @@ if (isset($_POST['tambah'])){
     <?php include_once('../components/main-content.php') ?>
 
 
-<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 500px;"></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area">
@@ -116,7 +116,7 @@ if (isset($_POST['tambah'])){
                 </select>
                 </div>
         </div>
-                <button type="submit" class="btn btn-primary btn-block" name="tambah">Tambah Data Perumahan</button>
+                <button type="submit" class="btn btn-primary btn-block" name="tambah" onclick="return confirm('Apakah data perumahan yang ingin ditambahkan sudah benar?')">Tambah Data Perumahan</button>
                 <br>
     </form>
 

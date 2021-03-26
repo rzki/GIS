@@ -83,14 +83,14 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
     <?php $head = 'Detail Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-    <div id="peta" style="margin-bottom: 1%; width:100%; height:50%"></div>
+    <div id="peta" style="margin-bottom: 1%; width:100%; height:45%"></div>
     <!-- jika data perumahan tidak diinput oleh user yang sedang login -->
     <!-- maka user tidak bisa memakai fungsi input ke dalam data tersebut -->
     <?php if($perum["id_user"] != $_SESSION["userID"]) {?>
     <?php } else {?>
             <div class="container">
         <a class="btnGambar btn btn-primary" href="kelola-gambar.php?id_perum=<?= $idPerum ?>">
-            Kelola Gambar Perum
+            Kelola Gambar
         </a>
     </div> 
     <?php }?> 
@@ -98,7 +98,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
     <hr>
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
             <!— Banner SlideShow nya —>
                 <div id="dmbannerhead" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
@@ -153,13 +153,8 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
                 <p class="card-title text-center" style="word-wrap: break-word; font-size:x-large"><b>Alamat</b></p>
                 <p class="card-title text-center" style="word-wrap: break-word; font-size:large"><?= $perum["alamat"];?></p>
                 <p class="card-title text-center" style="word-wrap: break-word; font-size:x-large"><b>Nomor Telepon</b></p>
-                <div class="wa-div">
-                    <a class="wa-link" href="http://wa.me/<?= $perum["no_telp"];?>">
-                        <p class="wa-text card-title text-center" style="word-wrap: break-word; font-size:large;">
-                        <?= $perum["no_telp"];?>
-                        </p>
-                    </a>
-                </div>
+                <p class="card-title text-center" style="word-wrap: break-word; font-size:large;"><?= $perum["no_telp"];?>
+                (<a href="tel:<?= $perum["no_telp"];?>">call</a>)</p>
             </div>
         </div>
     </div>
@@ -194,19 +189,18 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
                     <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
                         <td style="width: 75px;"><?= $i++; ?></td>
                         <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?> (<?= $rows["luas_bangunan"]; ?>/<?= $rows["luas_tanah"]; ?>)</td>
-                        <td class="text-center" data-target="luas_bangunan" style="width: 150px;"><?= $rows["luas_bangunan"]; ?> m2</td>
-                        <td class="text-center" data-target="luas_tanah" style="width: 125px;"><?= $rows["luas_tanah"]; ?> m2</td>
-                        <td class="text-center" data-target="harga" style="width: 250px;"><?= rupiah($rows["harga"]) ?></td>
+                        <td class="text-center" data-target="luas_bangunan" style="width: 175px;"><?= $rows["luas_bangunan"]; ?> m2</td>
+                        <td class="text-center" data-target="luas_tanah" style="width: 175px;"><?= $rows["luas_tanah"]; ?> m2</td>
+                        <td class="text-center" data-target="harga" style="width: 200px;"><?= rupiah($rows["harga"]) ?></td>
                         <td class="text-center" style="width: 125px;">
-                        <a href="tipe_detail.php?id_tipe=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i> Lihat Detail</a>
+                        <a href="tipe_detail.php?id_tipe=<?= $rows['id_tipe']; ?>"class="btn btn-outline-dark btn-sm" title="Detail Tipe Rumah"><i class="fas fa-info"></i></a>
                         <!-- jika data perumahan tidak diinput oleh user yang sedang login -->
                         <!-- maka user tidak bisa memakai fungsi input/update ke dalam data tersebut, hanya melihat detailnya saja -->   
                         <?php if($perum["id_user"] != $_SESSION["userID"]) {?>
                         <?php } else {?>
-                        <a href="edit_tiperumah.php?id_tipe=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i> Edit Data</a>
+                        <a href="edit_tiperumah.php?id_tipe=<?= $rows['id_tipe']; ?>" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Tipe Rumah"><i class="fas fa-edit"></i></a>
                         <a href="delete_tiperumah.php?id_tipe=<?= $rows['id_tipe']; ?>" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Tipe Rumah" onclick="return confirm('Yakin ingin hapus tipe perumahan?')">
                             <i class="fas fa-trash"></i>
-                            Hapus Data
                         </a>
                         <?php }?>
                     </td>

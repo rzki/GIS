@@ -17,7 +17,7 @@ if (isset($_GET['id_tipe'])) {
                 document.location.href='$previous'
             </script>
         ";
-    } else {
+    }  else {
         echo "
             <script>
                 alert('Data perumahan gagal dihapus');

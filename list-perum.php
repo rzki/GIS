@@ -22,9 +22,6 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
         width: 250px;
         text-align: center;
     }
-    .daftarPerumHeader{
-        margin-top:-75px;
-    }
     #daftarPerum{
         margin-bottom: -50px;
     }
@@ -32,19 +29,6 @@ $perum = query("SELECT * FROM perumahan_master WHERE status = 'Diterima' LIMIT $
 </head>
 <body>
     <?php include_once("components/navbar-list.php")?>
-
-    <!-- Welcome Section -->
-<section id="daftarPerumHeader" class="welcomeImg">
-    <div class="container">
-        <div class="row">
-            <div class="col mx-auto">
-                <img src="assets/brand/Kabupaten_Badung.png" class="text-center" style="width: 150px; height: 150px" alt="">
-                <h1 style="color: white;">Sistem Informasi Geografis <br> Pemetaan Perumahan Kabupaten Badung</h1>
-                <p class="lead" style="color: white;">Berikut merupakan daftar perumahan yang ada di <br> Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- List Perumahan Section -->
 <section id="daftarPerum">

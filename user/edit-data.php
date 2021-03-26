@@ -56,7 +56,7 @@ if(isset($_POST["update"])){
     <?php $head = 'Edit Data Perumahan' ?>
     <?php include_once('../components/main-content.php') ?>
 
-<div id="peta" style="margin-bottom: 1%; width:100%; height: 600px;"></div>
+<div id="peta" style="margin-bottom: 1%; width:100%; height: 500px;"></div>
 
 <div class="row justify-content-center">
     <input type="button" onclick="drawArea();" class="btn btn-primary" style="margin-bottom: 1%; margin-right: 1%;" value="Gambar Area Perumahan">
@@ -65,7 +65,6 @@ if(isset($_POST["update"])){
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $perum["id_perum"]; ?>">
-    <input type="hidden" name="gambarLama" value="<?= $perum["gambar_perum"]; ?>">
         <div class="form-group row">
             <label for="nama_perum" class="col-sm-2 col-form-label">Nama Perumahan</label>
                 <div class="col-sm-10">
@@ -100,8 +99,9 @@ if(isset($_POST["update"])){
         </div>
         
 
-                <center><button type="submit" class="btn btn-primary btn-block" name="update">Edit Data Perumahan</button></center>
+                <center><button type="submit" class="btn btn-primary btn-block" name="update">Update Data Perumahan</button></center>
 </form>
+<br>
 <script>
             //membuat mapOptions
             var mapOptions = {
