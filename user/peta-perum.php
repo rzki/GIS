@@ -17,7 +17,7 @@ if (isset($_SESSION['level'])) {
     }
 }
 
-$areas = getAreaList();
+$areas = getAreaListbyStatus();
 
 ?>
 <!DOCTYPE html>

@@ -38,7 +38,7 @@ $areas = getAreaListbyStatus();
             <img src="assets/brand/Kabupaten_Badung.png" class="text-center" style="width: 150px; height: 150px" alt="">
             <h1 style="color: white;">Sistem Informasi Geografis <br> Pemetaan Perumahan Kabupaten Badung</h1>
             <p class="lead" style="color: white;">Selamat datang di Sistem Informasi Geografis Pemetaan Perumahan Kabupaten Badung</p>
-            <p class="register-text">Untuk memulai menambahkan data perumahan, <a class="register-link" href="auth/login.php">klik disini</a></p>
+            <p class="register-text">Untuk memulai menambahkan data perumahan, silahkan login atau register terlebih dahulu dengan<a class="register-link" href="auth/login.php">klik disini</a></p>
           </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perum = query(" SELECT * FROM perumahan_master WHERE id_user = '$id_user' LIMIT $awalData, $jumlahDataPerHalaman");
+$perum = query(" SELECT * FROM perumahan_master WHERE id_user = '$id_user' ORDER BY id_perum DESC LIMIT $awalData, $jumlahDataPerHalaman");
 ?>
 
 <!doctype html>

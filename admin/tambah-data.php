@@ -21,7 +21,7 @@ if (isset($_SESSION['level'])) {
 if (isset($_POST['tambah'])){
     
     if( tambahdataperum  ($_POST) > 0) {
-        if(tambahgambarperum ($_POST) >0) {
+        if(tambahgambarperum ($_POST) > 0) {
         echo 
         "
         <script>

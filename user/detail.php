@@ -187,7 +187,7 @@ $carousel = mysqli_query($conn, "SELECT * FROM perum_gambar WHERE id_perum = $id
                     <?php $i = 1; ?>
                     <?php foreach ($tabelTipe as $rows) : ?>
                     <tr class="show text-center" id="<?= $rows["id_tipe"]; ?>">
-                        <td style="width: 75px;"><?= $i++; ?></td>
+                        <td style="width: 75px;"><?= $i; ?></td>
                         <td class="text-center" data-target="tipe_rumah"><?= $rows["tipe_rumah"]; ?> (<?= $rows["luas_bangunan"]; ?>/<?= $rows["luas_tanah"]; ?>)</td>
                         <td class="text-center" data-target="luas_bangunan" style="width: 175px;"><?= $rows["luas_bangunan"]; ?> m2</td>
                         <td class="text-center" data-target="luas_tanah" style="width: 175px;"><?= $rows["luas_tanah"]; ?> m2</td>

@@ -223,7 +223,8 @@ if (isset($_SESSION['login'])) {
           <br>
         <a href="../index.php" class="btn btn-lg">Back</a>
         <button class="btn btn-lg" type="submit" name="login" >Log In</button>
-        <p class="register">Belum mempunyai akun? <a href="register.php">klik disini</a></p>
+        <p class="register">Lupa Password? Silahkan hubungi <br> admin dengan <a href="mailto:adminsigperum@gmail.com">klik disini</a></p>
+        <p class="register">Belum mempunyai akun? <br> silahkan <a href="register.php">klik disini</a></p>
         <p class="copyright">&copy; 2020</p>
       </form>
   </body>

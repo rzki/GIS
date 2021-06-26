@@ -26,7 +26,7 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$perum = query(" SELECT * FROM perumahan_master LIMIT $awalData, $jumlahDataPerHalaman ");
+$perum = query(" SELECT * FROM perumahan_master ORDER BY id_perum DESC LIMIT $awalData, $jumlahDataPerHalaman ");
 
 ?>
 <!doctype html>
@@ -62,8 +62,8 @@ $perum = query(" SELECT * FROM perumahan_master LIMIT $awalData, $jumlahDataPerH
                 <table class="table table-sm table-hover table-striped table-bordered">
                     <tr class="text-center text-white bg-dark">
                         <th>No</th>
-                        <th>Nama Perumahan</th>
-                        <th>Alamat</th>
+                        <th><a class="sort-head text-center" data-order="desc" href="#"></a>Nama Perumahan</th>
+                        <th><a class="sort-head text-center" data-order="desc" href="#"></a>Alamat</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -73,7 +73,7 @@ $perum = query(" SELECT * FROM perumahan_master LIMIT $awalData, $jumlahDataPerH
                     <tr class="show" id="<?= $row["id_perum"]; ?>">
                         <td class="text-center"><?= $i; ?></td>
                         <td class="text-center" data-target="nama_perum" style="width: 300px;"><?= $row["nama_perum"]; ?></td>
-                        <td class="text-center" data-target="alamat" ><?= $row["alamat"]; ?></td>
+                        <td class="text-center" data-target="alamat"><?= $row["alamat"]; ?></td>
                         <td class="text-center" data-target="status"><?= $row["status"]; ?></td>
                         <td class="text-center" >
                             <a href="detail.php?id=<?= $row['id_perum']?>" class="btn btn-outline-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Detail Perumahan"><i class="fas fa-info"></i></a>
@@ -135,7 +135,7 @@ $perum = query(" SELECT * FROM perumahan_master LIMIT $awalData, $jumlahDataPerH
         function goBack() {
             window.location.href="home.php";
         }
-    </script>
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
