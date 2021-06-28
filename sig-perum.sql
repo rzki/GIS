@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2021 at 05:41 AM
+-- Generation Time: Jun 29, 2021 at 12:08 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -42,16 +42,39 @@ CREATE TABLE `perumahan_master` (
 --
 
 INSERT INTO `perumahan_master` (`id_perum`, `nama_perum`, `alamat`, `koordinat`, `no_telp`, `id_user`, `status`) VALUES
-(20, 'Damara Village', 'Jl. Puri Gading, Jimbaran, Kec. Kuta Sel., Kabupaten Badung, Bali 80361', '115.14445638636973,-8.800161487480931, 115.14469778518107,-8.799223161884896, 115.14404010766158,-8.798819203643141, 115.14352405058165,-8.79828589374846, 115.14394569419892,-8.797796053826765, 115.1441227199939,-8.797175801006933, 115.14327192309796,-8.796673236324551, 115.14360880848473,-8.795959678391972, 115.14267539974755,-8.795636297242423, 115.14235997186918,-8.796340313482421, 115.14262282835264,-8.797135511011891, 115.14301443086882,-8.797697449569435, 115.14309382419016,-8.798541416129368, 115.14336204509165,-8.79931010253165, 115.14382553094039,-8.79953381670774', '+62811945360', 2, 'Diterima'),
-(21, 'Bali Arum Jimbaran', 'Jl. Raya Kampus Unud, Jimbaran, Kec. Kuta Sel., Kabupaten Badung, Bali 80361', '115.17996990634859,-8.791171057805157, 115.18051707698763,-8.790741128867403, 115.18156850292146,-8.790905669630932, 115.18153095199526,-8.791839835161149, 115.18268966628966,-8.79229099380662, 115.1832690234369,-8.793161463052128, 115.18229055345729,-8.793329187411457, 115.18129277170377,-8.793276110101035, 115.18120694101528,-8.794305808565662, 115.18031644762235,-8.79414657703144, 115.18023061693386,-8.792777183011268, 115.17962765654376,-8.792197577602977', '(0361) 4721168', 1, 'Diterima'),
-(23, 'Mandala Griya', 'Jl. Maya Loka, Benoa, Kec. Kuta Sel., Kabupaten Badung, Bali 80361', '115.21101594036737,-8.799473554948527, 115.20980358189264,-8.799569036440392, 115.20988941258112,-8.79855056592386, 115.2108764654986,-8.798444475083885, 115.21080136364618,-8.79776549298813, 115.20884871548334,-8.797616965488684, 115.2087521559588,-8.799982789287244, 115.21099448269526,-8.80007827064775', ' +62 361 702544', 2, 'Diterima'),
-(30, 'Casa Nuansa Ring Jimbaran', 'Jl. Nuansa Timur, Jimbaran, Kec. Kuta Sel., Kab. Badung, Bali 80361', '115.18797898279448,-8.801216437871808, 115.187701106006,-8.801280053060797, 115.18764317035676,-8.801582224047962, 115.18785989297614,-8.801660682599437', '(0361) 235305', 7, 'Diterima'),
-(34, 'Mumbul Sector Garden', 'Jl. Mahoni Raya, Nusa Dua Selatan, Benoa, Kec. Kuta Sel., Kabupaten Badung, Bali', '115.20167219645376,-8.798977181737301, 115.20062077051992,-8.799003688160333, 115.2005456686675,-8.799608034090484, 115.19990193850393,-8.79971405959053, 115.19970345503683,-8.801134798360577, 115.20071625709535,-8.802086902367003, 115.2027064561844,-8.802362566757402, 115.20282983779909,-8.80129171547485, 115.20167219612634,-8.800313103095151', ' +62 361 702544', 7, 'Diterima'),
-(35, 'Kori Nuansa Barat', 'Jl. Nuansa Barat IV, Jimbaran, Kec. Kuta Sel., Kabupaten Badung, Bali 80361', '115.1820094584764,-8.799666348341717, 115.18177878850112,-8.80010635389902, 115.18213820450913,-8.80038732102943, 115.18242788308272,-8.799857194189842', '(0361) 235305', 7, 'Diterima'),
-(36, 'Kori Nuansa Hill Kampial', 'Jl. Nuansa Hill, Jimbaran, Kec. Kuta Sel., Kab. Badung, Bali 80361', '115.1879317763087,-8.806549459593134, 115.18771719958751,-8.807047769829676, 115.18866670157878,-8.807540778232704, 115.18910658385722,-8.806909939405898', '(0361) 235305', 2, 'Diterima'),
-(37, 'Kori Nuansa Ring Bukit', 'Jl. Nuansa Ring Bukit, Jimbaran, Kec. Kuta Sel., Kab. Badung, Bali 80361', '115.18647372706255,-8.805407054174177, 115.18634766323888,-8.805809944598055, 115.1871791480335,-8.806109461536659, 115.18731325848422,-8.805693318467851', '(0361) 235305', 2, 'Diterima'),
+(20, 'Damara', 'Jl. Puri Gading, Jimbaran, Kec. Kuta Sel., Kabupaten Badung, Bali', '115.14263033866884,-8.795638417743113, 115.14235138893129,-8.796454822064279, 115.14260888099672,-8.797250019347802, 115.14286637306215,-8.797949791544472, 115.14296293258668,-8.798660164997209, 115.14304876327516,-8.799158485859424, 115.14328479766847,-8.799444754987528, 115.14378905296327,-8.79963560094991, 115.14432549476625,-8.800218740780824, 115.14458298683168,-8.800409586344111, 115.14487266540529,-8.799338729410335, 115.144100189209,-8.798670767575723, 115.14394998550416,-8.797949791544472, 115.14431476593019,-8.797271224585312, 115.14357447624208,-8.796656272204308, 115.14385342597963,-8.795871676304264, 115.14324188232423,-8.795553596411722', '+62811945360', 2, 'Diterima'),
+(23, 'Mandala Griya', 'Jl. Maya Loka, Benoa, Kec. Kuta Sel., Kabupaten Badung, Bali 80361', '115.21083249068907,-8.797674123867314, 115.20875086386698,-8.797451469055162, 115.20862210344498,-8.80015512557119, 115.21117585181435,-8.800314163574765, 115.21112220163852,-8.799391742202737, 115.21015649847365,-8.799306921731263, 115.21039255924728,-8.798681370153947, 115.21109001153302,-8.798395100435457', ' +62 361 702544', 2, 'Diterima'),
 (38, 'Kori Nuansa Tukad Nangka Jimbaran', 'Jl. Nuansa Tukad Nangka Jimbaran, Jimbaran, Kec. Kuta Sel., Kab. Badung, Bali 80361', '115.1814451216342,-8.799179690825838, 115.18126809583921,-8.799481863770584, 115.1807262896182,-8.799200895952819, 115.18091404424925,-8.798866915061822', '(0361) 235305', 2, 'Diterima'),
-(39, 'Ocean Bay Sun', 'Jl. Ocean Bay Sun, Benoa, Kec. Kuta Sel., Kab. Badung 80361', '115.21415626983072,-8.797089919700658, 115.21359032372857,-8.79708726904473, 115.2130377886715,-8.796933530968843, 115.2129814622822,-8.796697622417929, 115.21315044145013,-8.796154236981598, 115.21378880719567,-8.796326530011157, 115.21361714581874,-8.79674798493018, 115.21412676553157,-8.796811600725343', ' +62 361 702544', 2, 'Diterima');
+(68, 'Nusa Dua Highland', 'Jalan Siligita, Benoa, South Kuta, Badung Regency, Bali 80361', '115.21353139311053,-8.798188349945551, 115.21237791433023,-8.798723780463783, 115.21230816910168,-8.799587889468535, 115.2131719369325,-8.799927170980212, 115.21420738532596,-8.799593190744549, 115.21407325988638,-8.798766190768747', '', 12, 'Diterima');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perum_gambar`
+--
+
+CREATE TABLE `perum_gambar` (
+  `id_gambar` int(11) NOT NULL,
+  `gambar_perum` varchar(150) NOT NULL,
+  `id_perum` int(11) NOT NULL,
+  `uploaded_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `perum_gambar`
+--
+
+INSERT INTO `perum_gambar` (`id_gambar`, `gambar_perum`, `id_perum`, `uploaded_on`) VALUES
+(214, 'Perum-Damara Village-603ef61f45e90.jpg', 20, '2021-03-03 03:36:15'),
+(215, 'Perum-Damara Village-603ef61f478fa.jpg', 20, '2021-03-03 03:36:15'),
+(216, 'Perum-Damara Village-603ef61f480ad.png', 20, '2021-03-03 03:36:15'),
+(238, 'Perum-Mandala Griya-60bec6de766ac.jpg', 23, '2021-06-08 03:24:46'),
+(254, 'Perum-Nusa Dua Highland-60c2a1ba6b102.jpg', 68, '2021-06-11 01:35:22'),
+(255, 'Perum-Nusa Dua Highland-60c2a1ba6bbf0.jpg', 68, '2021-06-11 01:35:22'),
+(258, 'Perum-Nusa Dua Highland-60c2a1de8a83e.jpg', 68, '2021-06-11 01:35:58'),
+(259, 'Perum-Nusa Dua Highland-60c2a1de8ad49.jpg', 68, '2021-06-11 01:35:58'),
+(260, 'Perum-Nusa Dua Highland-60c2a1de8b1d3.jpg', 68, '2021-06-11 01:35:58'),
+(261, 'Perum-Damara-60c2ae94515b2.png', 20, '2021-06-11 02:30:12');
 
 -- --------------------------------------------------------
 
@@ -77,22 +100,37 @@ CREATE TABLE `tiperumah_master` (
 --
 
 INSERT INTO `tiperumah_master` (`id_tipe`, `nama_perum`, `tipe_rumah`, `luas_bangunan`, `luas_tanah`, `spesifikasi`, `daya_listrik`, `harga`, `id_perum`, `id_user`) VALUES
-(53, 'Damara Village', 'Damita', '69', '105', '2 lantai, 2 kamar tidur, 2 kamar mandi, dapur, parking space, kolam renang (opsional)', '2200 watt', 1500000000, 20, 2),
+(53, 'Damara Village', 'Damita', '69', '100', '2 lantai, 2 kamar tidur, 2 kamar mandi, dapur, parking space, kolam renang (opsional)', '2200 watt', 1500000000, 20, 2),
 (54, 'Damara Village', 'Dahayu', '101', '100', '2 lantai, 3 kamar tidur + 1 opsional, 2 kamar mandi + 1 opsional, dapur, ruang tamu, kolam renang (opsional), parking space', '2200 watt', 2600000000, 20, 2),
-(55, 'Bali Arum Jimbaran', 'Sandat', '55', '100', '2 kamar tidur, ruang tamu, dapur, ruang makan, 1 kamar mandi, teras, parking space', '1300 Watt', 0, 21, 1),
-(56, 'Bali Arum Jimbaran', 'Cempaka', '80', '130', '2 lantai, 3 kamar tidur (1 kamar lantai 1 &amp; 2 kamar lantai 2), kamar mandi (lantai 1), ruang tamu, dapur, teras, balkon (lantai 2), parking space', '1300 Watt', 0, 21, 1),
-(57, 'Bali Arum Jimbaran', 'Jepun', '120', '140', '2 lantai, 3 kamar tidur (1 kamar lantai 1 &amp; 2 kamar lantai 2), kamar mandi (lantai 1), ruang tamu, dapur, teras, balkon (lantai 2), parking space', '2200 watt', 0, 21, 1),
-(58, 'Bali Arum Jimbaran', 'Padma', '140', '170', '2 lantai, 4 kamar tidur (2 kamar lantai 1 &amp; 2 kamar lantai 2), 2 kamar mandi (lantai 1 &amp; lantai 2), ruang tamu, dapur, teras, balkon (lantai 2), parking space', '2200 watt (bisa di naikkan sampai 4400 watt)', 0, 21, 1),
 (61, 'Mandala Griya', 'ASRI 37', '37', '70', '2 kamar tidur, kamar mandi, ruang tamu, dapur, teras, parking space', '1300', 627000000, 23, 2),
 (62, 'Mandala Griya', 'ASRI 40', '40', '72', '2 kamar tidur, kamar mandi, ruang tamu, dapur, teras, parking space', '1300', 655000000, 23, 2),
 (63, 'Mandala Griya', 'ASRI 55', '55', '72', '3 kamar tidur, kamar mandi, ruang tamu, dapur, teras, parking space', '1300', 1300000000, 23, 2),
-(65, 'Casa Nuansa Ring Jimbaran', 'Casa 1', '45', '82', '2 lantai, 3 kamar tidur (1 kamar lt1 &amp; 2 kamar lt2), 2 kamar mandi / wc ( lt1 &amp; lt2 ), ruang tamu, dapur, teras, parking space', '1300 Watt', 0, 30, 7),
-(66, 'Casa Nuansa Ring Jimbaran', 'Casa 2', '50', '82', '2 lantai, 3 kamar tidur (1 kamar lt1 &amp; 2 kamar lt2), 2 kamar mandi / wc ( lt1 &amp; lt2 ), ruang tamu, dapur, teras, parking space', '1300 Watt', 0, 30, 7),
 (96, 'Damara Village', 'Daksa', '100', '105', '2 lantai, 2 kamar tidur (lt1), 2 kamar tidur (lt2), ruang tamu, dapur, 2 kamar mandi (lt1 dan lt2), parking space, pool', '2200 watt', 2100000000, 20, 1),
-(97, 'Kori Nuansa Tukad Nangka Jimbaran', 'Tipe 1', '36', '80', '2 km tidur, 1 km mandi, ruang tamu, dapur, teras, parking space', '1300', 0, 38, 2),
-(98, 'Kori Nuansa Tukad Nangka Jimbaran', 'Tipe 1', '36', '80', '2 km tidur, 1 km mandi, ruang tamu, dapur, teras, parking space', '1300', 0, 38, 2),
-(99, 'Kori Nuansa Tukad Nangka Jimbaran', 'Tipe 1', '36', '80', '2 km tidur, 1 km mandi, ruang tamu, dapur, teras, parking space', '1300', 0, 38, 2),
-(100, 'Kori Nuansa Tukad Nangka Jimbaran', 'Tipe 1', '36', '80', '2 km tidur, 1 km mandi, ruang tamu, dapur, teras, parking space', '1300', 550000000, 38, 2);
+(100, 'Kori Nuansa Tukad Nangka Jimbaran', 'Tipe 1', '36', '80', '2 km tidur, 1 km mandi, ruang tamu, dapur, teras, parking space', '1300', 550000000, 38, 2),
+(107, 'Damara', 'Damita', '60', '80', '2 lantai, 2 kamar tidur + 2 kamar mandi + dapur + ruang makan + carport', '2200', 1500000000, 20, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipe_gambar`
+--
+
+CREATE TABLE `tipe_gambar` (
+  `id_gambar` int(11) NOT NULL,
+  `gambar_tipe` varchar(150) NOT NULL,
+  `id_tipe` int(11) NOT NULL,
+  `uploaded_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tipe_gambar`
+--
+
+INSERT INTO `tipe_gambar` (`id_gambar`, `gambar_tipe`, `id_tipe`, `uploaded_on`) VALUES
+(151, 'Perum-Damara Village_Tipe-Damita-603ef6a62bd1b.jpg', 53, '2021-03-03 03:38:30'),
+(152, 'Perum-Damara Village_Tipe-Damita-603ef6a62c784.png', 53, '2021-03-03 03:38:30'),
+(163, 'Perum-Damara-Tipe-Damita-60c2af1503d7b.jpg', 107, '2021-06-11 02:32:21'),
+(164, 'Perum-Damara-Tipe-Damita-60c2af1504577.png', 107, '2021-06-11 02:32:21');
 
 -- --------------------------------------------------------
 
@@ -115,10 +153,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `nama`, `alamat`, `username`, `email`, `password`, `level`) VALUES
-(1, 'Administrator', 'Dalung', 'admin', 'admin@gmail.com', '$2y$10$tUEpF2nX07hDg7P.XY.gXOf7RwlBSjvBmazzWcqwTucrIrIYK6h22', 'admin'),
-(2, 'Rizky Dhani Ismail', 'Dalung, Kuta Utara', 'rizkydhni', 'rizkydhani14@gmail.com', '$2y$10$jxNS7ABoeit2Byr0Ex1xaedazgh1KMm6lTT/tv3Z.ZgFiLkEwkl1G', 'user'),
-(7, 'I Gede Yoga Pramana', 'Gianyar', 'yogapra26', 'yogapramana@gmail.com', '$2y$10$A0pE89AwmTBThOGDzKsDE.i9ChgTJX9myr7bWH24SJBJWRXNHgdQC', 'user'),
-(9, 'agung oka aryananda', 'denpasar', 'agungoka12', 'okaaryananda@gmail.com', '$2y$10$jN2J3oLSMnSzfTbe/W/3Tez2GxAGlGnLO13OA/3PMiXBsYn3QwLoe', 'user');
+(1, 'Admin', 'Kuta Selatan', 'admin', 'adminsigperum@gmail.com', '$2y$10$cFhVQ5J9xlwDz1p9IgcQt.UOH2EI7/IUrUefxCLzTa9JeSnrCIoyi', 'admin'),
+(2, 'Rizky Dhani Ismail', 'Dalung, Kuta Utara', 'rizkydhni', 'rizkydhani15@gmail.com', '$2y$10$FOMgZRL7bi/FY3YPXaD0Z.TpDVqSkYzqY6pygnkUtVlDPWWaeHBdW', 'user'),
+(12, 'Yoga Pramana', 'Pejeng', 'yogapra26', 'yogapramana26@gmail.com', '$2y$10$kikCji1zHi4sdReJCHQGgOTrTCc64QG3uO0mgiKwgDjM8ukDE8hjC', 'user'),
+(13, 'Rizky Dhani', 'Dalung, Kuta Utara', 'rizkydhani123', 'rizkydhani15@gmail.com', '$2y$10$MalWsSBrCC3ilhDTKPOjkOTdV3tlk8gXtPIbtifrhcl58eBbCV6PG', 'user');
 
 --
 -- Indexes for dumped tables
@@ -132,12 +170,26 @@ ALTER TABLE `perumahan_master`
   ADD KEY `id-user` (`id_user`);
 
 --
+-- Indexes for table `perum_gambar`
+--
+ALTER TABLE `perum_gambar`
+  ADD PRIMARY KEY (`id_gambar`),
+  ADD KEY `id_perum` (`id_perum`);
+
+--
 -- Indexes for table `tiperumah_master`
 --
 ALTER TABLE `tiperumah_master`
   ADD PRIMARY KEY (`id_tipe`),
   ADD KEY `fk_id_perum` (`id_perum`),
   ADD KEY `fk_id-user` (`id_user`);
+
+--
+-- Indexes for table `tipe_gambar`
+--
+ALTER TABLE `tipe_gambar`
+  ADD PRIMARY KEY (`id_gambar`),
+  ADD KEY `fk-id_tipe` (`id_tipe`);
 
 --
 -- Indexes for table `users`
@@ -153,19 +205,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `perumahan_master`
 --
 ALTER TABLE `perumahan_master`
-  MODIFY `id_perum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_perum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `perum_gambar`
+--
+ALTER TABLE `perum_gambar`
+  MODIFY `id_gambar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
 
 --
 -- AUTO_INCREMENT for table `tiperumah_master`
 --
 ALTER TABLE `tiperumah_master`
-  MODIFY `id_tipe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id_tipe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+
+--
+-- AUTO_INCREMENT for table `tipe_gambar`
+--
+ALTER TABLE `tipe_gambar`
+  MODIFY `id_gambar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -178,11 +242,23 @@ ALTER TABLE `perumahan_master`
   ADD CONSTRAINT `id-user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `perum_gambar`
+--
+ALTER TABLE `perum_gambar`
+  ADD CONSTRAINT `id_perum` FOREIGN KEY (`id_perum`) REFERENCES `perumahan_master` (`id_perum`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `tiperumah_master`
 --
 ALTER TABLE `tiperumah_master`
   ADD CONSTRAINT `fk_id-user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_id_perum` FOREIGN KEY (`id_perum`) REFERENCES `perumahan_master` (`id_perum`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tipe_gambar`
+--
+ALTER TABLE `tipe_gambar`
+  ADD CONSTRAINT `fk-id_tipe` FOREIGN KEY (`id_tipe`) REFERENCES `tiperumah_master` (`id_tipe`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
